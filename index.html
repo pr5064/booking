@@ -3,60 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PREVI BOOK - Startup Marketplace</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>PREVI BOOK - Innovation Hub</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </head>
 <body>
+
     <header class="navbar">
         <h1>PREVI BOOK</h1>
         <nav>
             <a href="#">Home</a>
-            <a href="#" id="explore-ideas-btn">Explore Ideas</a>
-            <a href="upload.html" class="btn-upload">Upload Your Product</a>
+            <a href="explore.html">Explore Ideas</a>
+            <a href="upload.html" class="btn-upload">Upload Idea</a>
+            <a href="prebook.html" class="btn-prebook">Pre-Book a Product</a>
+            <a href="entrepreneur.html" class="btn-entrepreneur">Become an Entrepreneur</a>
         </nav>
     </header>
-    
+
     <section class="banner">
-        <h2>Transforming Innovation into Reality</h2>
-        <p>Upload your products, validate market demand, and connect with investors.</p>
-        <button class="btn-explore" id="explore-sectors">Explore Sectors</button>
+        <h2>Turn Your Ideas Into Reality</h2>
+        <p>Join our platform to explore, upload, invest, and pre-book innovative products.</p>
     </section>
 
-    <section class="sectors">
-        <h2>Popular Product Sectors</h2>
-        <div class="sector-container">
-            <div class="sector-card" style="background-color: #ff4757;">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Electronics</h3>
-            </div>
-            <div class="sector-card" style="background-color: #2ed573;">
-                <i class="fas fa-tshirt"></i>
-                <h3>Fashion</h3>
-            </div>
-            <div class="sector-card" style="background-color: #ffa502;">
-                <i class="fas fa-utensils"></i>
-                <h3>Food & Beverages</h3>
-            </div>
-            <div class="sector-card" style="background-color: #3742fa;">
-                <i class="fas fa-couch"></i>
-                <h3>Home & Furniture</h3>
-            </div>
-            <div class="sector-card" style="background-color: #1e90ff;">
-                <i class="fas fa-car"></i>
-                <h3>Automobiles</h3>
-            </div>
-            <div class="sector-card" style="background-color: #ff6b81;">
-                <i class="fas fa-book"></i>
-                <h3>Books & Stationery</h3>
-            </div>
+    <section class="options">
+        <div class="option-card" onclick="navigateTo('explore.html')">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Explore Ideas</h3>
+        </div>
+        <div class="option-card" onclick="navigateTo('upload.html')">
+            <i class="fas fa-upload"></i>
+            <h3>Upload Your Idea</h3>
+        </div>
+        <div class="option-card" onclick="navigateTo('prebook.html')">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Pre-Book a Product</h3>
+        </div>
+        <div class="option-card" onclick="navigateTo('entrepreneur.html')">
+            <i class="fas fa-briefcase"></i>
+            <h3>Become an Entrepreneur</h3>
         </div>
     </section>
 
-    <section class="cta">
-        <h2>Start Your Journey Today</h2>
-        <p>Join our platform and take your business to the next level.</p>
-        <a href="upload.html" class="btn-upload">Upload Your Product</a>
+    <section class="sectors">
+        <h2>Explore By Sectors</h2>
+        <div class="sector-grid">
+            <div class="sector" style="background-color: #ff4757;"><i class="fas fa-mobile-alt"></i> Electronics</div>
+            <div class="sector" style="background-color: #2ed573;"><i class="fas fa-tshirt"></i> Fashion</div>
+            <div class="sector" style="background-color: #ffa502;"><i class="fas fa-utensils"></i> Food & Beverages</div>
+            <div class="sector" style="background-color: #3742fa;"><i class="fas fa-couch"></i> Home & Furniture</div>
+            <div class="sector" style="background-color: #1e90ff;"><i class="fas fa-car"></i> Automobiles</div>
+            <div class="sector" style="background-color: #ff6b81;"><i class="fas fa-book"></i> Books & Stationery</div>
+            <div class="sector" style="background-color: #00cec9;"><i class="fas fa-stethoscope"></i> Healthcare</div>
+            <div class="sector" style="background-color: #6c5ce7;"><i class="fas fa-spa"></i> Beauty & Wellness</div>
+        </div>
     </section>
 
     <footer>
