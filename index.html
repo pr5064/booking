@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previ Book</title>
+    <title>Previ Book - Discover & Invest</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
@@ -15,9 +15,8 @@
         <h1>PREVI BOOK</h1>
         <nav>
             <a href="index.html">Home</a>
-            <a href="explore.html">Explore Ideas</a>
-            <a href="upload.html">Upload Idea</a>
-            <a href="prebook.html">Pre-Book</a>
+            <a href="invest.html">Explore</a>
+            <a href="upload.html">Upload</a>
             <a href="invest.html" class="btn-invest">Invest</a>
         </nav>
     </header>
@@ -27,27 +26,42 @@
         <button class="close-btn" onclick="toggleSidebar()">✖</button>
         <h2>Categories</h2>
         <ul>
-            <li><a href="#">Clothing & Fashion</a></li>
-            <li><a href="#">Food & Beverages</a></li>
-            <li><a href="#">Electronics & Gadgets</a></li>
-            <li><a href="#">Home & Furniture</a></li>
-            <li><a href="#">Beauty & Personal Care</a></li>
-            <li><a href="#">Automobiles</a></li>
-            <li><a href="#">Books & Stationery</a></li>
-            <li><a href="#">Health & Wellness</a></li>
-            <li><a href="#">Toys & Baby Products</a></li>
-            <li><a href="#">Sports & Fitness</a></li>
+            <li><a href="#" data-icon="👗">Clothing</a></li>
+            <li><a href="#" data-icon="🍔">Food & Beverages</a></li>
+            <li><a href="#" data-icon="📱">Electronics</a></li>
+            <li><a href="#" data-icon="🏠">Home & Furniture</a></li>
+            <li><a href="#" data-icon="💄">Beauty</a></li>
+            <li><a href="#" data-icon="🚗">Automobiles</a></li>
+            <li><a href="#" data-icon="📚">Books</a></li>
+            <li><a href="#" data-icon="🏋️">Sports</a></li>
         </ul>
     </div>
 
-    <!-- Main Content -->
-    <main>
-        <h2>Welcome to PREVI BOOK</h2>
-        <p>Explore and invest in the next big startup ideas!</p>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>🚀 Invest in the Future</h2>
+        <p>Discover the next big startup & be part of innovation.</p>
+        <button class="cta-btn">Get Started 🎯</button>
+    </section>
 
+    <!-- Categories -->
+    <section class="categories">
+        <h2>🔥 Trending Sectors</h2>
+        <div class="category-grid">
+            <div class="category-card food">🍔 Food</div>
+            <div class="category-card fashion">👗 Clothing</div>
+            <div class="category-card electronics">📱 Electronics</div>
+            <div class="category-card home">🏠 Home</div>
+            <div class="category-card beauty">💄 Beauty</div>
+            <div class="category-card automobiles">🚗 Automobiles</div>
+            <div class="category-card books">📚 Books</div>
+            <div class="category-card sports">🏋️ Sports</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 PREVI BOOK. All Rights Reserved.</p>
+        <p>&copy; 2025 PREVI BOOK. All Rights Reserved. 🎉</p>
     </footer>
 
 </body>
