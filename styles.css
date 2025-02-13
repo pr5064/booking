@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    background-color: #f4f4f4;
 }
 
 /* Navbar */
@@ -11,13 +11,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #007bff;
+    background-color: #ff6b6b;
     color: white;
     padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .navbar h1 {
     margin: 0;
+    font-size: 22px;
 }
 
 .navbar nav a {
@@ -25,6 +27,7 @@ body {
     text-decoration: none;
     margin: 0 10px;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .btn-invest {
@@ -45,14 +48,14 @@ body {
 /* Sidebar */
 .sidebar {
     position: fixed;
-    left: -250px;
+    left: -270px;
     top: 0;
-    width: 250px;
+    width: 270px;
     height: 100%;
-    background: white;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    transition: 0.3s;
+    transition: 0.3s ease-in-out;
     z-index: 1000;
 }
 
@@ -62,7 +65,11 @@ body {
 
 .sidebar h2 {
     text-align: center;
-    color: #333;
+    color: #444;
+    font-size: 22px;
+    border-bottom: 2px solid #ff6b6b;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .sidebar ul {
@@ -71,38 +78,17 @@ body {
 }
 
 .sidebar ul li {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid #ddd;
+    transition: background 0.3s;
 }
 
 .sidebar ul li a {
     text-decoration: none;
-    color: #007bff;
+    color: #ff6b6b;
     font-weight: bold;
     display: block;
 }
 
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    float: right;
-}
-
-/* Main Content */
-main {
-    padding: 20px;
-    text-align: center;
-}
-
-/* Footer */
-footer {
-    background: #007bff;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+.sidebar ul li:hover {
+    background: #ff6b
