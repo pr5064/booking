@@ -12,27 +12,22 @@ body {
     text-align: center;
 }
 
-.intro {
+.intro, .features, .market-opportunity, .revenue-model, .call-to-action {
     padding: 50px;
     text-align: center;
-    background-color: #ecf0f1;
 }
 
 .features {
     background-color: #2ecc71;
     color: #fff;
-    padding: 50px;
-    text-align: center;
 }
 
 .market-opportunity {
-    padding: 50px;
     background-color: #e74c3c;
     color: #fff;
 }
 
 .revenue-model {
-    padding: 50px;
     background-color: #1abc9c;
     color: #fff;
 }
@@ -40,13 +35,10 @@ body {
 .call-to-action {
     background-color: #f1c40f;
     color: #fff;
-    padding: 20px;
-    text-align: center;
 }
 
 .modal-content {
     background-color: #f7f7f7;
-    padding: 20px;
 }
 
 .btn-primary {
