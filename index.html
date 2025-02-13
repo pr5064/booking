@@ -3,65 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PREVI BOOK - Innovation Hub</title>
+    <title>PREVI BOOK</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 
+    <!-- Navbar -->
     <header class="navbar">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
         <h1>PREVI BOOK</h1>
         <nav>
-            <a href="#">Home</a>
+            <a href="index.html">Home</a>
             <a href="explore.html">Explore Ideas</a>
-            <a href="upload.html" class="btn-upload">Upload Idea</a>
-            <a href="prebook.html" class="btn-prebook">Pre-Book a Product</a>
-            <a href="entrepreneur.html" class="btn-entrepreneur">Become an Entrepreneur</a>
+            <a href="upload.html">Upload Idea</a>
+            <a href="prebook.html">Pre-Book</a>
+            <a href="invest.html" class="btn-invest">Invest</a>
         </nav>
     </header>
 
-    <section class="banner">
-        <h2>Turn Your Ideas Into Reality</h2>
-        <p>Join our platform to explore, upload, invest, and pre-book innovative products.</p>
-    </section>
+    <!-- Sidebar (Hidden by Default) -->
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">✖</button>
+        <h2>Categories</h2>
+        <ul>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Health & Wellness</a></li>
+            <li><a href="#">Education</a></li>
+            <li><a href="#">Sustainable Energy</a></li>
+            <li><a href="#">Agriculture</a></li>
+            <li><a href="#">Finance & Fintech</a></li>
+            <li><a href="#">AI & Robotics</a></li>
+            <li><a href="#">Automobile</a></li>
+            <li><a href="#">Fashion & Lifestyle</a></li>
+        </ul>
+    </div>
 
-    <section class="options">
-        <div class="option-card" onclick="navigateTo('explore.html')">
-            <i class="fas fa-lightbulb"></i>
-            <h3>Explore Ideas</h3>
-        </div>
-        <div class="option-card" onclick="navigateTo('upload.html')">
-            <i class="fas fa-upload"></i>
-            <h3>Upload Your Idea</h3>
-        </div>
-        <div class="option-card" onclick="navigateTo('prebook.html')">
-            <i class="fas fa-shopping-cart"></i>
-            <h3>Pre-Book a Product</h3>
-        </div>
-        <div class="option-card" onclick="navigateTo('entrepreneur.html')">
-            <i class="fas fa-briefcase"></i>
-            <h3>Become an Entrepreneur</h3>
-        </div>
-    </section>
-
-    <section class="sectors">
-        <h2>Explore By Sectors</h2>
-        <div class="sector-grid">
-            <div class="sector" style="background-color: #ff4757;"><i class="fas fa-mobile-alt"></i> Electronics</div>
-            <div class="sector" style="background-color: #2ed573;"><i class="fas fa-tshirt"></i> Fashion</div>
-            <div class="sector" style="background-color: #ffa502;"><i class="fas fa-utensils"></i> Food & Beverages</div>
-            <div class="sector" style="background-color: #3742fa;"><i class="fas fa-couch"></i> Home & Furniture</div>
-            <div class="sector" style="background-color: #1e90ff;"><i class="fas fa-car"></i> Automobiles</div>
-            <div class="sector" style="background-color: #ff6b81;"><i class="fas fa-book"></i> Books & Stationery</div>
-            <div class="sector" style="background-color: #00cec9;"><i class="fas fa-stethoscope"></i> Healthcare</div>
-            <div class="sector" style="background-color: #6c5ce7;"><i class="fas fa-spa"></i> Beauty & Wellness</div>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <h2>Welcome to PREVI BOOK</h2>
+        <p>Explore and invest in the next big startup ideas!</p>
+    </main>
 
     <footer>
         <p>&copy; 2025 PREVI BOOK. All Rights Reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
