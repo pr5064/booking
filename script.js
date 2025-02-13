@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("explore-ideas-btn").addEventListener("click", function () {
-        window.location.href = "invest.html";
-    });
+    function navigateTo(page) {
+        window.location.href = page;
+    }
 
-    document.getElementById("explore-sectors").addEventListener("click", function () {
-        document.querySelector(".sectors").scrollIntoView({ behavior: "smooth" });
+    document.querySelectorAll(".option-card").forEach(card => {
+        card.addEventListener("click", function () {
+            const page = this.getAttribute("onclick").split("'")[1];
+            navigateTo(page);
+        });
     });
 });
