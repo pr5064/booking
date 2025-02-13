@@ -26,14 +26,6 @@ body {
     font-weight: bold;
 }
 
-.navbar .btn-upload {
-    background: #ff4757;
-    padding: 8px 15px;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-}
-
 .banner {
     text-align: center;
     padding: 60px 20px;
@@ -45,62 +37,65 @@ body {
     font-size: 36px;
 }
 
-.btn-explore {
+.options {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    gap: 20px;
+}
+
+.option-card {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: white;
-    color: #ff4757;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.option-card i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.option-card:hover {
+    transform: scale(1.05);
 }
 
 .sectors {
     text-align: center;
     padding: 40px 20px;
-    background: white;
 }
 
-.sector-container {
+.sector-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 15px;
 }
 
-.sector-card {
+.sector {
     width: 180px;
     height: 180px;
-    margin: 15px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
-}
-
-.sector-card:hover {
-    transform: scale(1.05);
-}
-
-.cta {
     text-align: center;
-    padding: 40px 20px;
-    background: #1abc9c;
-    color: white;
 }
 
-.btn-upload {
-    display: inline-block;
-    background: white;
-    color: #1abc9c;
-    padding: 10px 20px;
-    margin-top: 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
+.sector:hover {
+    transform: scale(1.05);
 }
 
 footer {
