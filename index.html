@@ -3,6 +3,164 @@
 <head>
     <title>Previ Book</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light background */
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #ff6600; /* Bright orange */
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00; /* Yellow hover effect */
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        #hero button {
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #hero button:hover {
+            background-color: #ffdd44;
+        }
+
+        /* Categories */
+        #categories {
+            padding: 50px;
+            background-color: #e0f7fa; /* Light cyan */
+            text-align: center;
+        }
+
+        .category {
+            display: inline-block;
+            margin: 15px;
+            background-color: #fff;
+            border: 2px solid #ff6600;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .category:hover {
+            transform: scale(1.05);
+        }
+
+        /* Featured Products */
+        #featured-products {
+            padding: 50px;
+            background-color: #ffe6e6; /* Light pink */
+            text-align: center;
+        }
+
+        .product {
+            display: inline-block;
+            margin: 15px;
+            background-color: #fff;
+            border: 2px solid #ff3366;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product button {
+            background-color: #ff3366;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .product button:hover {
+            background-color: #ff6699;
+        }
+
+        /* Contact Us */
+        #contact-us {
+            padding: 50px;
+            background-color: #cce5ff; /* Light blue */
+            text-align: center;
+        }
+
+        input, textarea {
+            display: block;
+            margin: 10px auto;
+            width: 80%;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3399ff;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -99,63 +257,4 @@
         <section id="shop-by-category">
             <h2>Shop by Category</h2>
             <div class="category">
-                <img src="images/men.jpg" alt="Men's Fashion">
-                <h3>Men's Fashion</h3>
-            </div>
-            <div class="category">
-                <img src="images/women.jpg" alt="Women's Fashion">
-                <h3>Women's Fashion</h3>
-            </div>
-            <div class="category">
-                <img src="images/kids.jpg" alt="Kids' Fashion">
-                <h3>Kids' Fashion</h3>
-            </div>
-            <div class="category">
-                <img src="images/electronics.jpg" alt="Electronics">
-                <h3>Electronics</h3>
-            </div>
-            <div class="category">
-                <img src="images/home.jpg" alt="Home & Living">
-                <h3>Home & Living</h3>
-            </div>
-            <div class="category">
-                <img src="images/beauty.jpg" alt="Beauty">
-                <h3>Beauty</h3>
-            </div>
-            <div class="category">
-                <img src="images/studio.jpg" alt="Studio">
-                <h3>Studio</h3>
-            </div>
-            <div class="category">
-                <img src="images/grocery.jpg" alt="Grocery">
-                <h3>Grocery</h3>
-            </div>
-            <div class="category">
-                <img src="images/medical.jpg" alt="Medical">
-                <h3>Medical</h3>
-            </div>
-            <div class="category">
-                <img src="images/appliances.jpg" alt="Appliances">
-                <h3>Appliances</h3>
-            </div>
-        </section>
-
-        <section id="contact-us">
-            <h2>Contact Us</h2>
-            <p>If you have any questions or comments, please feel free to contact us.</p>
-            <form>
-                <input type="text" name="name" placeholder="Name">
-                <input type="email" name="email" placeholder="Email">
-                <textarea name="message" placeholder="Message"></textarea>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 Previ Book</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <img src="images/men.jpg" alt="Men's
