@@ -1,281 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Shopping</title>
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #37474f; /* Light background */
-            color: #333;
-        }
-
-        /* Header */
-        header {
-            background-color: #ff6600; /* Bright orange */
-            color: #fff;
-            padding: 15px 0;
-            text-align: center;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffcc00; /* Yellow hover effect */
-        }
-
-        /* Hero Section */
-        #hero {
-            background: linear-gradient(to right, #ff9966, #ff5e62);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        #hero button {
-            background-color: #ffcc00;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        #hero button:hover {
-            background-color: #ffdd44;
-        }
-
-        /* Categories */
-        #categories {
-            padding: 50px;
-            background-color: #e0f7fa; /* Light cyan */
-            text-align: center;
-        }
-
-        .category {
-            display: inline-block;
-            margin: 15px;
-            background-color: #fff;
-            border: 2px solid #ff6600;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .category:hover {
-            transform: scale(1.05);
-        }
-
-        /* Featured Products */
-        #featured-products {
-            padding: 50px;
-            background-color: #ffe6e6; /* Light pink */
-            text-align: center;
-        }
-
-        .product {
-            display: inline-block;
-            margin: 15px;
-            background-color: #fff;
-            border: 2px solid #ff3366;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .product:hover {
-            transform: scale(1.05);
-        }
-
-        .product button {
-            background-color: #ff3366;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .product button:hover {
-            background-color: #ff6699;
-        }
-
-        /* Contact Us */
-        #contact-us {
-            padding: 50px;
-            background-color: #cce5ff; /* Light blue */
-            text-align: center;
-        }
-
-        input, textarea {
-            display: block;
-            margin: 10px auto;
-            width: 80%;
-            padding: 10px;
-            border: 2px solid #007bff;
-            border-radius: 5px;
-        }
-
-        button[type="submit"] {
-            background-color: #007bff;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #3399ff;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #222;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        .footer-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin: 10px;
-        }
-
-        .footer-section h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 8px;
-        }
-
-        .footer-section ul li a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section ul li a:hover {
-            color: #f8b400;
-        }
-
-        .social-icons a {
-            margin: 0 10px;
-            display: inline-block;
-        }
-
-        .social-icons img {
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s ease;
-        }
-
-        .social-icons img:hover {
-            transform: scale(1.2);
-        }
-
-        .footer-bottom {
-            margin-top: 20px;
-            font-size: 14px;
-            border-top: 1px solid #444;
-            padding-top: 10px;
-        }
-
-        /* Men's Category Popup */
-        #men-category-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        #men-category-popup ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        #men-category-popup ul li {
-            margin-bottom: 10px;
-        }
-
-        #men-category-popup ul li a {
-            text-decoration: none;
-            color: #333;
-        }
-    </style>
+    <title>Previ Book</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
-        <h1>Online Shopping</h1>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#" id="men-link">Men</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Kids</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Men's Fashion</a></li>
+                <li><a href="#">Women's Fashion</a></li>
+                <li><a href="#">Kids' Fashion</a></li>
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Home & Living</a></li>
+                <li><a href="#">Beauty</a></li>
+                <li><a href="#">Studio</a></li>
+                <li><a href="#">Grocery</a></li>
+                <li><a href="#">Medical</a></li>
+                <li><a href="#">Appliances</a></li>
             </ul>
         </nav>
     </header>
 
-    <div id="men-category-popup">
-        <ul>
-            <li><a href="#">T-Shirts</a></li>
-            <li><a href="#">Jeans</a></li>
-            <li><a href="#">Casual Shirts</a></li>
-            <li><a href="#">Formal Shirts</a></li>
-            <li><a href="#">Sweatshirts</a></li>
-            <li><a href="#">Jackets</a></li>
-            <li><a href="#">Blazers & Coats</a></li>
-            <li><a href="#">Suits</a></li>
-            <li><a href="#">Rain Jackets</a></li>
-            <li><a href="#">Indian
+    <main>
+        <section id="hero">
+            <h1>Welcome to Previ Book!</h1>
+            <p>We offer a wide variety of products for everyone.</p>
+            <button>Shop Now</button>
+        </section>
+
+        <section id="categories">
+            <h2>Categories</h2>
+            <div class="category">
+                <img src="men.jpg" height="200px" alt="Men's Fashion">
+                <h3>Men's Fashion</h3>
+            </div>
+            <div class="category">
+                <img src="women.webp" height="200px" alt="Women's Fashion">
+                <h3>Women's Fashion</h3>
+            </div>
+            <div class="category">
+                <img src="kids.jpg" height="200px" alt="Kids' Fashion">
+                <h3>Kids' Fashion</h3>
+            </div>
+            <div class="category">
+                <img src="gadgets.webp" height="200px" width="150px" alt="Electronics">
+                <h3>Gadgets</h3>
+            </div>
+            <div class="category">
+                <img src="Home_Living.jpg" height="200px" alt="Home & Living">
+                <h3>Home & Living</h3>
+            </div>
+            <div class="category">
+                <img src="beauty.avif"  height="200px" alt="Beauty">
+                <h3>Beauty</h3>
+            </div>
+            <div class="category">
+                <img src="images/studio.jpg" alt="Studio">
+                <h3>Studio</h3>
+            </div>
+            <div class="category">
+                <img src="grocery.jpg"  height="200px" width="150px" alt="Grocery">
+                <h3>Grocery</h3>
+            </div>
+            <div class="category">
+                <img src="medical.w" height="200px" alt="Medical">
+                <h3>Medical</h3>
+            </div>
+            <div class="category">
+                <img src="images/appliances.jpg" alt="Appliances">
+                <h3>Appliances</h3>
+            </div>
+        </section>
+
+        <section id="featured-products">
+            <h2>Featured Products</h2>
+            <div class="product">
+                <img src="images/product1.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>Description of product 1.</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product2.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>Description of product 2.</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product3.jpg" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>Description of product 3.</p>
+                <button>Add to Cart</button>
+            </div>
+        </section>
+
+        
+        <section id="contact-us">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or comments, please feel free to contact us.</p>
+            <form>
+                <input type="text" name="name" placeholder="Name">
+                <input type="email" name="email" placeholder="Email">
+                <textarea name="message" placeholder="Message"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><img src="images/fb.jpeg" alt="Facebook"></a>
+                <a href="#"><img src="images/ig.jpeg" alt="Instagram"></a>
+                <a href="#"><img src="images/x.jpeg" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: previbook@gmail.com</p>
+            <p>Phone: +91 12345 67890</p>
+        </div>
+    </div>
+    <p class="footer-bottom">&copy; 2024 Previ Book | All Rights Reserved</p>
+</footer>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
