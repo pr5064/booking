@@ -3,14 +3,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #37474f; /* Light background */
+    background-color: #37474f;
     color: #333;
 }
 
 /* Header */
 header {
     background-color: black;
-    color: black;
+    color: white;
     padding: 10px 0;
     text-align: center;
 }
@@ -24,21 +24,21 @@ header nav {
 }
 
 .logo {
-    height: 50px; /* Adjust height as needed */
+    height: 50px;
     width: auto;
     margin-right: 20px;
 }
 
-
+/* Navigation Links */
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
+    align-items: center;
 }
 
 nav li {
-    display: inline;
     margin: 0 15px;
 }
 
@@ -50,11 +50,54 @@ nav a {
 }
 
 nav a:hover {
-    color: #ffcc00; /* Yellow hover effect */
+    color: #ffcc00;
 }
 
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 300px;
+}
 
+.search-bar input[type="text"] {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 8px;
+    width: 100%;
+    border-radius: 25px;
+}
 
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons a {
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.icons img {
+    width: 27px;
+    height: 27px;
+    transition: transform 0.3s ease;
+}
+
+.icons img:hover {
+    transform: scale(1.2);
+}
 
 /* Hero Section */
 #hero {
@@ -79,10 +122,13 @@ nav a:hover {
     background-color: #ffdd44;
 }
 
+
+
+
 /* Categories */
 #categories {
     padding: 50px;
-    background-color: #e0f7fa; /* Light cyan */
+    background-color: #e0f7fa;
     text-align: center;
 }
 
@@ -104,7 +150,7 @@ nav a:hover {
 /* Featured Products */
 #featured-products {
     padding: 50px;
-    background-color: #ffe6e6; /* Light pink */
+    background-color: #ffe6e6;
     text-align: center;
 }
 
@@ -135,36 +181,6 @@ nav a:hover {
 
 .product button:hover {
     background-color: #ff6699;
-}
-
-/* Contact Us */
-#contact-us {
-    padding: 50px;
-    background-color: #cce5ff; /* Light blue */
-    text-align: center;
-}
-
-input, textarea {
-    display: block;
-    margin: 10px auto;
-    width: 80%;
-    padding: 10px;
-    border: 2px solid #007bff;
-    border-radius: 5px;
-}
-
-button[type="submit"] {
-    background-color: #007bff;
-    border: none;
-    padding: 10px 20px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-button[type="submit"]:hover {
-    background-color: #3399ff;
 }
 
 /* Footer */
@@ -236,4 +252,3 @@ footer {
     border-top: 1px solid #444;
     padding-top: 10px;
 }
-
