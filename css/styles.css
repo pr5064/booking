@@ -9,15 +9,32 @@ body {
 
 /* Header */
 header {
-    background-color: green; /* Bright orange */
-    color: #fff;
-    padding: 15px 0;
+    background-color: black;
+    color: black;
+    padding: 10px 0;
     text-align: center;
 }
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: black;
+}
+
+.logo {
+    height: 50px; /* Adjust height as needed */
+    width: auto;
+    margin-right: 20px;
+}
+
 
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
 }
 
 nav li {
@@ -36,9 +53,12 @@ nav a:hover {
     color: #ffcc00; /* Yellow hover effect */
 }
 
+
+
+
 /* Hero Section */
 #hero {
-    background: linear-gradient(to right, #ff9966, #ff5e62);
+    background: #ffdab9;
     color: white;
     padding: 100px 20px;
     text-align: center;
