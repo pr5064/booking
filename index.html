@@ -113,6 +113,16 @@
             from { transform: translateY(0px); }
             to { transform: translateY(-15px); }
         }
+		footer {
+              background-color: #222;
+              color: white;
+              text-align: center;
+              padding: 10px;
+              position: relative;
+              bottom: 0;
+              width: 100%;
+        }
+
     </style>
 </head>
 <body>
@@ -129,10 +139,14 @@
         <h1>Welcome to PreviBook!</h1>
         <p>Are you here to shop or display your product?</p>
         <div class="options">
-            <button class="btn btn-display" onclick="alert('Feature coming soon!')">Display Your Product</button>
+            <button class="btn btn-display" onclick="window.location.href='display.html'">Display Your Product</button>
             <button class="btn btn-shop" onclick="window.location.href='shop.html'">Shop Now</button>
         </div>
     </div>
+	<footer>
+    <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
+</footer>
+
 	<!-- Connect to JavaScript file -->
   <script src="script.js"></script>
 </body>
