@@ -7,62 +7,133 @@
     <link rel="stylesheet" href="css/styles.css">
     <style>
         body {
-            background: linear-gradient(135deg, #ff6600, #ffcc00);
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            overflow: hidden;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: url('images/bg-glow.jpg') no-repeat center center/cover;
+            animation: moveBackground 20s infinite linear;
+            z-index: -1;
+            filter: blur(8px);
+        }
+
+        @keyframes moveBackground {
+            from { transform: rotate(0deg) scale(1.1); }
+            to { transform: rotate(360deg) scale(1.1); }
+        }
+
+        .container {
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .container {
+            flex-direction: column;
             text-align: center;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: 15px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
         }
+
         h1 {
-            color: white;
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            background: linear-gradient(90deg, #ffcc00, #ff3366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: typing 2s steps(15, end), blink 0.5s infinite;
         }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
         .options {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 30px;
         }
+
         .btn {
-            padding: 15px 25px;
+            padding: 20px 30px;
             border: none;
-            font-size: 18px;
+            border-radius: 50px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-        .btn-display {
-            background: #ff3366;
             color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
+
+        .btn-display {
+            background: #6a1b9a;
+            box-shadow: 0 0 15px #6a1b9a;
+        }
+
         .btn-shop {
             background: #009688;
-            color: white;
+            box-shadow: 0 0 15px #009688;
         }
+
         .btn:hover {
             transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+        }
+
+        .floating-icons img {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            opacity: 0.7;
+            animation: float 3s infinite ease-in-out alternate;
+        }
+
+        .floating-icons img:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+        .floating-icons img:nth-child(2) { top: 50%; left: 10%; animation-delay: 1s; }
+        .floating-icons img:nth-child(3) { top: 30%; right: 15%; animation-delay: 2s; }
+        .floating-icons img:nth-child(4) { bottom: 20%; left: 40%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-15px); }
         }
     </style>
 </head>
 <body>
+    <div class="parallax-bg"></div>
+
+    <div class="floating-icons">
+        <img src="images/icon1.png" alt="Icon 1">
+        <img src="images/icon2.png" alt="Icon 2">
+        <img src="images/icon3.png" alt="Icon 3">
+        <img src="images/icon4.png" alt="Icon 4">
+    </div>
+
     <div class="container">
         <h1>Welcome to PreviBook!</h1>
-        <p>Do you want to display your product or shop for a product?</p>
+        <p>Are you here to shop or display your product?</p>
         <div class="options">
-            <button class="btn btn-display">Display Your Product</button>
+            <button class="btn btn-display" onclick="alert('Feature coming soon!')">Display Your Product</button>
             <button class="btn btn-shop" onclick="window.location.href='shop.html'">Shop Now</button>
         </div>
     </div>
+	<!-- Connect to JavaScript file -->
+  <script src="script.js"></script>
 </body>
 </html>
