@@ -21,27 +21,93 @@
         }
         .product-form {
             background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .product-form input, .product-form textarea {
+        .product-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: #0072ff;
+        }
+        .form-group label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            color: #aaa;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .form-group input:focus + label, .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label, .form-group textarea:not(:placeholder-shown) + label,
+        .form-group select:focus + label, .form-group select:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            background: white;
+            padding: 0 5px;
+            font-size: 12px;
+            color: #0072ff;
+        }
+        .image-upload {
+            text-align: center;
+            border: 2px dashed #0072ff;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            position: relative;
+        }
+        .image-upload:hover {
+            background-color: #e0f0ff;
+            border-color: #005bb5;
+        }
+        .image-upload input[type="file"] {
+            display: none;
+        }
+        .image-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #0072ff;
+            font-weight: 600;
+        }
+        .image-upload-label i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .file-name {
+            margin-top: 10px;
+            color: #555;
+            font-size: 14px;
         }
         .product-form button {
             background-color: #0072ff;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
+            width: 100%;
             transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         .product-form button:hover {
             background-color: #005bb5;
@@ -50,10 +116,15 @@
             margin-top: 30px;
             padding: 20px;
             background: #f9f9f9;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+        .preview.show {
+            transform: scale(1);
         }
         .preview img {
             width: 100%;
@@ -64,39 +135,105 @@
 <body>
     <h1>Display Your Product</h1>
     <div class="product-form">
-        <input type="text" id="productName" placeholder="Product Name" required>
-        <textarea id="productDescription" placeholder="Product Description" rows="4" required></textarea>
-        <input type="number" id="productPrice" placeholder="Product Price ($)" required>
-        <input type="file" id="productImage" accept="image/*" required>
+        <div class="form-group">
+            <input type="text" id="productName" placeholder=" " required>
+            <label for="productName">Product Name</label>
+        </div>
+        <div class="form-group">
+            <select id="productCategory" onchange="updateProductTypes()" required>
+                <option value="" disabled selected>Select Product Category</option>
+                <option value="Mens Fashion">Men's Fashion</option>
+                <option value="Womens Fashion">Women's Fashion</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Home Decor">Home Decor</option>
+            </select>
+            <label for="productCategory">Product Category</label>
+        </div>
+        <div class="form-group">
+            <select id="productType" required>
+                <option value="" disabled selected>Select Product Type</option>
+            </select>
+            <label for="productType">Product Type</label>
+        </div>
+        <div class="form-group">
+            <textarea id="productDescription" placeholder=" " rows="4" required></textarea>
+            <label for="productDescription">Product Description</label>
+        </div>
+        <div class="form-group">
+            <input type="number" id="productPrice" placeholder=" " required>
+            <label for="productPrice">Product Price ($)</label>
+        </div>
+        <div class="image-upload" onclick="document.getElementById('productImage').click()">
+            <input type="file" id="productImage" accept="image/*" required>
+            <div class="image-upload-label">
+                <i>📷</i>
+                <span>Click to Upload Image</span>
+            </div>
+            <div class="file-name" id="fileName">No file chosen</div>
+        </div>
         <button onclick="previewProduct()">Preview Product</button>
     </div>
 
-    <div class="preview" id="productPreview" style="display:none;">
+    <div class="preview" id="productPreview">
         <h2>Product Preview</h2>
         <p id="previewName"></p>
+        <p id="previewCategory"></p>
+        <p id="previewType"></p>
         <p id="previewDescription"></p>
         <p id="previewPrice"></p>
         <img id="previewImage" src="" alt="Product Image">
     </div>
 
     <script>
+        function updateProductTypes() {
+            const category = document.getElementById('productCategory').value;
+            const typeSelect = document.getElementById('productType');
+            typeSelect.innerHTML = '<option value="" disabled selected>Select Product Type</option>';
+
+            let types = [];
+            if (category === 'Mens Fashion') {
+                types = ['T-shirt', 'Shirt', 'Jeans', 'Jacket'];
+            } else if (category === 'Womens Fashion') {
+                types = ['Dress', 'Top', 'Skirt', 'Blouse'];
+            } else if (category === 'Electronics') {
+                types = ['Mobile', 'Laptop', 'Headphones', 'Camera'];
+            } else if (category === 'Home Decor') {
+                types = ['Lamp', 'Vase', 'Rug', 'Wall Art'];
+            }
+            types.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                typeSelect.appendChild(option);
+            });
+        }
+
+        document.getElementById('productImage').addEventListener('change', function () {
+            const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+            document.getElementById('fileName').innerText = fileName;
+        });
+
         function previewProduct() {
             const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const type = document.getElementById('productType').value;
             const description = document.getElementById('productDescription').value;
             const price = document.getElementById('productPrice').value;
             const image = document.getElementById('productImage').files[0];
 
-            if (name && description && price && image) {
-                document.getElementById('previewName').innerText = `Name: ${name}`;
-                document.getElementById('previewDescription').innerText = `Description: ${description}`;
-                document.getElementById('previewPrice').innerText = `Price: $${price}`;
+            if (name && category && type && description && price && image) {
+                document.getElementById('previewName').innerText = Name: ${name};
+                document.getElementById('previewCategory').innerText = Category: ${category};
+                document.getElementById('previewType').innerText = Type: ${type};
+                document.getElementById('previewDescription').innerText = Description: ${description};
+                document.getElementById('previewPrice').innerText = Price: $${price};
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     document.getElementById('previewImage').src = e.target.result;
                 }
                 reader.readAsDataURL(image);
 
-                document.getElementById('productPreview').style.display = 'block';
+                document.getElementById('productPreview').classList.add('show');
             } else {
                 alert('Please fill in all fields and upload an image.');
             }
@@ -104,3 +241,4 @@
     </script>
 </body>
 </html>
+ 
