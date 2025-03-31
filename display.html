@@ -8,237 +8,162 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            color: #333;
+            background: #F9F9F9; /* Light Grey Background */
+            color: #333; /* Dark Text for Contrast */
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            justify-content: center;
             padding: 20px;
         }
-        h1 {
-            color: white;
-            margin-bottom: 20px;
-        }
-        .product-form {
-            background: white;
-            padding: 30px;
+        .container {
+            background: #ffffff; /* White Background */
+            padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 500px;
+            text-align: center;
         }
-        .product-form:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 24px;
         }
         .form-group {
-            position: relative;
             margin-bottom: 20px;
+            position: relative;
         }
-        .form-group input, .form-group textarea, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 14px;
+            border: 1px solid #ddd; /* Light Grey Border */
+            border-radius: 12px;
             outline: none;
-            transition: border-color 0.3s;
+            font-size: 16px;
+            background: #fafafa; /* Light Background for Inputs */
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            border-color: #0072ff;
+        .form-group textarea {
+            resize: none;
         }
-        .form-group label {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            color: #aaa;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        .form-group input:focus + label, .form-group input:not(:placeholder-shown) + label,
-        .form-group textarea:focus + label, .form-group textarea:not(:placeholder-shown) + label,
-        .form-group select:focus + label, .form-group select:not(:placeholder-shown) + label {
-            top: -10px;
-            left: 10px;
-            background: white;
-            padding: 0 5px;
-            font-size: 12px;
-            color: #0072ff;
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            background-color: #ffffff; /* White Background on Focus */
+            border-color: #007BFF; /* Blue Border on Focus */
         }
         .image-upload {
             text-align: center;
-            border: 2px dashed #0072ff;
+            border: 2px dashed #ddd;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
-            transition: background-color 0.3s, border-color 0.3s;
-            position: relative;
+            transition: 0.3s;
+            background: #fafafa;
+            color: #333;
+            font-weight: bold;
         }
         .image-upload:hover {
-            background-color: #e0f0ff;
-            border-color: #005bb5;
+            background: #f0f0f0;
         }
-        .image-upload input[type="file"] {
-            display: none;
-        }
-        .image-upload-label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #0072ff;
-            font-weight: 600;
-        }
-        .image-upload-label i {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        .file-name {
-            margin-top: 10px;
-            color: #555;
-            font-size: 14px;
-        }
-        .product-form button {
-            background-color: #0072ff;
-            color: white;
-            padding: 12px 20px;
+        button {
+            background: #007BFF; /* Premium Blue Button */
+            color: #fff;
+            padding: 14px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
+            font-size: 18px;
             cursor: pointer;
+            transition: 0.3s;
             width: 100%;
-            transition: background 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            font-weight: bold;
         }
-        .product-form button:hover {
-            background-color: #005bb5;
+        button:hover {
+            background: #0056b3; /* Darker Blue on Hover */
         }
-        .preview {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f9f9f9;
+        .preview-container {
+            display: none;
+            margin-top: 20px;
+            padding: 25px;
+            background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            transform: scale(0);
-            transition: transform 0.5s ease;
+            text-align: center;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        .preview.show {
-            transform: scale(1);
-        }
-        .preview img {
+        .preview-container img {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+        .preview-container p {
+            font-size: 16px;
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
-    <h1>Display Your Product</h1>
-    <div class="product-form">
+    <div class="container">
+        <h2>Display Your Product</h2>
         <div class="form-group">
-            <input type="text" id="productName" placeholder=" " required>
-            <label for="productName">Product Name</label>
+            <input type="text" id="productName" placeholder="Product Name" required>
         </div>
         <div class="form-group">
-            <select id="productCategory" onchange="updateProductTypes()" required>
+            <select id="productCategory" required>
                 <option value="" disabled selected>Select Product Category</option>
-                <option value="Mens Fashion">Men's Fashion</option>
-                <option value="Womens Fashion">Women's Fashion</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Home Decor">Home Decor</option>
+                <option>Men's Fashion</option>
+                <option>Women's Fashion</option>
+                <option>Kids' Fashion</option>
+                <option>Electronics</option>
+                <option>Home & Living</option>
+                <option>Beauty</option>
+                <option>Grocery</option>
+                <option>Medical</option>
+                <option>Appliances</option>
+                <option>Gadgets</option>
             </select>
-            <label for="productCategory">Product Category</label>
         </div>
         <div class="form-group">
-            <select id="productType" required>
-                <option value="" disabled selected>Select Product Type</option>
-            </select>
-            <label for="productType">Product Type</label>
+            <textarea id="productDescription" placeholder="Product Description" rows="4" required></textarea>
         </div>
         <div class="form-group">
-            <textarea id="productDescription" placeholder=" " rows="4" required></textarea>
-            <label for="productDescription">Product Description</label>
-        </div>
-        <div class="form-group">
-            <input type="number" id="productPrice" placeholder=" " required>
-            <label for="productPrice">Product Price ($)</label>
+            <input type="number" id="productPrice" placeholder="Product Price ($)" required>
         </div>
         <div class="image-upload" onclick="document.getElementById('productImage').click()">
             <input type="file" id="productImage" accept="image/*" required>
-            <div class="image-upload-label">
-                <i>📷</i>
-                <span>Click to Upload Image</span>
-            </div>
-            <div class="file-name" id="fileName">No file chosen</div>
+            <p>📷 Click to Upload Image</p>
         </div>
         <button onclick="previewProduct()">Preview Product</button>
     </div>
-
-    <div class="preview" id="productPreview">
-        <h2>Product Preview</h2>
+    <div class="preview-container" id="previewContainer">
+        <h3>Product Preview</h3>
         <p id="previewName"></p>
         <p id="previewCategory"></p>
-        <p id="previewType"></p>
         <p id="previewDescription"></p>
         <p id="previewPrice"></p>
         <img id="previewImage" src="" alt="Product Image">
     </div>
-
     <script>
-        function updateProductTypes() {
-            const category = document.getElementById('productCategory').value;
-            const typeSelect = document.getElementById('productType');
-            typeSelect.innerHTML = '<option value="" disabled selected>Select Product Type</option>';
-
-            let types = [];
-            if (category === 'Mens Fashion') {
-                types = ['T-shirt', 'Shirt', 'Jeans', 'Jacket'];
-            } else if (category === 'Womens Fashion') {
-                types = ['Dress', 'Top', 'Skirt', 'Blouse'];
-            } else if (category === 'Electronics') {
-                types = ['Mobile', 'Laptop', 'Headphones', 'Camera'];
-            } else if (category === 'Home Decor') {
-                types = ['Lamp', 'Vase', 'Rug', 'Wall Art'];
-            }
-            types.forEach(type => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                typeSelect.appendChild(option);
-            });
-        }
-
         document.getElementById('productImage').addEventListener('change', function () {
-            const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
-            document.getElementById('fileName').innerText = fileName;
-        });
-
-        function previewProduct() {
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const type = document.getElementById('productType').value;
-            const description = document.getElementById('productDescription').value;
-            const price = document.getElementById('productPrice').value;
-            const image = document.getElementById('productImage').files[0];
-
-            if (name && category && type && description && price && image) {
-                document.getElementById('previewName').innerText = Name: ${name};
-                document.getElementById('previewCategory').innerText = Category: ${category};
-                document.getElementById('previewType').innerText = Type: ${type};
-                document.getElementById('previewDescription').innerText = Description: ${description};
-                document.getElementById('previewPrice').innerText = Price: $${price};
+            const file = this.files[0];
+            if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     document.getElementById('previewImage').src = e.target.result;
                 }
-                reader.readAsDataURL(image);
-
-                document.getElementById('productPreview').classList.add('show');
-            } else {
-                alert('Please fill in all fields and upload an image.');
+                reader.readAsDataURL(file);
             }
+        });
+
+        function previewProduct() {
+            document.getElementById('previewName').innerText = "Name: " + document.getElementById('productName').value;
+            document.getElementById('previewCategory').innerText = "Category: " + document.getElementById('productCategory').value;
+            document.getElementById('previewDescription').innerText = "Description: " + document.getElementById('productDescription').value;
+            document.getElementById('previewPrice').innerText = "Price: $" + document.getElementById('productPrice').value;
+            document.getElementById('previewContainer').style.display = 'block';
         }
     </script>
 </body>
 </html>
- 
