@@ -102,6 +102,14 @@
             font-size: 16px;
             margin: 5px 0;
         }
+        .action-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .action-buttons button {
+            width: 48%;
+        }
     </style>
 </head>
 <body>
@@ -144,7 +152,14 @@
         <p id="previewDescription"></p>
         <p id="previewPrice"></p>
         <img id="previewImage" src="" alt="Product Image">
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button onclick="goBack()">Back</button>
+            <button onclick="redirectToShop()">Go to Shop</button>
+        </div>
     </div>
+
     <script>
         document.getElementById('productImage').addEventListener('change', function () {
             const file = this.files[0];
@@ -163,6 +178,21 @@
             document.getElementById('previewDescription').innerText = "Description: " + document.getElementById('productDescription').value;
             document.getElementById('previewPrice').innerText = "Price: $" + document.getElementById('productPrice').value;
             document.getElementById('previewContainer').style.display = 'block';
+        }
+
+        function goBack() {
+            // Reset the form and hide preview
+            document.getElementById('productName').value = '';
+            document.getElementById('productCategory').value = '';
+            document.getElementById('productDescription').value = '';
+            document.getElementById('productPrice').value = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('previewContainer').style.display = 'none';
+        }
+
+        function redirectToShop() {
+            // Redirect to the shop website (update URL with your website URL)
+            window.location.href = 'https://www.yourshopwebsite.com';
         }
     </script>
 </body>
