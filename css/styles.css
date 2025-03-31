@@ -122,9 +122,6 @@ nav a:hover {
     background-color: #ffdd44;
 }
 
-
-
-
 /* Categories */
 #categories {
     padding: 50px;
@@ -145,6 +142,17 @@ nav a:hover {
 
 .category:hover {
     transform: scale(1.05);
+}
+
+/* Remove underline and change text color to black */
+.category a {
+    text-decoration: none;
+    color: black;
+    display: block; /* Ensures the whole area is clickable */
+}
+
+.category h3 {
+    color: black;
 }
 
 /* Featured Products */
