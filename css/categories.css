@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
@@ -65,5 +64,5 @@ header {
 }
 
 .category button:hover {
-    background: #e65c00;
+    background: #e65c00;
 }
