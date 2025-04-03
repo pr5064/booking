@@ -11,29 +11,67 @@
 
     <!-- Header -->
     <header>
-        Men's Fashion | StyleHub
+        <div class="logo">🛍️ StyleHub</div>
+        <input type="text" id="search-bar" placeholder="Search for fashion...">
+        <select id="sort-options">
+            <option value="popularity">Sort by Popularity</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+        </select>
     </header>
 
-    <!-- Categories Section -->
+    <!-- Trending Now Section -->
+    <section class="trending">
+        <h2>🔥 Trending Now</h2>
+        <div class="trending-items">
+            <div class="item">
+                <img src="images/jacket.jpg" alt="Jackets">
+                <p>Winter Jackets - 50% OFF</p>
+            </div>
+            <div class="item">
+                <img src="images/sneakers.jpg" alt="Sneakers">
+                <p>Stylish Sneakers - Limited Stock!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
     <section class="category-container">
-        <div class="category">
-            <img src="images/tshirt.jpg" alt="T-Shirts">
-            <h2>T-Shirts</h2>
-            <p>40-80% OFF</p>
-            <button>Shop Now</button>
+        <h2>👕 Popular Categories</h2>
+        <div class="categories">
+            <div class="category">
+                <img src="images/tshirt.jpg" alt="T-Shirts">
+                <h2>T-Shirts</h2>
+                <p>40-80% OFF</p>
+                <button class="shop-now">Shop Now</button>
+            </div>
+            <div class="category">
+                <img src="images/sports_shoes.jpg" alt="Sports Shoes">
+                <h2>Sports Shoes</h2>
+                <p>40-80% OFF</p>
+                <button class="shop-now">Shop Now</button>
+            </div>
+            <div class="category">
+                <img src="images/kurta.jpg" alt="Kurtas & Sets">
+                <h2>Kurtas & Sets</h2>
+                <p>50-80% OFF</p>
+                <button class="shop-now">Shop Now</button>
+            </div>
         </div>
-        <div class="category">
-            <img src="images/sports_shoes.jpg" alt="Sports Shoes">
-            <h2>Sports Shoes</h2>
-            <p>40-80% OFF</p>
-            <button>Shop Now</button>
-        </div>
-        <div class="category">
-            <img src="images/kurta.jpg" alt="Kurtas & Sets">
-            <h2>Kurtas & Sets</h2>
-            <p>50-80% OFF</p>
-            <button>Shop Now</button>
-        </div>
+    </section>
+
+    <!-- Best Deals Section -->
+    <section class="best-deals">
+        <h2>🎁 Best Deals of the Day</h2>
+        <p>Grab the best discounts before they expire!</p>
+        <button class="view-deals">View Deals</button>
+    </section>
+
+    <!-- Exclusive Offers Section -->
+    <section class="exclusive">
+        <h2>💳 Exclusive Member Offers</h2>
+        <p>Sign up to get special discounts and early access.</p>
+        <button class="signup">Join Now</button>
     </section>
 
 </body>

@@ -1,142 +1,101 @@
- body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #1a1a2e, #16213e);
-        color: white;
-        overflow: hidden;
-    }
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0A192F; /* Deep Navy Blue */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+}
 
-    .parallax-bg {
-        position: absolute;
-        width: 200%;
-        height: 200%;
-        top: -50%;
-        left: -50%;
-        background: url('images/bg-glow.jpg') no-repeat center center/cover;
-        animation: moveBackground 20s infinite linear;
-        z-index: -1;
-        filter: blur(8px);
-        will-change: transform;
-    }
-    
-    @keyframes moveBackground {
-        from { transform: rotate(0deg) scale(1.05); }
-        to { transform: rotate(360deg) scale(1.05); }
-    }
-    
-    .container {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-        backdrop-filter: blur(10px);
-        padding: 20px;
-    }
-    
-    h1 {
-        font-size: 3.5rem;
-        display: inline-block;
-        background: linear-gradient(90deg, #ffcc00, #ff3366);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: fadeIn 2s ease-in-out, blink 1s infinite;
-    }
-    
-    /* Smooth fade-in effect */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    
-    /* Blinking effect */
-    @keyframes blink {
-        50% {
-            opacity: 0.6;
-        }
-    }
-    
-    
-    
+/* Header */
+header {
+    background: #0A192F;
+    padding: 15px;
+    color: #D4AF37; /* Gold */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid #D4AF37;
+}
 
-    @keyframes typing {
-        from { width: 0; }
-        to { width: 100%; }
-    }
+/* Search & Sort */
+#search-bar, #sort-options {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #D4AF37;
+    background: transparent;
+    color: white;
+    border-radius: 8px;
+    outline: none;
+}
 
-    p {
-        font-size: 1.2rem;
-        margin-bottom: 40px;
-        opacity: 0.8;
-    }
+/* Trending Section */
+.trending {
+    padding: 30px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 15px;
+    margin: 20px;
+    border: 1px solid #D4AF37;
+}
 
-    .options {
-        display: flex;
-        gap: 30px;
-    }
+/* Categories */
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
 
-    .btn {
-        padding: 20px 30px;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        cursor: pointer;
-        color: white;
-        transition: transform 0.3s, box-shadow 0.3s;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        position: relative;
-        overflow: hidden;
-    }
+.category {
+    background: rgba(255, 215, 0, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+    width: 250px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
 
-    .btn-display {
-        background: #6a1b9a;
-        box-shadow: 0 0 15px #6a1b9a;
-    }
+.category:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
 
-    .btn-show {
-        background: #ffcc00;
-        box-shadow: 0 0 15px #ffcc00;
-        color: #000;
-    }
-    
-    .btn-shop {
-        background: #009688;
-        box-shadow: 0 0 15px #009688;
-        color: white;
-    }
-    
-    .btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
-        opacity: 0.9;
-    }
-    
-    
+/* Category Images */
+.category img, .deals-container img, .offers-container img {
+    width: 32%; /* Allows 3 images in a row */
+    border-radius: 10px;
+    margin: 5px;
+}
 
-    .floating-icons img {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        opacity: 0.7;
-        animation: float 4s infinite ease-in-out alternate;
-        will-change: transform;
-    }
-    
+/* Grid for Deals & Offers */
+.deals-container, .offers-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px;
+}
 
-    .floating-icons img:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
-    .floating-icons img:nth-child(2) { top: 50%; left: 10%; animation-delay: 1s; }
-    .floating-icons img:nth-child(3) { top: 30%; right: 15%; animation-delay: 2s; }
-    .floating-icons img:nth-child(4) { bottom: 20%; left: 40%; animation-delay: 1.5s; }
+/* Buttons */
+.shop-now, .view-deals, .signup {
+    background: #D4AF37;
+    color: #0A192F;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
 
-    @keyframes float {
-        from { transform: translateY(0px); }
-        to { transform: translateY(-8px); }
-    }
-    
+.shop-now:hover, .view-deals:hover, .signup:hover {
+    background: #B7950B;
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+}

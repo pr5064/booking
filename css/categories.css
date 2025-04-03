@@ -1,68 +1,101 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    font-family: 'Poppins', sans-serif;
+    background: #0A192F; /* Dark Navy Blue */
     margin: 0;
     padding: 0;
     text-align: center;
+    color: #EAEAEA; /* Light Gray */
 }
 
+/* Header */
 header {
-    background: #ff6600;
-    padding: 20px;
-    color: white;
-    font-size: 24px;
+    background: #0A192F;
+    padding: 15px;
+    color: #FFD700; /* Gold */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 20px;
     font-weight: bold;
+    border-bottom: 2px solid #FFD700;
 }
 
-.category-container {
+/* Search & Sort */
+#search-bar, #sort-options {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #FFD700;
+    background: transparent;
+    color: white;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Trending Section */
+.trending {
+    padding: 30px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 15px;
+    margin: 20px;
+    border: 1px solid #FFD700;
+}
+
+/* Categories */
+.categories {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    padding: 20px;
 }
 
 .category {
-    background: white;
-    padding: 15px;
+    background: rgba(255, 215, 0, 0.05);
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+    width: 250px;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
-    width: 250px;
 }
 
 .category:hover {
     transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
 }
 
-.category img {
-    width: 100%;
+/* Category Images */
+.category img, .deals-container img, .offers-container img {
+    width: 32%; /* Allows 3 images in a row */
     border-radius: 10px;
+    margin: 5px;
 }
 
-.category h2 {
-    margin: 10px 0;
-    color: #333;
-}
-
-.category p {
-    font-size: 18px;
-    color: #ff6600;
-    font-weight: bold;
-}
-
-.category button {
-    background: #ff6600;
-    color: white;
-    border: none;
+/* Grid for Deals & Offers */
+.deals-container, .offers-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
     padding: 10px;
+}
+
+/* Buttons */
+.shop-now, .view-deals, .signup {
+    background: #FFD700; /* Gold */
+    color: #0A192F;
+    border: none;
+    padding: 12px;
     width: 100%;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
 }
 
-.category button:hover {
-    background: #e65c00;
+.shop-now:hover, .view-deals:hover, .signup:hover {
+    background: #B7950B; /* Deep Gold */
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
 }
