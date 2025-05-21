@@ -1,36 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PreviBook - Start</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="preload" href="images/bg-glow.jpg" as="image">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PreviBook - Welcome</title>
 
+  <link rel="preload" href="images/bg-glow.jpg" as="image" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* Premium dark gradient background with subtle glow */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      overflow-x: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .parallax-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('images/bg-glow.jpg') center/cover no-repeat;
+      filter: brightness(0.4) blur(5px);
+      z-index: -2;
+      animation: slowGlow 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowGlow {
+      0%, 100% { filter: brightness(0.4) blur(5px); }
+      50% { filter: brightness(0.6) blur(7px); }
+    }
+
+    /* Floating icons with gentle up-down animation */
+    .floating-icons {
+      position: fixed;
+      top: 15vh;
+      right: 3vw;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 2;
+    }
+
+    .floating-icons img {
+      width: 40px;
+      height: 40px;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 5px #08f);
+      animation: floatUpDown 6s ease-in-out infinite;
+      cursor: default;
+      transition: filter 0.3s ease;
+    }
+
+    .floating-icons img:hover {
+      filter: drop-shadow(0 0 12px #0ff);
+      transform: scale(1.1);
+    }
+
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Main container styling */
+    .container {
+      max-width: 450px;
+      background: rgba(30, 45, 60, 0.75);
+      border-radius: 15px;
+      padding: 40px 30px;
+      box-shadow: 0 0 20px #00bfff88;
+      backdrop-filter: blur(10px);
+      border: 1px solid #00bfff55;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      color: #00d9ff;
+      text-shadow: 0 0 10px #00d9ff88;
+      letter-spacing: 1.5px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #cce7ffcc;
+    }
+
+    /* Stylish buttons */
+    .options {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,191,255,0.4);
+      user-select: none;
+    }
+
+    .btn-show {
+      background: #0077cc;
+      color: #e0f7ff;
+      box-shadow: 0 5px 15px #0077cc88;
+    }
+
+    .btn-show:hover {
+      background: #00aaff;
+      box-shadow: 0 8px 25px #00aaffcc;
+      transform: translateY(-3px);
+    }
+
+    .btn-shop {
+      background: #00d9ff;
+      color: #003a54;
+      box-shadow: 0 5px 15px #00d9ff88;
+    }
+
+    .btn-shop:hover {
+      background: #00f0ff;
+      box-shadow: 0 8px 25px #00f0ffcc;
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+      color: #008fbf99;
+      text-align: center;
+      letter-spacing: 0.8px;
+      font-weight: 500;
+      user-select: none;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        width: 100%;
+        padding: 30px 20px;
+      }
+      .floating-icons {
+        display: none;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="parallax-bg"></div>
+  <div class="parallax-bg"></div>
 
-    <div class="floating-icons">
-        <img src="images/icon1.png" alt="Icon 1">
-        <img src="images/icon2.png" alt="Icon 2">
-        <img src="images/icon3.png" alt="Icon 3">
-        <img src="images/icon4.png" alt="Icon 4">
-    </div>
+  <div class="floating-icons" aria-label="Decorative floating icons">
+    <img src="images/icon1.png" alt="Icon 1" />
+    <img src="images/icon2.png" alt="Icon 2" />
+    <img src="images/icon3.png" alt="Icon 3" />
+    <img src="images/icon4.png" alt="Icon 4" />
+  </div>
 
-    <div class="container">
-        <h1>Welcome to PreviBook!</h1>
-        <p>Are you here to shop or display your product?</p>
-        <div class="options">
-            <button class="btn btn-show" onclick="window.location.href='display.html'">Display Your Product</button>
-            <button class="btn btn-shop" onclick="window.location.href='shop.html'">Shop Now</button>
-        </div>
+  <main class="container" role="main">
+    <h1>Welcome to PreviBook!</h1>
+    <p>Are you here to shop or display your product?</p>
+    <div class="options">
+      <button class="btn btn-show" onclick="window.location.href='display.html'">Display Your Product</button>
+      <button class="btn btn-shop" onclick="window.location.href='shop.html'">Shop Now</button>
     </div>
-	<footer>
+  </main>
+
+  <footer>
     <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
-</footer>
+  </footer>
 
-	<!-- Connect to JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
