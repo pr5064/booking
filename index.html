@@ -25,7 +25,7 @@
       overflow: hidden;
     }
 
-    /* Glowing animated circles for background effect */
+    /* Glowing animated circles */
     .glow-circle {
       position: absolute;
       border-radius: 50%;
@@ -66,10 +66,10 @@
     .container {
       position: relative;
       z-index: 1;
-      background: rgba(30, 41, 59, 0.75);
+      background: rgba(30, 41, 59, 0.85);
       padding: 40px 30px;
       border-radius: 20px;
-      box-shadow: 0 0 35px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.4);
       max-width: 480px;
       width: 100%;
       border: 1px solid rgba(147, 197, 253, 0.3);
@@ -134,45 +134,39 @@
       box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
     }
 
-    .bar:nth-child(2) {
-      animation-delay: 1s;
-      height: 42px;
-    }
-
-    .bar:nth-child(3) {
-      animation-delay: 2s;
-      height: 46px;
-    }
-
-    .bar:nth-child(4) {
-      animation-delay: 3s;
-      height: 40px;
-    }
+    .bar:nth-child(2) { animation-delay: 1s; height: 42px; }
+    .bar:nth-child(3) { animation-delay: 2s; height: 46px; }
+    .bar:nth-child(4) { animation-delay: 3s; height: 40px; }
 
     @keyframes floatUpDown {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
 
+    /* Contact info - fixed visibility */
     .contact-info {
-      margin-top: 24px;
-      text-align: left;
+      margin-top: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: #e0f2fe;
       font-size: 0.9rem;
-      color: #cbd5e1;
-      max-width: 160px;
-      padding-top: 8px;
-      border-top: 1px solid #334155;
+      line-height: 1.6;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+      text-align: left;
+      max-width: 180px;
     }
 
     .contact-info strong {
-      color: #60a5fa;
+      color: #93c5fd;
+      display: block;
     }
 
     footer {
       margin-top: auto;
       padding: 20px;
       font-size: 0.9rem;
-      color: #94a3b8;
+      color: #cbd5e1;
       text-align: center;
       z-index: 1;
     }
@@ -190,12 +184,12 @@
 </head>
 <body>
 
-  <!-- Background glowing circles -->
+  <!-- Animated Background Circles -->
   <div class="glow-circle one"></div>
   <div class="glow-circle two"></div>
   <div class="glow-circle three"></div>
 
-  <!-- Side bars and contact info -->
+  <!-- Side Bars with Contact Info -->
   <div class="side-bars">
     <div class="bar"></div>
     <div class="bar"></div>
@@ -203,13 +197,13 @@
     <div class="bar"></div>
 
     <div class="contact-info">
-      <div><strong>Email:</strong><br /> contact@previbook.com</div>
-      <div><strong>Phone:</strong><br /> +91 98765 43210</div>
-      <div><strong>Location:</strong><br /> Chennai, India</div>
+      <strong>Email:</strong> contact@previbook.com<br>
+      <strong>Phone:</strong> +91 98765 43210<br>
+      <strong>Location:</strong> Chennai, India
     </div>
   </div>
 
-  <!-- Main container -->
+  <!-- Main Container -->
   <div class="container">
     <h1>Welcome to PreviBook!</h1>
     <p>Are you here to shop or display your product?</p>
