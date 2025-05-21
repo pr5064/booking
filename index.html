@@ -6,115 +6,107 @@
   <title>PreviBook - Welcome</title>
 
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(circle at top left, #0b0c10, #1c1f26 40%, #2e303d);
-      color: #f0e6d2;
-      overflow-x: hidden;
+      background: linear-gradient(to right, #0f172a, #1e293b);
+      color: #e2e8f0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 0 20px;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
       position: relative;
+      overflow-x: hidden;
+      padding: 0 16px;
     }
 
-    /* Glowing animated background layers */
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      top: -30%;
-      left: -30%;
-      width: 160%;
-      height: 160%;
-      border-radius: 50%;
-      filter: blur(200px);
-      opacity: 0.25;
-      animation: pulseGlow 12s ease-in-out infinite alternate;
-      z-index: -3;
+    .container {
+      background: rgba(30, 41, 59, 0.85);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+      max-width: 480px;
+      width: 100%;
+      border: 1px solid rgba(147, 197, 253, 0.3);
     }
 
-    body::before {
-      background: #d4af37; /* Gold */
-      animation-delay: 0s;
+    h1 {
+      font-size: 2.8rem;
+      color: #3b82f6;
+      margin-bottom: 16px;
     }
 
-    body::after {
-      background: #bfa52a; /* Darker gold */
-      animation-delay: 6s;
+    p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 32px;
     }
 
-    @keyframes pulseGlow {
-      0% {
-        transform: scale(1);
-        opacity: 0.25;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 0.4;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 0.25;
-      }
+    .options {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    /* Vertical gold bars container */
+    .btn {
+      padding: 14px 28px;
+      font-size: 1rem;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(to right, #3b82f6, #2563eb);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(59, 130, 246, 0.6);
+    }
+
+    /* Side bars */
     .side-bars {
       position: fixed;
       top: 20vh;
-      right: 4vw;
+      right: 20px;
       display: flex;
       flex-direction: column;
       gap: 14px;
       align-items: center;
       z-index: 2;
-      user-select: none;
     }
 
-    /* Each bar */
     .bar {
       width: 6px;
       height: 50px;
-      background: linear-gradient(135deg, #f5c518, #bfa52a);
-      border-radius: 10px;
-      box-shadow:
-        0 0 10px #f5c518cc,
-        inset 0 0 6px #bfa52aaa;
-      animation: floatUpDown 6s ease-in-out infinite;
-      cursor: default;
-      transition: box-shadow 0.3s ease;
-    }
-    .bar:nth-child(2) {
-      animation-delay: 1.2s;
-      height: 40px;
-      background: linear-gradient(135deg, #d4af37, #8f7b1c);
-    }
-    .bar:nth-child(3) {
-      animation-delay: 2.4s;
-      height: 45px;
-      background: linear-gradient(135deg, #f5c518, #a98219);
-    }
-    .bar:nth-child(4) {
-      animation-delay: 3.6s;
-      height: 38px;
-      background: linear-gradient(135deg, #d4af37, #7c6616);
+      background: linear-gradient(to bottom, #3b82f6, #1d4ed8);
+      border-radius: 8px;
+      animation: floatUpDown 5s ease-in-out infinite;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
     }
 
-    .bar:hover {
-      box-shadow:
-        0 0 25px #f5d742dd,
-        inset 0 0 15px #f5c518dd;
-      transform: scale(1.15);
+    .bar:nth-child(2) {
+      animation-delay: 1s;
+      height: 42px;
+    }
+
+    .bar:nth-child(3) {
+      animation-delay: 2s;
+      height: 46px;
+    }
+
+    .bar:nth-child(4) {
+      animation-delay: 3s;
+      height: 40px;
     }
 
     @keyframes floatUpDown {
@@ -122,158 +114,74 @@
         transform: translateY(0);
       }
       50% {
-        transform: translateY(-14px);
+        transform: translateY(-10px);
       }
     }
 
-    /* Contact info block next to bars */
+    /* Contact info */
     .contact-info {
-      margin-top: 30px;
+      margin-top: 24px;
       text-align: left;
-      color: #f0e6d2cc;
-      font-size: 0.95rem;
-      font-weight: 500;
-      line-height: 1.5;
-      user-select: text;
-      max-width: 140px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-shadow: 0 0 4px #bfa52a99;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      max-width: 160px;
+      padding-top: 8px;
+      border-top: 1px solid #334155;
     }
 
     .contact-info strong {
-      color: #f5c518;
-      font-weight: 700;
+      color: #60a5fa;
+      font-weight: bold;
     }
 
-    /* Glassmorphic main container */
-    .container {
-      max-width: 460px;
-      background: rgba(40, 35, 20, 0.75);
-      border-radius: 20px;
-      padding: 48px 36px;
-      box-shadow:
-        0 0 20px #d4af37cc,
-        inset 0 0 40px #8c771a55;
-      backdrop-filter: blur(15px);
-      border: 1.5px solid rgba(212, 175, 55, 0.45);
-      user-select: none;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 14px;
-      color: #f5c518;
-      text-shadow: 0 0 12px #f5d742aa;
-      letter-spacing: 1.6px;
-      font-weight: 700;
-    }
-
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 38px;
-      color: #f0e6d2cc;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
-
-    /* Buttons container */
-    .options {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Stylish pill buttons */
-    .btn {
-      cursor: pointer;
-      border: none;
-      padding: 16px 38px;
-      font-size: 1.15rem;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 7px 20px rgba(212, 175, 55, 0.6);
-      user-select: none;
-      color: #2b2200;
-      background: linear-gradient(135deg, #f5c518, #bfa52a);
-      text-shadow: 0 0 3px #7a6915aa;
-    }
-
-    .btn-show {
-      background: linear-gradient(135deg, #bfa52a, #6e5d07);
-      color: #e0d8a6;
-      box-shadow: 0 7px 22px #6e5d0799;
-      text-shadow: 0 0 6px #5c510655;
-    }
-
-    .btn:hover {
-      filter: brightness(1.15);
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.85);
-      transform: translateY(-4px);
-    }
-
-    /* Footer */
     footer {
       margin-top: auto;
-      padding: 20px 10px;
-      font-size: 0.95rem;
-      color: #d4af37bb;
-      font-weight: 600;
-      letter-spacing: 0.9px;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #94a3b8;
       text-align: center;
-      user-select: none;
-      text-shadow: 0 0 5px #bfa52a88;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 520px) {
-      .container {
-        width: 100%;
-        padding: 36px 24px;
-      }
-      h1 {
-        font-size: 2.4rem;
-      }
-      p {
-        font-size: 1.1rem;
-        margin-bottom: 28px;
-      }
-      .btn {
-        padding: 14px 30px;
-        font-size: 1rem;
-      }
+    @media (max-width: 600px) {
       .side-bars {
         display: none;
+      }
+
+      .container {
+        padding: 30px 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="side-bars" aria-label="Decorative vertical bars and contact information">
-    <div class="bar" title="Bar 1"></div>
-    <div class="bar" title="Bar 2"></div>
-    <div class="bar" title="Bar 3"></div>
-    <div class="bar" title="Bar 4"></div>
 
-    <div class="contact-info" aria-label="Contact information">
+  <!-- Side bars and contact info -->
+  <div class="side-bars">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+
+    <div class="contact-info">
       <div><strong>Email:</strong><br /> contact@previbook.com</div>
-      <div><strong>Phone:</strong><br /> +1 (555) 123-4567</div>
-      <div><strong>Address:</strong><br /> 123 Premium St.<br /> Suite 456</div>
+      <div><strong>Phone:</strong><br /> +91 98765 43210</div>
+      <div><strong>Location:</strong><br /> Chennai, India</div>
     </div>
   </div>
 
-  <main class="container" role="main">
+  <!-- Main container -->
+  <div class="container">
     <h1>Welcome to PreviBook!</h1>
     <p>Are you here to shop or display your product?</p>
     <div class="options">
-      <button class="btn btn-show" onclick="window.location.href='display.html'">Display Your Product</button>
-      <button class="btn btn-shop" onclick="window.location.href='shop.html'">Shop Now</button>
+      <button class="btn" onclick="window.location.href='display.html'">Display Your Product</button>
+      <button class="btn" onclick="window.location.href='shop.html'">Shop Now</button>
     </div>
-  </main>
+  </div>
 
   <footer>
     <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
