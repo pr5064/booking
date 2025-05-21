@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
-    /* Premium dark gradient background with subtle glow */
+    /* existing styles... */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -39,7 +39,6 @@
       50% { filter: brightness(0.6) blur(7px); }
     }
 
-    /* Floating icons with gentle up-down animation */
     .floating-icons {
       position: fixed;
       top: 15vh;
@@ -70,7 +69,6 @@
       50% { transform: translateY(-12px); }
     }
 
-    /* Main container styling */
     .container {
       max-width: 450px;
       background: rgba(30, 45, 60, 0.75);
@@ -79,6 +77,7 @@
       box-shadow: 0 0 20px #00bfff88;
       backdrop-filter: blur(10px);
       border: 1px solid #00bfff55;
+      z-index: 1;
     }
 
     h1 {
@@ -95,7 +94,6 @@
       color: #cce7ffcc;
     }
 
-    /* Stylish buttons */
     .options {
       display: flex;
       gap: 20px;
@@ -139,7 +137,6 @@
       transform: translateY(-3px);
     }
 
-    /* Footer */
     footer {
       margin-top: auto;
       padding: 15px 10px;
@@ -149,6 +146,54 @@
       letter-spacing: 0.8px;
       font-weight: 500;
       user-select: none;
+    }
+
+    /* Contact Info Bar Styles */
+    #contact-bar {
+      position: fixed;
+      top: 50vh;
+      right: 0;
+      background: rgba(0, 217, 255, 0.85);
+      color: #003a54;
+      padding: 12px 20px;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 0 15px #00d9ffcc;
+      transition: width 0.3s ease, padding 0.3s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 40px;
+      text-align: center;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #contact-bar.open {
+      width: 260px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    #contact-bar span {
+      margin-left: 8px;
+      display: none;
+    }
+
+    #contact-bar.open span {
+      display: inline;
+    }
+
+    /* Small icon for contact bar */
+    #contact-bar::before {
+      content: "☎";
+      font-size: 1.2rem;
+      color: #003a54;
+      display: block;
     }
 
     @media (max-width: 500px) {
@@ -165,6 +210,11 @@
       .btn {
         padding: 12px 25px;
         font-size: 1rem;
+      }
+      #contact-bar {
+        top: auto;
+        bottom: 10vh;
+        right: 10px;
       }
     }
   </style>
@@ -188,10 +238,31 @@
     </div>
   </main>
 
+  <!-- Contact info bar -->
+  <div id="contact-bar" aria-label="Contact information toggle" role="button" tabindex="0" aria-expanded="false">
+    <span>Contact: +1 (234) 567-8901 | email@previBook.com</span>
+  </div>
+
   <footer>
     <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    const contactBar = document.getElementById('contact-bar');
+    
+    function toggleContact() {
+      contactBar.classList.toggle('open');
+      const expanded = contactBar.classList.contains('open');
+      contactBar.setAttribute('aria-expanded', expanded);
+    }
+
+    contactBar.addEventListener('click', toggleContact);
+    contactBar.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleContact();
+      }
+    });
+  </script>
 </body>
 </html>
