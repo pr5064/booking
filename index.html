@@ -5,223 +5,264 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PreviBook - Welcome</title>
 
-  <link rel="preload" href="images/bg-glow.jpg" as="image" />
-  <link rel="stylesheet" href="css/styles.css" />
-
   <style>
-    /* existing styles... */
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #e0e0e0;
-      overflow-x: hidden;
       height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top left, #0b0c10, #1c1f26 40%, #2e303d);
+      color: #f0e6d2;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
       padding: 0 20px;
+      text-align: center;
+      position: relative;
     }
 
-    .parallax-bg {
+    /* Glowing animated background layers */
+    body::before,
+    body::after {
+      content: "";
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('images/bg-glow.jpg') center/cover no-repeat;
-      filter: brightness(0.4) blur(5px);
-      z-index: -2;
-      animation: slowGlow 20s ease-in-out infinite alternate;
+      top: -30%;
+      left: -30%;
+      width: 160%;
+      height: 160%;
+      border-radius: 50%;
+      filter: blur(200px);
+      opacity: 0.25;
+      animation: pulseGlow 12s ease-in-out infinite alternate;
+      z-index: -3;
     }
 
-    @keyframes slowGlow {
-      0%, 100% { filter: brightness(0.4) blur(5px); }
-      50% { filter: brightness(0.6) blur(7px); }
+    body::before {
+      background: #d4af37; /* Gold */
+      animation-delay: 0s;
     }
 
-    .floating-icons {
+    body::after {
+      background: #bfa52a; /* Darker gold */
+      animation-delay: 6s;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        transform: scale(1);
+        opacity: 0.25;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.25;
+      }
+    }
+
+    /* Vertical gold bars container */
+    .side-bars {
       position: fixed;
-      top: 15vh;
-      right: 3vw;
+      top: 20vh;
+      right: 4vw;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 14px;
+      align-items: center;
       z-index: 2;
+      user-select: none;
     }
 
-    .floating-icons img {
-      width: 40px;
-      height: 40px;
-      opacity: 0.8;
-      filter: drop-shadow(0 0 5px #08f);
+    /* Each bar */
+    .bar {
+      width: 6px;
+      height: 50px;
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
+      border-radius: 10px;
+      box-shadow:
+        0 0 10px #f5c518cc,
+        inset 0 0 6px #bfa52aaa;
       animation: floatUpDown 6s ease-in-out infinite;
       cursor: default;
-      transition: filter 0.3s ease;
+      transition: box-shadow 0.3s ease;
+    }
+    .bar:nth-child(2) {
+      animation-delay: 1.2s;
+      height: 40px;
+      background: linear-gradient(135deg, #d4af37, #8f7b1c);
+    }
+    .bar:nth-child(3) {
+      animation-delay: 2.4s;
+      height: 45px;
+      background: linear-gradient(135deg, #f5c518, #a98219);
+    }
+    .bar:nth-child(4) {
+      animation-delay: 3.6s;
+      height: 38px;
+      background: linear-gradient(135deg, #d4af37, #7c6616);
     }
 
-    .floating-icons img:hover {
-      filter: drop-shadow(0 0 12px #0ff);
-      transform: scale(1.1);
+    .bar:hover {
+      box-shadow:
+        0 0 25px #f5d742dd,
+        inset 0 0 15px #f5c518dd;
+      transform: scale(1.15);
     }
 
     @keyframes floatUpDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-14px);
+      }
     }
 
+    /* Contact info block next to bars */
+    .contact-info {
+      margin-top: 30px;
+      text-align: left;
+      color: #f0e6d2cc;
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.5;
+      user-select: text;
+      max-width: 140px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-shadow: 0 0 4px #bfa52a99;
+    }
+
+    .contact-info strong {
+      color: #f5c518;
+      font-weight: 700;
+    }
+
+    /* Glassmorphic main container */
     .container {
-      max-width: 450px;
-      background: rgba(30, 45, 60, 0.75);
-      border-radius: 15px;
-      padding: 40px 30px;
-      box-shadow: 0 0 20px #00bfff88;
-      backdrop-filter: blur(10px);
-      border: 1px solid #00bfff55;
-      z-index: 1;
+      max-width: 460px;
+      background: rgba(40, 35, 20, 0.75);
+      border-radius: 20px;
+      padding: 48px 36px;
+      box-shadow:
+        0 0 20px #d4af37cc,
+        inset 0 0 40px #8c771a55;
+      backdrop-filter: blur(15px);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      user-select: none;
     }
 
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-      color: #00d9ff;
-      text-shadow: 0 0 10px #00d9ff88;
-      letter-spacing: 1.5px;
+      font-size: 3rem;
+      margin-bottom: 14px;
+      color: #f5c518;
+      text-shadow: 0 0 12px #f5d742aa;
+      letter-spacing: 1.6px;
+      font-weight: 700;
     }
 
     p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      color: #cce7ffcc;
+      font-size: 1.3rem;
+      margin-bottom: 38px;
+      color: #f0e6d2cc;
+      font-weight: 500;
+      letter-spacing: 0.3px;
     }
 
+    /* Buttons container */
     .options {
       display: flex;
-      gap: 20px;
+      gap: 24px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
+    /* Stylish pill buttons */
     .btn {
       cursor: pointer;
       border: none;
-      padding: 14px 32px;
-      font-size: 1.1rem;
-      border-radius: 40px;
+      padding: 16px 38px;
+      font-size: 1.15rem;
+      border-radius: 50px;
       font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0,191,255,0.4);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 7px 20px rgba(212, 175, 55, 0.6);
       user-select: none;
+      color: #2b2200;
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
+      text-shadow: 0 0 3px #7a6915aa;
     }
 
     .btn-show {
-      background: #0077cc;
-      color: #e0f7ff;
-      box-shadow: 0 5px 15px #0077cc88;
+      background: linear-gradient(135deg, #bfa52a, #6e5d07);
+      color: #e0d8a6;
+      box-shadow: 0 7px 22px #6e5d0799;
+      text-shadow: 0 0 6px #5c510655;
     }
 
-    .btn-show:hover {
-      background: #00aaff;
-      box-shadow: 0 8px 25px #00aaffcc;
-      transform: translateY(-3px);
+    .btn:hover {
+      filter: brightness(1.15);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.85);
+      transform: translateY(-4px);
     }
 
-    .btn-shop {
-      background: #00d9ff;
-      color: #003a54;
-      box-shadow: 0 5px 15px #00d9ff88;
-    }
-
-    .btn-shop:hover {
-      background: #00f0ff;
-      box-shadow: 0 8px 25px #00f0ffcc;
-      transform: translateY(-3px);
-    }
-
+    /* Footer */
     footer {
       margin-top: auto;
-      padding: 15px 10px;
-      font-size: 0.9rem;
-      color: #008fbf99;
-      text-align: center;
-      letter-spacing: 0.8px;
-      font-weight: 500;
-      user-select: none;
-    }
-
-    /* Contact Info Bar Styles */
-    #contact-bar {
-      position: fixed;
-      top: 50vh;
-      right: 0;
-      background: rgba(0, 217, 255, 0.85);
-      color: #003a54;
-      padding: 12px 20px;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
+      padding: 20px 10px;
+      font-size: 0.95rem;
+      color: #d4af37bb;
       font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      box-shadow: 0 0 15px #00d9ffcc;
-      transition: width 0.3s ease, padding 0.3s ease;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 40px;
+      letter-spacing: 0.9px;
       text-align: center;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      user-select: none;
+      text-shadow: 0 0 5px #bfa52a88;
     }
 
-    #contact-bar.open {
-      width: 260px;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    #contact-bar span {
-      margin-left: 8px;
-      display: none;
-    }
-
-    #contact-bar.open span {
-      display: inline;
-    }
-
-    /* Small icon for contact bar */
-    #contact-bar::before {
-      content: "☎";
-      font-size: 1.2rem;
-      color: #003a54;
-      display: block;
-    }
-    @media (max-width: 500px) {
+    /* Responsive adjustments */
+    @media (max-width: 520px) {
       .container {
         width: 100%;
-        padding: 30px 20px;
-      }
-      .floating-icons {
-        display: none;
+        padding: 36px 24px;
       }
       h1 {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
+      }
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 28px;
       }
       .btn {
-        padding: 12px 25px;
+        padding: 14px 30px;
         font-size: 1rem;
       }
-      #contact-bar {
-        top: auto;
-        bottom: 10vh;
-        right: 10px;
+      .side-bars {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="parallax-bg"></div>
+  <div class="side-bars" aria-label="Decorative vertical bars and contact information">
+    <div class="bar" title="Bar 1"></div>
+    <div class="bar" title="Bar 2"></div>
+    <div class="bar" title="Bar 3"></div>
+    <div class="bar" title="Bar 4"></div>
 
-  
+    <div class="contact-info" aria-label="Contact information">
+      <div><strong>Email:</strong><br /> contact@previbook.com</div>
+      <div><strong>Phone:</strong><br /> +1 (555) 123-4567</div>
+      <div><strong>Address:</strong><br /> 123 Premium St.<br /> Suite 456</div>
+    </div>
+  </div>
+
   <main class="container" role="main">
     <h1>Welcome to PreviBook!</h1>
     <p>Are you here to shop or display your product?</p>
@@ -231,31 +272,8 @@
     </div>
   </main>
 
-  <!-- Contact info bar -->
-  <div id="contact-bar" aria-label="Contact information toggle" role="button" tabindex="0" aria-expanded="false">
-    <span>Contact:+91 9059068068</span>
- 
-
   <footer>
     <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
   </footer>
-
-  <script>
-    const contactBar = document.getElementById('contact-bar');
-    
-    function toggleContact() {
-      contactBar.classList.toggle('open');
-      const expanded = contactBar.classList.contains('open');
-      contactBar.setAttribute('aria-expanded', expanded);
-    }
-
-    contactBar.addEventListener('click', toggleContact);
-    contactBar.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleContact();
-      }
-    });
-  </script>
 </body>
 </html>
