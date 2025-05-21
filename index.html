@@ -1,107 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PreviBook - Inline Bar Content</title>
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: #111218;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PreviBook - Welcome</title>
 
-  .bars-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
 
-  .bar {
-    width: 12px;
-    height: 80px;
-    background: linear-gradient(135deg, #f5c518, #bfa52a);
-    border-radius: 25px;
-    box-shadow: 0 0 12px #f5c518cc, inset 0 0 8px #bfa52aaa;
-    cursor: pointer;
-    transition: width 0.4s ease;
-    color: #f5c518;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top left, #0b0c10, #1c1f26 40%, #2e303d);
+      color: #f0e6d2;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+    }
 
-  .bar.expanded {
-    width: 280px;
-    border-radius: 15px;
-    padding: 0 16px;
-  }
+    /* Glowing animated background layers */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      top: -30%;
+      left: -30%;
+      width: 160%;
+      height: 160%;
+      border-radius: 50%;
+      filter: blur(200px);
+      opacity: 0.25;
+      animation: pulseGlow 12s ease-in-out infinite alternate;
+      z-index: -3;
+    }
 
-  .bar-content {
-    opacity: 0;
-    white-space: normal;
-    font-size: 1rem;
-    line-height: 1.3;
-    max-width: 250px;
-    transition: opacity 0.3s ease;
-  }
+    body::before {
+      background: #d4af37; /* Gold */
+      animation-delay: 0s;
+    }
 
-  .bar.expanded .bar-content {
-    opacity: 1;
-    margin-left: 12px;
-    color: #fff2b0;
-  }
-</style>
+    body::after {
+      background: #bfa52a; /* Darker gold */
+      animation-delay: 6s;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        transform: scale(1);
+        opacity: 0.25;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.25;
+      }
+    }
+
+    /* Vertical gold bars container */
+    .side-bars {
+      position: fixed;
+      top: 20vh;
+      right: 4vw;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      z-index: 2;
+      user-select: none;
+      max-width: 160px;
+      background: rgba(40, 35, 20, 0.75);
+      border-radius: 20px;
+      padding: 20px 12px;
+      box-shadow:
+        0 0 20px #d4af37cc,
+        inset 0 0 40px #8c771a55;
+      backdrop-filter: blur(15px);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      color: #f0e6d2cc;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: left;
+      user-select: text;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-shadow: 0 0 4px #bfa52a99;
+      transition: background 0.4s ease;
+    }
+
+    /* Each bar */
+    .bar {
+      width: 6px;
+      height: 50px;
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
+      border-radius: 10px;
+      box-shadow:
+        0 0 10px #f5c518cc,
+        inset 0 0 6px #bfa52aaa;
+      animation: floatUpDown 6s ease-in-out infinite;
+      cursor: default;
+      transition: box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .bar:nth-child(2) {
+      animation-delay: 1.2s;
+      height: 40px;
+      background: linear-gradient(135deg, #d4af37, #8f7b1c);
+    }
+    .bar:nth-child(3) {
+      animation-delay: 2.4s;
+      height: 45px;
+      background: linear-gradient(135deg, #f5c518, #a98219);
+    }
+    .bar:nth-child(4) {
+      animation-delay: 3.6s;
+      height: 38px;
+      background: linear-gradient(135deg, #d4af37, #7c6616);
+    }
+
+    .bar:hover {
+      box-shadow:
+        0 0 25px #f5d742dd,
+        inset 0 0 15px #f5c518dd;
+      transform: scale(1.15);
+    }
+
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    /* Dynamic content panel */
+    #dynamic-panel {
+      margin-top: 24px;
+      color: #f0e6d2cc;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    #dynamic-panel h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #f5c518;
+      font-weight: 700;
+      text-shadow: 0 0 10px #f5d742aa;
+      font-size: 1.3rem;
+    }
+    #dynamic-panel p {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: #f0e6d2d9;
+    }
+    #dynamic-panel button {
+      cursor: pointer;
+      border: none;
+      padding: 10px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      color: #2b2200;
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.6);
+      transition: filter 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+    #dynamic-panel button:hover {
+      filter: brightness(1.2);
+      transform: translateY(-2px);
+    }
+
+    /* Glassmorphic main container */
+    .container {
+      max-width: 460px;
+      background: rgba(40, 35, 20, 0.75);
+      border-radius: 20px;
+      padding: 48px 36px;
+      box-shadow:
+        0 0 20px #d4af37cc,
+        inset 0 0 40px #8c771a55;
+      backdrop-filter: blur(15px);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      user-select: none;
+      color: #f0e6d2;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 14px;
+      color: #f5c518;
+      text-shadow: 0 0 12px #f5d742aa;
+      letter-spacing: 1.6px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 38px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* Buttons container */
+    .options {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Stylish pill buttons */
+    .btn {
+      cursor: pointer;
+      border: none;
+      padding: 16px 38px;
+      font-size: 1.15rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 7px 20px rgba(212, 175, 55, 0.6);
+      user-select: none;
+      color: #2b2200;
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
+      text-shadow: 0 0 3px #7a6915aa;
+      outline: none;
+    }
+
+    .btn-show {
+      background: linear-gradient(135deg, #bfa52a, #6e5d07);
+      color: #e0d8a6;
+      box-shadow: 0 7px 22px #6e5d0799;
+      text-shadow: 0 0 6px #5c510655;
+    }
+
+    .btn:hover {
+      filter: brightness(1.15);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.85);
+      transform: translateY(-4px);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid #f5c518;
+      outline-offset: 3px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 20px 10px;
+      font-size: 0.95rem;
+      color: #d4af37bb;
+      font-weight: 600;
+      letter-spacing: 0.9px;
+      text-align: center;
+      user-select: none;
+      text-shadow: 0 0 5px #bfa52a88;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 520px) {
+      .container {
+        width: 100%;
+        padding: 36px 24px;
+      }
+      h1 {
+        font-size: 2.4rem;
+      }
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 28px;
+      }
+      .btn {
+        padding: 14px 30px;
+        font-size: 1rem;
+      }
+      .side-bars {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="side-bars" aria-label="Decorative vertical bars and dynamic content panel">
+    <div class="bar" title="Bar 1"></div>
+    <div class="bar" title="Bar 2"></div>
+    <div class="bar" title="Bar 3"></div>
+    <div class="bar" title="Bar 4"></div>
 
-<div class="bars-container">
-  <div class="bar" tabindex="0" role="button" aria-expanded="false" aria-label="Display Your Product">
-    <div class="bar-content">Display your product here with easy upload options.</div>
+    <div class="contact-info" id="dynamic-panel" aria-live="polite">
+      <div><strong>Email:</strong><br /> contact@previbook.com</div>
+      <div><strong>Phone:</strong><br /> +1 (555) 123-4567</div>
+      <div><strong>Address:</strong><br /> 123 Premium St.<br /> Suite 456</div>
+    </div>
   </div>
-  <div class="bar" tabindex="0" role="button" aria-expanded="false" aria-label="Shop Products">
-    <div class="bar-content">Shop the latest products with fast checkout.</div>
-  </div>
-  <div class="bar" tabindex="0" role="button" aria-expanded="false" aria-label="Contact Information">
-    <div class="bar-content">Contact us at contact@previbook.com or call 555-1234.</div>
-  </div>
-  <div class="bar" tabindex="0" role="button" aria-expanded="false" aria-label="About PreviBook">
-    <div class="bar-content">PreviBook connects sellers and buyers seamlessly.</div>
-  </div>
-</div>
 
-<script>
-  const bars = document.querySelectorAll('.bar');
+  <main class="container" role="main">
+    <h1>Welcome to PreviBook!</h1>
+    <p>Are you here to shop or display your product?</p>
+    <div class="options">
+      <button type="button" class="btn btn-show" onclick="showContent('display')">Display Your Product</button>
+      <button type="button" class="btn btn-shop" onclick="showContent('shop')">Shop Now</button>
+    </div>
+  </main>
 
-  bars.forEach(bar => {
-    bar.addEventListener('click', () => {
-      // Close any other expanded bars
-      bars.forEach(b => {
-        if (b !== bar) {
-          b.classList.remove('expanded');
-          b.setAttribute('aria-expanded', 'false');
-        }
-      });
+  <footer>
+    &copy; 2025 PreviBook. All rights reserved.
+  </footer>
 
-      // Toggle clicked bar
-      const expanded = bar.classList.toggle('expanded');
-      bar.setAttribute('aria-expanded', expanded);
-    });
+  <script>
+    function showContent(type) {
+      const panel = document.getElementById('dynamic-panel');
 
-    bar.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        bar.click();
+      if (type === 'display') {
+        panel.innerHTML = `
+          <h3>Display Your Product</h3>
+          <p>Upload and showcase your products here.</p>
+          <button type="button" onclick="alert('Upload feature coming soon!')">Upload Product</button>
+        `;
+      } else if (type === 'shop') {
+        panel.innerHTML = `
+          <h3>Shop Products</h3>
+          <p>Browse and buy amazing products.</p>
+          <button type="button" onclick="alert('Shop feature coming soon!')">Start Shopping</button>
+        `;
       }
-    });
-  });
-</script>
-
+    }
+  </script>
 </body>
 </html>
