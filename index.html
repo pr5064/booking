@@ -79,6 +79,23 @@
       align-items: center;
       z-index: 2;
       user-select: none;
+      max-width: 160px;
+      background: rgba(40, 35, 20, 0.75);
+      border-radius: 20px;
+      padding: 20px 12px;
+      box-shadow:
+        0 0 20px #d4af37cc,
+        inset 0 0 40px #8c771a55;
+      backdrop-filter: blur(15px);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      color: #f0e6d2cc;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: left;
+      user-select: text;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-shadow: 0 0 4px #bfa52a99;
+      transition: background 0.4s ease;
     }
 
     /* Each bar */
@@ -93,6 +110,7 @@
       animation: floatUpDown 6s ease-in-out infinite;
       cursor: default;
       transition: box-shadow 0.3s ease;
+      user-select: none;
     }
     .bar:nth-child(2) {
       animation-delay: 1.2s;
@@ -126,23 +144,42 @@
       }
     }
 
-    /* Contact info block next to bars */
-    .contact-info {
-      margin-top: 30px;
-      text-align: left;
+    /* Dynamic content panel */
+    #dynamic-panel {
+      margin-top: 24px;
       color: #f0e6d2cc;
-      font-size: 0.95rem;
       font-weight: 500;
       line-height: 1.5;
-      user-select: text;
-      max-width: 140px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-shadow: 0 0 4px #bfa52a99;
     }
-
-    .contact-info strong {
+    #dynamic-panel h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
       color: #f5c518;
       font-weight: 700;
+      text-shadow: 0 0 10px #f5d742aa;
+      font-size: 1.3rem;
+    }
+    #dynamic-panel p {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: #f0e6d2d9;
+    }
+    #dynamic-panel button {
+      cursor: pointer;
+      border: none;
+      padding: 10px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      color: #2b2200;
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.6);
+      transition: filter 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+    #dynamic-panel button:hover {
+      filter: brightness(1.2);
+      transform: translateY(-2px);
     }
 
     /* Glassmorphic main container */
@@ -157,6 +194,7 @@
       backdrop-filter: blur(15px);
       border: 1.5px solid rgba(212, 175, 55, 0.45);
       user-select: none;
+      color: #f0e6d2;
     }
 
     h1 {
@@ -171,7 +209,6 @@
     p {
       font-size: 1.3rem;
       margin-bottom: 38px;
-      color: #f0e6d2cc;
       font-weight: 500;
       letter-spacing: 0.3px;
     }
@@ -198,6 +235,7 @@
       color: #2b2200;
       background: linear-gradient(135deg, #f5c518, #bfa52a);
       text-shadow: 0 0 3px #7a6915aa;
+      outline: none;
     }
 
     .btn-show {
@@ -211,6 +249,11 @@
       filter: brightness(1.15);
       box-shadow: 0 10px 30px rgba(212, 175, 55, 0.85);
       transform: translateY(-4px);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid #f5c518;
+      outline-offset: 3px;
     }
 
     /* Footer */
@@ -250,13 +293,13 @@
   </style>
 </head>
 <body>
-  <div class="side-bars" aria-label="Decorative vertical bars and contact information">
+  <div class="side-bars" aria-label="Decorative vertical bars and dynamic content panel">
     <div class="bar" title="Bar 1"></div>
     <div class="bar" title="Bar 2"></div>
     <div class="bar" title="Bar 3"></div>
     <div class="bar" title="Bar 4"></div>
 
-    <div class="contact-info" aria-label="Contact information">
+    <div class="contact-info" id="dynamic-panel" aria-live="polite">
       <div><strong>Email:</strong><br /> contact@previbook.com</div>
       <div><strong>Phone:</strong><br /> +1 (555) 123-4567</div>
       <div><strong>Address:</strong><br /> 123 Premium St.<br /> Suite 456</div>
@@ -267,13 +310,33 @@
     <h1>Welcome to PreviBook!</h1>
     <p>Are you here to shop or display your product?</p>
     <div class="options">
-      <button class="btn btn-show" onclick="window.location.href='display.html'">Display Your Product</button>
-      <button class="btn btn-shop" onclick="window.location.href='shop.html'">Shop Now</button>
+      <button type="button" class="btn btn-show" onclick="showContent('display')">Display Your Product</button>
+      <button type="button" class="btn btn-shop" onclick="showContent('shop')">Shop Now</button>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
+    &copy; 2025 PreviBook. All rights reserved.
   </footer>
+
+  <script>
+    function showContent(type) {
+      const panel = document.getElementById('dynamic-panel');
+
+      if (type === 'display') {
+        panel.innerHTML = `
+          <h3>Display Your Product</h3>
+          <p>Upload and showcase your products here.</p>
+          <button type="button" onclick="alert('Upload feature coming soon!')">Upload Product</button>
+        `;
+      } else if (type === 'shop') {
+        panel.innerHTML = `
+          <h3>Shop Products</h3>
+          <p>Browse and buy amazing products.</p>
+          <button type="button" onclick="alert('Shop feature coming soon!')">Start Shopping</button>
+        `;
+      }
+    }
+  </script>
 </body>
 </html>
