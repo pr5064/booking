@@ -1,132 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Previ Book</title>
     <link rel="stylesheet" href="css/shop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav>
-            <a href="#">
-                <img src="images/logo.jpg" alt="Previ Book Logo" class="logo">
-            </a>
-            <ul>
+        <nav class="navbar">
+            <a href="#"><img src="images/logo.jpg" alt="Previ Book Logo" class="logo"></a>
+            <ul class="nav-links">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Men's Fashion</a></li>
-                <li><a href="#">Women's Fashion</a></li>
-                <li><a href="#">Kids' Fashion</a></li>
-                <li><a href="#">Home & Living</a></li>
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Kids</a></li>
+                <li><a href="#">Living</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Search for products, brands and more">
+                <input type="text" placeholder="Search products, brands and more...">
                 <button type="submit">🔍</button>
             </div>
-            <div class="icons">
+            <div class="nav-icons">
                 <a href="#"><img src="images/profile.png" alt="Profile" class="icon"></a>
                 <a href="#"><img src="images/wishlist.jpg" alt="Wishlist" class="icon"></a>
-                <a href="#"><img src="images/shop.png" alt="Bag" class="icon"></a>
+                <a href="#"><img src="images/shop.png" alt="Cart" class="icon"></a>
             </div>
         </nav>
     </header>
 
     <main>
         <section id="hero">
-            <h1>Welcome to Previ Book!</h1>
-            <p>We offer a wide variety of products for everyone.</p>
-            <button>Shop Now</button>
+            <div class="hero-content">
+                <h1>Discover Premium Products</h1>
+                <p>Curated collections just for you.</p>
+                <button class="shop-btn">Explore Now</button>
+            </div>
         </section>
-    </main>
+
         <section id="categories">
-            <h2>Categories</h2>
-            <div class="category">
-                <a href="mens.html">
-                    <img src="images/men.jpg" height="200px" alt="Men's Fashion">
-                    <h3>Men's Fashion</h3>
-                </a>
-            </div>
-            
-            <div class="category">
-                <a href="womens.html">
-                <img src="images/women.webp" height="200px" alt="Women's Fashion">
-                <h3>Women's Fashion</h3>
-            </div>
-            <div class="category">
-                <a href="kids.html">
-                <img src="images/kids.jpg" height="200px" alt="Kids' Fashion">
-                <h3>Kids' Fashion</h3>
-            </div>
-            <div class="category">
-                <a href="electronics.html">
-                <img src="images/electronics.jpg" height="200px" alt="Electronics">
-                <h3>Electronics</h3>
-            </div>
-            <div class="category">
-                <a href="home.html">
-                <img src="images/home.jpg" height="200px" alt="Home & Living">
-                <h3>Home & Living</h3>
-            </div>
-            <div class="category">
-                <a href="beauty.html">
-                <img src="images/beauty.avif" height="200px" alt="Beauty">
-                <h3>Beauty</h3>
-            </div>
-            <div class="category">
-                <a href="gadgets.html">
-                <img src="images/gadgets.webp" height="200px" alt="Appliances">
-                <h3>Gadgets</h3>
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-container">
+                <!-- Category Cards -->
+                <div class="category-card"><a href="mens.html"><img src="images/men.jpg"><h3>Men</h3></a></div>
+                <div class="category-card"><a href="womens.html"><img src="images/women.webp"><h3>Women</h3></a></div>
+                <div class="category-card"><a href="kids.html"><img src="images/kids.jpg"><h3>Kids</h3></a></div>
+                <div class="category-card"><a href="electronics.html"><img src="images/electronics.jpg"><h3>Electronics</h3></a></div>
+                <div class="category-card"><a href="home.html"><img src="images/home.jpg"><h3>Home & Living</h3></a></div>
+                <div class="category-card"><a href="beauty.html"><img src="images/beauty.avif"><h3>Beauty</h3></a></div>
+                <div class="category-card"><a href="gadgets.html"><img src="images/gadgets.webp"><h3>Gadgets</h3></a></div>
             </div>
         </section>
 
         <section id="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product">
-                <img src="images/product1.jpg" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>Description of product 1.</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="images/product2.jpg" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>Description of product 2.</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="images/product3.jpg" alt="Product 3">
-                <h3>Product 3</h3>
-                <p>Description of product 3.</p>
-                <button>Add to Cart</button>
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid">
+                <!-- Product Cards -->
+                <div class="product-card">
+                    <img src="images/product1.jpg" alt="Product 1">
+                    <h3>Elegant Shirt</h3>
+                    <p>Premium cotton shirt with a modern fit.</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/product2.jpg" alt="Product 2">
+                    <h3>Leather Bag</h3>
+                    <p>Stylish & spacious handcrafted leather bag.</p>
+                    <button>Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/product3.jpg" alt="Product 3">
+                    <h3>Smartwatch</h3>
+                    <p>Track your fitness & stay connected in style.</p>
+                    <button>Add to Cart</button>
+                </div>
             </div>
         </section>
+    </main>
 
-        <footer>
-            <div class="footer-container">
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Categories</a></li>
-                        <li><a href="#">Featured</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="#"><img src="images/linkdien.png" alt="LinkedIn"></a>
-                        <a href="#"><img src="images/x.jpeg" alt="Twitter"></a>
-                        <a href="#"><img src="images/ig.jpeg" alt="Instagram"></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>Email: info@previbook.com</p>
-                    <p>Phone: 123-456-7890</p>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Offers</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect with Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="images/linkdien.png" alt="LinkedIn"></a>
+                    <a href="#"><img src="images/x.jpeg" alt="Twitter"></a>
+                    <a href="#"><img src="images/ig.jpeg" alt="Instagram"></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Previ Book. All rights reserved.</p>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@previbook.com</p>
+                <p>Phone: 123-456-7890</p>
             </div>
-        </footer>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Previ Book. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
