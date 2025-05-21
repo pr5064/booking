@@ -15,8 +15,8 @@
       margin: 0;
       height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(circle at top left, #0f2027, #203a43 40%, #2c5364);
-      color: #e0e0e0;
+      background: radial-gradient(circle at top left, #0b0c10, #1c1f26 40%, #2e303d);
+      color: #f0e6d2;
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
@@ -38,33 +38,33 @@
       height: 160%;
       border-radius: 50%;
       filter: blur(200px);
-      opacity: 0.3;
+      opacity: 0.25;
       animation: pulseGlow 12s ease-in-out infinite alternate;
       z-index: -3;
     }
 
     body::before {
-      background: #00d9ff;
+      background: #d4af37; /* Gold */
       animation-delay: 0s;
     }
 
     body::after {
-      background: #0077cc;
+      background: #bfa52a; /* Darker gold */
       animation-delay: 6s;
     }
 
     @keyframes pulseGlow {
       0% {
         transform: scale(1);
-        opacity: 0.3;
+        opacity: 0.25;
       }
       50% {
         transform: scale(1.1);
-        opacity: 0.5;
+        opacity: 0.4;
       }
       100% {
         transform: scale(1);
-        opacity: 0.3;
+        opacity: 0.25;
       }
     }
 
@@ -85,43 +85,42 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #00e5ff, #006699);
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
       box-shadow:
-        0 0 10px #00e5ff88,
-        inset 0 0 6px #00aaffbb;
+        0 0 10px #f5c518aa,
+        inset 0 0 6px #bfa52aaa;
       animation: floatUpDown 5.5s ease-in-out infinite;
       position: relative;
       cursor: default;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
 
-    /* Slight differences in animation delay for each icon */
     .floating-icon:nth-child(2) {
       animation-delay: 1.2s;
-      background: linear-gradient(135deg, #00bfff, #004466);
+      background: linear-gradient(135deg, #d4af37, #8f7b1c);
       box-shadow:
-        0 0 12px #00bfffaa,
-        inset 0 0 5px #0077aacc;
+        0 0 12px #d4af37cc,
+        inset 0 0 5px #8f7b1ccc;
     }
     .floating-icon:nth-child(3) {
       animation-delay: 2.4s;
-      background: linear-gradient(135deg, #00d9ff, #005577);
+      background: linear-gradient(135deg, #f5c518, #a98219);
       box-shadow:
-        0 0 8px #00d9ffcc,
-        inset 0 0 6px #0099ccdd;
+        0 0 8px #f5c518cc,
+        inset 0 0 6px #a98219cc;
     }
     .floating-icon:nth-child(4) {
       animation-delay: 3.6s;
-      background: linear-gradient(135deg, #33ccff, #003344);
+      background: linear-gradient(135deg, #d4af37, #7c6616);
       box-shadow:
-        0 0 9px #33ccffaa,
-        inset 0 0 7px #006677cc;
+        0 0 9px #d4af37cc,
+        inset 0 0 7px #7c6616cc;
     }
 
     .floating-icon:hover {
       box-shadow:
-        0 0 25px #00f0ffdd,
-        inset 0 0 15px #00ccffdd;
+        0 0 25px #f5d742dd,
+        inset 0 0 15px #f5c518dd;
       transform: scale(1.15);
     }
 
@@ -137,22 +136,22 @@
     /* Glassmorphic main container */
     .container {
       max-width: 460px;
-      background: rgba(30, 45, 60, 0.75);
+      background: rgba(40, 35, 20, 0.75);
       border-radius: 20px;
       padding: 48px 36px;
       box-shadow:
-        0 0 20px #00d9ffcc,
-        inset 0 0 40px #00669955;
+        0 0 20px #d4af37cc,
+        inset 0 0 40px #8c771a55;
       backdrop-filter: blur(15px);
-      border: 1.5px solid rgba(0, 217, 255, 0.45);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
       user-select: none;
     }
 
     h1 {
       font-size: 3rem;
       margin-bottom: 14px;
-      color: #00e5ff;
-      text-shadow: 0 0 12px #00e5ffaa;
+      color: #f5c518;
+      text-shadow: 0 0 12px #f5d742aa;
       letter-spacing: 1.6px;
       font-weight: 700;
     }
@@ -160,7 +159,7 @@
     p {
       font-size: 1.3rem;
       margin-bottom: 38px;
-      color: #cce7ffcc;
+      color: #f0e6d2cc;
       font-weight: 500;
       letter-spacing: 0.3px;
     }
@@ -182,23 +181,23 @@
       border-radius: 50px;
       font-weight: 600;
       transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 7px 20px rgba(0, 217, 255, 0.5);
+      box-shadow: 0 7px 20px rgba(212, 175, 55, 0.6);
       user-select: none;
-      color: #003a54;
-      background: linear-gradient(135deg, #00d9ff, #0077cc);
-      text-shadow: 0 0 3px #004466aa;
+      color: #2b2200;
+      background: linear-gradient(135deg, #f5c518, #bfa52a);
+      text-shadow: 0 0 3px #7a6915aa;
     }
 
     .btn-show {
-      background: linear-gradient(135deg, #0077cc, #004466);
-      color: #aaddff;
-      box-shadow: 0 7px 22px #004466cc;
-      text-shadow: 0 0 6px #003a5477;
+      background: linear-gradient(135deg, #bfa52a, #6e5d07);
+      color: #e0d8a6;
+      box-shadow: 0 7px 22px #6e5d0799;
+      text-shadow: 0 0 6px #5c510655;
     }
 
     .btn:hover {
       filter: brightness(1.15);
-      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.85);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.85);
       transform: translateY(-4px);
     }
 
@@ -207,12 +206,12 @@
       margin-top: auto;
       padding: 20px 10px;
       font-size: 0.95rem;
-      color: #00bfff99;
+      color: #d4af37bb;
       font-weight: 600;
       letter-spacing: 0.9px;
       text-align: center;
       user-select: none;
-      text-shadow: 0 0 5px #00bfff55;
+      text-shadow: 0 0 5px #bfa52a88;
     }
 
     /* Responsive adjustments */
