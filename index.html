@@ -68,56 +68,49 @@
       }
     }
 
-    /* Floating CSS "icons" container */
-    .floating-icons {
+    /* Vertical gold bars container */
+    .side-bars {
       position: fixed;
-      top: 12vh;
+      top: 20vh;
       right: 4vw;
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 14px;
+      align-items: center;
       z-index: 2;
       user-select: none;
     }
 
-    /* Each floating icon is a CSS shape with animation */
-    .floating-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+    /* Each bar */
+    .bar {
+      width: 6px;
+      height: 50px;
       background: linear-gradient(135deg, #f5c518, #bfa52a);
+      border-radius: 10px;
       box-shadow:
-        0 0 10px #f5c518aa,
+        0 0 10px #f5c518cc,
         inset 0 0 6px #bfa52aaa;
-      animation: floatUpDown 5.5s ease-in-out infinite;
-      position: relative;
+      animation: floatUpDown 6s ease-in-out infinite;
       cursor: default;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      transition: box-shadow 0.3s ease;
     }
-
-    .floating-icon:nth-child(2) {
+    .bar:nth-child(2) {
       animation-delay: 1.2s;
+      height: 40px;
       background: linear-gradient(135deg, #d4af37, #8f7b1c);
-      box-shadow:
-        0 0 12px #d4af37cc,
-        inset 0 0 5px #8f7b1ccc;
     }
-    .floating-icon:nth-child(3) {
+    .bar:nth-child(3) {
       animation-delay: 2.4s;
+      height: 45px;
       background: linear-gradient(135deg, #f5c518, #a98219);
-      box-shadow:
-        0 0 8px #f5c518cc,
-        inset 0 0 6px #a98219cc;
     }
-    .floating-icon:nth-child(4) {
+    .bar:nth-child(4) {
       animation-delay: 3.6s;
+      height: 38px;
       background: linear-gradient(135deg, #d4af37, #7c6616);
-      box-shadow:
-        0 0 9px #d4af37cc,
-        inset 0 0 7px #7c6616cc;
     }
 
-    .floating-icon:hover {
+    .bar:hover {
       box-shadow:
         0 0 25px #f5d742dd,
         inset 0 0 15px #f5c518dd;
@@ -131,6 +124,25 @@
       50% {
         transform: translateY(-14px);
       }
+    }
+
+    /* Contact info block next to bars */
+    .contact-info {
+      margin-top: 30px;
+      text-align: left;
+      color: #f0e6d2cc;
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.5;
+      user-select: text;
+      max-width: 140px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-shadow: 0 0 4px #bfa52a99;
+    }
+
+    .contact-info strong {
+      color: #f5c518;
+      font-weight: 700;
     }
 
     /* Glassmorphic main container */
@@ -231,18 +243,24 @@
         padding: 14px 30px;
         font-size: 1rem;
       }
-      .floating-icons {
+      .side-bars {
         display: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="floating-icons" aria-label="Decorative floating icons">
-    <div class="floating-icon" title="Icon 1"></div>
-    <div class="floating-icon" title="Icon 2"></div>
-    <div class="floating-icon" title="Icon 3"></div>
-    <div class="floating-icon" title="Icon 4"></div>
+  <div class="side-bars" aria-label="Decorative vertical bars and contact information">
+    <div class="bar" title="Bar 1"></div>
+    <div class="bar" title="Bar 2"></div>
+    <div class="bar" title="Bar 3"></div>
+    <div class="bar" title="Bar 4"></div>
+
+    <div class="contact-info" aria-label="Contact information">
+      <div><strong>Email:</strong><br /> contact@previbook.com</div>
+      <div><strong>Phone:</strong><br /> +1 (555) 123-4567</div>
+      <div><strong>Address:</strong><br /> 123 Premium St.<br /> Suite 456</div>
+    </div>
   </div>
 
   <main class="container" role="main">
