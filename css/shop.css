@@ -227,7 +227,7 @@ footer {
     text-align: center;
 }
 
-.footer-container {
+.footer-containear {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -287,4 +287,80 @@ footer {
     font-size: 14px;
     border-top: 1px solid #444;
     padding-top: 10px;
+}
+
+/* Existing styles here... (keep all your original CSS) */
+
+/* Responsive Design for Mobile */
+@media only screen and (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    nav li {
+        margin: 10px 0;
+    }
+
+    .icons {
+        margin-top: 10px;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    #hero {
+        padding: 60px 15px;
+    }
+
+    #hero button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    #categories {
+        padding: 30px 10px;
+    }
+
+    .category {
+        width: 90%;
+        display: block;
+        margin: 20px auto;
+    }
+
+    #featured-products {
+        padding: 30px 10px;
+    }
+
+    .product {
+        width: 90%;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .footer-containear {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .footer-section {
+        min-width: 100%;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .social-icons a {
+        margin: 5px;
+    }
 }
