@@ -67,7 +67,7 @@
       position: relative;
       z-index: 1;
       background: rgba(30, 41, 59, 0.85);
-      padding: 40px 30px;
+      padding: 40px 70px;
       border-radius: 20px;
       box-shadow: 0 0 35px rgba(59, 130, 246, 0.4);
       max-width: 480px;
@@ -113,55 +113,6 @@
       box-shadow: 0 10px 24px rgba(59, 130, 246, 0.6);
     }
 
-    /* Side bars */
-    .side-bars {
-      position: fixed;
-      top: 20vh;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: center;
-      z-index: 2;
-    }
-
-    .bar {
-      width: 6px;
-      height: 50px;
-      background: linear-gradient(to bottom, #3b82f6, #1d4ed8);
-      border-radius: 8px;
-      animation: floatUpDown 5s ease-in-out infinite;
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
-    }
-
-    .bar:nth-child(2) { animation-delay: 1s; height: 42px; }
-    .bar:nth-child(3) { animation-delay: 2s; height: 46px; }
-    .bar:nth-child(4) { animation-delay: 3s; height: 40px; }
-
-    @keyframes floatUpDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    /* Contact info - fixed visibility */
-    .contact-info {
-      margin-top: 20px;
-      background: rgba(15, 23, 42, 0.8);
-      padding: 10px 14px;
-      border-radius: 12px;
-      color: #e0f2fe;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
-      text-align: left;
-      max-width: 180px;
-    }
-
-    .contact-info strong {
-      color: #93c5fd;
-      display: block;
-    }
-
     footer {
       margin-top: auto;
       padding: 20px;
@@ -188,20 +139,6 @@
   <div class="glow-circle one"></div>
   <div class="glow-circle two"></div>
   <div class="glow-circle three"></div>
-
-  <!-- Side Bars with Contact Info -->
-  <div class="side-bars">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-
-    <div class="contact-info">
-      <strong>Email:</strong> contact@previbook.com<br>
-      <strong>Phone:</strong> 11111111111<br>
-      <strong>Location:</strong> Chennai, India
-    </div>
-  </div>
 
   <!-- Main Container -->
   <div class="container">
