@@ -1,241 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Men's Fashion | PreviBook</title>
-    <style>
-        /* Basic Reset & Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: #f0f2f8;
-            color: #333;
-        }
-        header {
-            background-color: #1f1f2e;
-            padding: 1rem 2rem;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        header .logo {
-            font-size: 1.8rem;
-        }
-        header input[type="text"] {
-            padding: 0.4rem 0.7rem;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-            width: 200px;
-            margin-right: 10px;
-        }
-        header select {
-            padding: 0.4rem;
-            border-radius: 5px;
-            border: none;
-            font-size: 1rem;
-        }
-        /* Trending Section */
-        .trending {
-            padding: 1rem 2rem;
-        }
-        .trending h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        .trending-items {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .trending-items .item {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
-            overflow: hidden;
-            width: 300px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        .trending-items .item:hover {
-            transform: scale(1.05);
-        }
-        .trending-items img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .trending-items p {
-            padding: 0.7rem 1rem;
-            font-weight: 600;
-            color: #d93025; /* red-ish for sale */
-        }
-        /* Category Section */
-        .category-container {
-            padding: 1rem 2rem 3rem;
-        }
-        .category-container h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-            gap: 1.5rem;
-        }
-        .category {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-            text-align: center;
-            padding-bottom: 1rem;
-            transition: box-shadow 0.3s ease;
-        }
-        .category:hover {
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        .category img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-bottom: 2px solid #1a73e8;
-        }
-        .category h2 {
-            margin: 0.7rem 0 0.3rem;
-            font-size: 1.4rem;
-        }
-        .category p {
-            color: #1a73e8;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-        }
-        .shop-now {
-            display: inline-block;
-            background-color: #1a73e8;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
-        .shop-now:hover {
-            background-color: #0f5ac1;
-        }
-        /* Best Deals and Exclusive Sections */
-        .best-deals, .exclusive {
-            background: white;
-            margin: 2rem 2rem 3rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 1.5rem 2rem;
-            text-align: center;
-        }
-        .best-deals h2, .exclusive h2 {
-            font-size: 1.6rem;
-            margin-bottom: 0.8rem;
-        }
-        .best-deals p, .exclusive p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: #555;
-        }
-        .best-deals .view-deals,
-        .exclusive .signup {
-            background-color: #1a73e8;
-            border: none;
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .best-deals .view-deals:hover,
-        .exclusive .signup:hover {
-            background-color: #0f5ac1;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Men's Fashion | PreviBook</title>
+  <link rel="stylesheet" href="css/categories.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
+  <script defer src="script.js"></script>
+  <style>
+    body {
+      font-family: 'Urbanist', sans-serif;
+      margin: 0;
+      background: #f4f5f7;
+      color: #222;
+    }
+
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1e1e1e;
+      letter-spacing: 0.5px;
+    }
+
+    #search-bar {
+      flex: 1;
+      margin: 0 1.5rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      max-width: 400px;
+      font-size: 1rem;
+    }
+
+    #sort-options {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    h2 {
+      color: #1f1f1f;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #004aad;
+      padding-left: 0.6rem;
+    }
+
+    .trending-items, .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .item, .category {
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .item:hover, .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    }
+
+    .item img, .category img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+    }
+
+    .shop-now, .view-deals, .signup {
+      margin-top: 0.6rem;
+      padding: 0.6rem 1.2rem;
+      background: #004aad;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+
+    .shop-now:hover, .view-deals:hover, .signup:hover {
+      background: #003a8c;
+    }
+
+    .best-deals, .exclusive {
+      background: #e6eefc;
+      border-radius: 20px;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      #search-bar, #sort-options {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">🛍️ PreviBook</div>
-        <input type="text" id="search-bar" placeholder="Search for fashion..." />
-        <select id="sort-options">
-            <option value="popularity">Sort by Popularity</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-        </select>
-    </header>
+  <!-- Header -->
+  <header>
+    <div class="logo">PreviBook</div>
+    <input type="text" id="search-bar" placeholder="Search Men's Fashion...">
+    <select id="sort-options">
+      <option value="popularity">Sort by Popularity</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+    </select>
+  </header>
 
-    <!-- Trending Now Section -->
-    <section class="trending">
-        <h2>🔥 Trending Now</h2>
-        <div class="trending-items">
-            <div class="item">
-                <img src="images/jacket.jpg" alt="Jackets" />
-                <p>Winter Jackets - 50% OFF</p>
-            </div>
-            <div class="item">
-                <img src="images/sneakers.jpg" alt="Sneakers" />
-                <p>Stylish Sneakers - Limited Stock!</p>
-            </div>
-        </div>
-    </section>
+  <!-- Trending Now Section -->
+  <section class="trending">
+    <div class="section-title">Trending Now</div>
+    <div class="trending-items">
+      <div class="item">
+        <img src="images/jacket.jpg" alt="Jackets">
+        <p>Winter Jackets - 50% OFF</p>
+      </div>
+      <div class="item">
+        <img src="images/sneakers.jpg" alt="Sneakers">
+        <p>Stylish Sneakers - Limited Stock!</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Popular Categories -->
-    <section class="category-container">
-        <h2>👕 Popular Categories</h2>
-        <div class="categories">
-            <div class="category">
-                <img src="images/tshirt.jpg" alt="T-Shirts" />
-                <h2>T-Shirts</h2>
-                <p>40-80% OFF</p>
-                <a href="category.html?cat=tshirts" class="shop-now">Shop Now</a>
-            </div>
-            <div class="category">
-                <img src="images/shirt.jpg" alt="Shirts" />
-                <h2>Shirts</h2>
-                <p>30-70% OFF</p>
-                <a href="category.html?cat=shirts" class="shop-now">Shop Now</a>
-            </div>
-            <div class="category">
-                <img src="images/sports_shoes.jpg" alt="Sports Shoes" />
-                <h2>Sports Shoes</h2>
-                <p>40-80% OFF</p>
-                <a href="category.html?cat=shoes" class="shop-now">Shop Now</a>
-            </div>
-            <div class="category">
-                <img src="images/kurta.jpg" alt="Kurtas & Sets" />
-                <h2>Kurtas & Sets</h2>
-                <p>50-80% OFF</p>
-                <a href="category.html?cat=kurtas" class="shop-now">Shop Now</a>
-            </div>
-        </div>
-    </section>
+  <!-- Popular Categories -->
+  <section class="category-container">
+    <div class="section-title">Popular Categories</div>
+    <div class="categories">
+      <div class="category">
+        <img src="images/tshirt.jpg" alt="T-Shirts">
+        <h2>T-Shirts</h2>
+        <p>40-80% OFF</p>
+        <button class="shop-now">Shop Now</button>
+      </div>
+      <div class="category">
+        <img src="images/sports_shoes.jpg" alt="Sports Shoes">
+        <h2>Sports Shoes</h2>
+        <p>40-80% OFF</p>
+        <button class="shop-now">Shop Now</button>
+      </div>
+      <div class="category">
+        <img src="images/kurta.jpg" alt="Kurtas & Sets">
+        <h2>Kurtas & Sets</h2>
+        <p>50-80% OFF</p>
+        <button class="shop-now">Shop Now</button>
+      </div>
+    </div>
+  </section>
 
-    <!-- Best Deals Section -->
-    <section class="best-deals">
-        <h2>🎁 Best Deals of the Day</h2>
-        <p>Grab the best discounts before they expire!</p>
-        <button class="view-deals">View Deals</button>
-    </section>
+  <!-- Best Deals Section -->
+  <section class="best-deals">
+    <h2>Best Deals of the Day</h2>
+    <p>Grab the best discounts before they expire!</p>
+    <button class="view-deals">View Deals</button>
+  </section>
 
-    <!-- Exclusive Offers Section -->
-    <section class="exclusive">
-        <h2>💳 Exclusive Member Offers</h2>
-        <p>Sign up to get special discounts and early access.</p>
-        <button class="signup">Join Now</button>
-    </section>
+  <!-- Exclusive Offers Section -->
+  <section class="exclusive">
+    <h2>Exclusive Member Offers</h2>
+    <p>Sign up to get special discounts and early access.</p>
+    <button class="signup">Join Now</button>
+  </section>
 
 </body>
 </html>
