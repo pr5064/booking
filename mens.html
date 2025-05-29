@@ -2,202 +2,300 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Men's Fashion | PreviBook</title>
-  <link rel="stylesheet" href="css/categories.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
-  <script defer src="script.js"></script>
   <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Urbanist', sans-serif;
       margin: 0;
-      background: #f4f5f7;
-      color: #222;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fb;
+      color: #1a1a1a;
     }
 
+    /* Header */
     header {
-      background: #ffffff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
+      padding: 1.25rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 15px rgb(37 99 235 / 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #1e1e1e;
-      letter-spacing: 0.5px;
+    header .logo {
+      color: white;
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      user-select: none;
     }
-
     #search-bar {
-      flex: 1;
-      margin: 0 1.5rem;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      max-width: 400px;
-      font-size: 1rem;
-    }
-
-    #sort-options {
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-
-    h2 {
-      color: #1f1f1f;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-
-    section {
-      padding: 2rem;
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      border-left: 4px solid #004aad;
-      padding-left: 0.6rem;
-    }
-
-    .trending-items, .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .item, .category {
-      background: #ffffff;
-      padding: 1rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .item:hover, .category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-    }
-
-    .item img, .category img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 0.8rem;
-    }
-
-    .shop-now, .view-deals, .signup {
-      margin-top: 0.6rem;
-      padding: 0.6rem 1.2rem;
-      background: #004aad;
-      color: #fff;
+      flex-grow: 1;
+      max-width: 320px;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
       border: none;
-      border-radius: 8px;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+      outline-offset: 2px;
+    }
+    #search-bar:focus {
+      box-shadow: 0 0 8px 2px #3b82f6;
+    }
+    #sort-options {
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
       cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: background 0.3s ease;
+      background-color: white;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease;
+    }
+    #sort-options:hover {
+      background-color: #e0e7ff;
     }
 
-    .shop-now:hover, .view-deals:hover, .signup:hover {
-      background: #003a8c;
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
     }
-
-    .best-deals, .exclusive {
-      background: #e6eefc;
-      border-radius: 20px;
+    h1 {
+      font-weight: 900;
       text-align: center;
-      padding: 2rem;
-      margin-top: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #2563eb;
+      letter-spacing: 1px;
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
 
-      #search-bar, #sort-options {
-        width: 100%;
+    /* Product Card */
+    .product-card {
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgb(0 0 0 / 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgb(37 99 235 / 0.25);
+    }
+    .product-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: scale 0.3s ease;
+    }
+    .product-card:hover .product-image {
+      scale: 1.05;
+    }
+    .product-details {
+      padding: 1rem 1.25rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+      color: #1e293b;
+    }
+    .product-category {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .product-price {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #2563eb;
+      margin-bottom: 1rem;
+    }
+    .btn-buy {
+      background: #2563eb;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
+      user-select: none;
+    }
+    .btn-buy:hover {
+      background-color: #1e40af;
+      box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+      }
+      #search-bar {
+        max-width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <div class="logo">PreviBook</div>
-    <input type="text" id="search-bar" placeholder="Search Men's Fashion...">
-    <select id="sort-options">
+    <input
+      type="text"
+      id="search-bar"
+      placeholder="Search men’s products..."
+      aria-label="Search products"
+    />
+    <select id="sort-options" aria-label="Sort products">
       <option value="popularity">Sort by Popularity</option>
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
     </select>
   </header>
 
-  <!-- Trending Now Section -->
-  <section class="trending">
-    <div class="section-title">Trending Now</div>
-    <div class="trending-items">
-      <div class="item">
-        <img src="images/jacket.jpg" alt="Jackets">
-        <p>Winter Jackets - 50% OFF</p>
-      </div>
-      <div class="item">
-        <img src="images/sneakers.jpg" alt="Sneakers">
-        <p>Stylish Sneakers - Limited Stock!</p>
-      </div>
+  <main>
+    <h1>Men's Fashion Collection</h1>
+    <div class="product-grid" id="product-grid">
+      <!-- Products injected by JS -->
     </div>
-  </section>
+  </main>
 
-  <!-- Popular Categories -->
-  <section class="category-container">
-    <div class="section-title">Popular Categories</div>
-    <div class="categories">
-      <div class="category">
-        <img src="images/tshirt.jpg" alt="T-Shirts">
-        <h2>T-Shirts</h2>
-        <p>40-80% OFF</p>
-        <button class="shop-now">Shop Now</button>
-      </div>
-      <div class="category">
-        <img src="images/sports_shoes.jpg" alt="Sports Shoes">
-        <h2>Sports Shoes</h2>
-        <p>40-80% OFF</p>
-        <button class="shop-now">Shop Now</button>
-      </div>
-      <div class="category">
-        <img src="images/kurta.jpg" alt="Kurtas & Sets">
-        <h2>Kurtas & Sets</h2>
-        <p>50-80% OFF</p>
-        <button class="shop-now">Shop Now</button>
-      </div>
-    </div>
-  </section>
+  <script>
+    // Sample data - In real, fetch from backend or API
+    const products = [
+      {
+        id: 1,
+        name: "Classic White T-Shirt",
+        category: "T-Shirts",
+        price: 15.99,
+        popularity: 80,
+        image: "images/tshirt.jpg"
+      },
+      {
+        id: 2,
+        name: "Formal Blue Shirt",
+        category: "Shirts",
+        price: 29.99,
+        popularity: 70,
+        image: "images/shirt.jpg"
+      },
+      {
+        id: 3,
+        name: "Running Sneakers",
+        category: "Shoes",
+        price: 59.99,
+        popularity: 90,
+        image: "images/sports_shoes.jpg"
+      },
+      {
+        id: 4,
+        name: "Winter Jacket",
+        category: "Jackets",
+        price: 79.99,
+        popularity: 85,
+        image: "images/jacket.jpg"
+      },
+      {
+        id: 5,
+        name: "Casual Kurta",
+        category: "Kurtas",
+        price: 39.99,
+        popularity: 50,
+        image: "images/kurta.jpg"
+      },
+      {
+        id: 6,
+        name: "Sporty Sneakers",
+        category: "Shoes",
+        price: 65.00,
+        popularity: 75,
+        image: "images/sneakers.jpg"
+      }
+    ];
 
-  <!-- Best Deals Section -->
-  <section class="best-deals">
-    <h2>Best Deals of the Day</h2>
-    <p>Grab the best discounts before they expire!</p>
-    <button class="view-deals">View Deals</button>
-  </section>
+    const productGrid = document.getElementById("product-grid");
+    const searchBar = document.getElementById("search-bar");
+    const sortOptions = document.getElementById("sort-options");
 
-  <!-- Exclusive Offers Section -->
-  <section class="exclusive">
-    <h2>Exclusive Member Offers</h2>
-    <p>Sign up to get special discounts and early access.</p>
-    <button class="signup">Join Now</button>
-  </section>
+    // Render products
+    function renderProducts(items) {
+      productGrid.innerHTML = "";
+      if (items.length === 0) {
+        productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
+        return;
+      }
+      items.forEach((product) => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="product-image" />
+          <div class="product-details">
+            <div>
+              <h3 class="product-name">${product.name}</h3>
+              <p class="product-category">${product.category}</p>
+              <p class="product-price">$${product.price.toFixed(2)}</p>
+            </div>
+            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
 
+    // Filter & Sort Logic
+    function filterAndSort() {
+      let filtered = products.filter(p =>
+        p.name.toLowerCase().includes(searchBar.value.toLowerCase())
+      );
+
+      const sortVal = sortOptions.value;
+      if (sortVal === "price-low") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortVal === "price-high") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortVal === "popularity") {
+        filtered.sort((a, b) => b.popularity - a.popularity);
+      }
+
+      renderProducts(filtered);
+    }
+
+    // Event listeners
+    searchBar.addEventListener("input", filterAndSort);
+    sortOptions.addEventListener("change", filterAndSort);
+
+    // Initial render
+    renderProducts(products);
+  </script>
 </body>
 </html>
