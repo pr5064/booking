@@ -11,107 +11,122 @@
     }
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f8f9fb;
-      color: #1a1a1a;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafb;
+      color: #1e293b;
     }
 
     /* Header */
     header {
-      background: linear-gradient(90deg, #3b82f6, #2563eb);
-      padding: 1.25rem 2rem;
+      background: #ffffff;
+      padding: 1rem 2.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      box-shadow: 0 4px 15px rgb(37 99 235 / 0.3);
+      box-shadow: 0 4px 20px rgb(0 0 0 / 0.08);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
     header .logo {
-      color: white;
-      font-size: 1.9rem;
       font-weight: 900;
+      font-size: 1.9rem;
       letter-spacing: 2px;
+      color: #2563eb;
       user-select: none;
+      font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      cursor: default;
     }
     #search-bar {
       flex-grow: 1;
-      max-width: 320px;
-      padding: 0.5rem 1rem;
-      border-radius: 30px;
-      border: none;
+      max-width: 350px;
+      margin: 0 2rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 40px;
+      border: 1.8px solid #d1d5db;
       font-size: 1rem;
-      transition: box-shadow 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
       outline-offset: 2px;
+      color: #334155;
+      font-weight: 500;
+    }
+    #search-bar::placeholder {
+      color: #94a3b8;
+      font-weight: 400;
     }
     #search-bar:focus {
-      box-shadow: 0 0 8px 2px #3b82f6;
+      border-color: #2563eb;
+      box-shadow: 0 0 8px 2px #2563eb;
+      outline: none;
     }
     #sort-options {
-      padding: 0.5rem 1rem;
-      border-radius: 30px;
-      border: none;
+      padding: 0.5rem 1.4rem;
+      border-radius: 40px;
+      border: 1.5px solid #2563eb;
       font-size: 1rem;
       cursor: pointer;
       background-color: white;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-      transition: background-color 0.3s ease;
+      color: #2563eb;
+      font-weight: 700;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 4px 10px rgb(37 99 235 / 0.3);
+      user-select: none;
     }
     #sort-options:hover {
-      background-color: #e0e7ff;
+      background-color: #2563eb;
+      color: white;
     }
 
     /* Main Content */
     main {
-      max-width: 1200px;
-      margin: 2rem auto 4rem;
+      max-width: 1180px;
+      margin: 3rem auto 5rem;
       padding: 0 1rem;
     }
     h1 {
       font-weight: 900;
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      color: #2563eb;
-      letter-spacing: 1px;
+      font-size: 2.8rem;
+      margin-bottom: 2.5rem;
+      color: #1e293b;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
     }
 
     /* Product Grid */
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
     }
 
     /* Product Card */
     .product-card {
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 10px 20px rgb(0 0 0 / 0.08);
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 18px 35px rgb(37 99 235 / 0.12);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
       cursor: pointer;
     }
     .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 30px rgb(37 99 235 / 0.25);
+      transform: translateY(-10px);
+      box-shadow: 0 28px 55px rgb(37 99 235 / 0.3);
     }
     .product-image {
       width: 100%;
-      height: 240px;
+      height: 270px;
       object-fit: cover;
-      transition: scale 0.3s ease;
+      transition: transform 0.35s ease;
+      border-bottom: 1.5px solid #e2e8f0;
     }
     .product-card:hover .product-image {
-      scale: 1.05;
+      transform: scale(1.05);
     }
     .product-details {
-      padding: 1rem 1.25rem 1.5rem;
+      padding: 1.25rem 1.6rem 1.8rem;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -119,49 +134,63 @@
     }
     .product-name {
       font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 0.3rem;
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
       color: #1e293b;
+      letter-spacing: 0.02em;
     }
     .product-category {
       font-size: 0.9rem;
       color: #64748b;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.1rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
+      font-weight: 600;
     }
     .product-price {
       font-weight: 900;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: #2563eb;
-      margin-bottom: 1rem;
+      margin-bottom: 1.3rem;
     }
     .btn-buy {
       background: #2563eb;
       color: white;
-      padding: 0.6rem 1.5rem;
+      padding: 0.7rem 1.8rem;
       border: none;
-      border-radius: 30px;
+      border-radius: 40px;
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
       align-self: flex-start;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
+      box-shadow: 0 6px 15px rgb(37 99 235 / 0.45);
       user-select: none;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      letter-spacing: 0.03em;
     }
     .btn-buy:hover {
       background-color: #1e40af;
-      box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
+      box-shadow: 0 8px 22px rgb(30 64 175 / 0.65);
     }
 
     /* Responsive tweaks */
-    @media (max-width: 600px) {
-      header {
-        justify-content: center;
-      }
+    @media (max-width: 720px) {
       #search-bar {
         max-width: 100%;
+        margin: 0 1rem;
+      }
+      main {
+        margin: 2rem auto 4rem;
+      }
+    }
+    @media (max-width: 400px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 1rem;
+      }
+      #search-bar {
+        margin: 0;
       }
     }
   </style>
@@ -173,7 +202,7 @@
     <input
       type="text"
       id="search-bar"
-      placeholder="Search men’s products..."
+      placeholder="Search men’s fashion..."
       aria-label="Search products"
     />
     <select id="sort-options" aria-label="Sort products">
@@ -186,116 +215,24 @@
   <main>
     <h1>Men's Fashion Collection</h1>
     <div class="product-grid" id="product-grid">
-      <!-- Products injected by JS -->
+      <!-- Products rendered by JS -->
     </div>
   </main>
 
   <script>
-    // Sample data - In real, fetch from backend or API
     const products = [
-      {
-        id: 1,
-        name: "Classic White T-Shirt",
-        category: "T-Shirts",
-        price: 15.99,
-        popularity: 80,
-        image: "images/tshirt.jpg"
-      },
-      {
-        id: 2,
-        name: "Formal Blue Shirt",
-        category: "Shirts",
-        price: 29.99,
-        popularity: 70,
-        image: "images/shirt.jpg"
-      },
-      {
-        id: 3,
-        name: "Running Sneakers",
-        category: "Shoes",
-        price: 59.99,
-        popularity: 90,
-        image: "images/sports_shoes.jpg"
-      },
-      {
-        id: 4,
-        name: "Winter Jacket",
-        category: "Jackets",
-        price: 79.99,
-        popularity: 85,
-        image: "images/jacket.jpg"
-      },
-      {
-        id: 5,
-        name: "Casual Kurta",
-        category: "Kurtas",
-        price: 39.99,
-        popularity: 50,
-        image: "images/kurta.jpg"
-      },
-      {
-        id: 6,
-        name: "Sporty Sneakers",
-        category: "Shoes",
-        price: 65.00,
-        popularity: 75,
-        image: "images/sneakers.jpg"
-      }
+      { id: 1, name: "Classic White T-Shirt", category: "T-Shirts", price: 15.99, popularity: 80, image: "images/tshirt.jpg" },
+      { id: 2, name: "Formal Blue Shirt", category: "Shirts", price: 29.99, popularity: 70, image: "images/shirt.jpg" },
+      { id: 3, name: "Running Sneakers", category: "Shoes", price: 59.99, popularity: 90, image: "images/sports_shoes.jpg" },
+      { id: 4, name: "Winter Jacket", category: "Jackets", price: 79.99, popularity: 85, image: "images/jacket.jpg" },
+      { id: 5, name: "Casual Kurta", category: "Kurtas", price: 39.99, popularity: 50, image: "images/kurta.jpg" },
+      { id: 6, name: "Sporty Sneakers", category: "Shoes", price: 65.00, popularity: 75, image: "images/sneakers.jpg" },
+      { id: 7, name: "Aviator Sunglasses", category: "Glasses", price: 49.99, popularity: 60, image: "images/aviators.jpg" },
+      { id: 8, name: "Elegant Wrist Watch", category: "Watches", price: 120.00, popularity: 95, image: "images/watch.jpg" },
+      { id: 9, name: "Denim Jeans", category: "Jeans", price: 39.99, popularity: 77, image: "images/jeans.jpg" },
+      { id: 10, name: "Leather Belt", category: "Accessories", price: 25.00, popularity: 55, image: "images/belt.jpg" }
     ];
 
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
-    const sortOptions = document.getElementById("sort-options");
-
-    // Render products
-    function renderProducts(items) {
-      productGrid.innerHTML = "";
-      if (items.length === 0) {
-        productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
-        return;
-      }
-      items.forEach((product) => {
-        const card = document.createElement("div");
-        card.className = "product-card";
-        card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="product-image" />
-          <div class="product-details">
-            <div>
-              <h3 class="product-name">${product.name}</h3>
-              <p class="product-category">${product.category}</p>
-              <p class="product-price">$${product.price.toFixed(2)}</p>
-            </div>
-            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
-          </div>
-        `;
-        productGrid.appendChild(card);
-      });
-    }
-
-    // Filter & Sort Logic
-    function filterAndSort() {
-      let filtered = products.filter(p =>
-        p.name.toLowerCase().includes(searchBar.value.toLowerCase())
-      );
-
-      const sortVal = sortOptions.value;
-      if (sortVal === "price-low") {
-        filtered.sort((a, b) => a.price - b.price);
-      } else if (sortVal === "price-high") {
-        filtered.sort((a, b) => b.price - a.price);
-      } else if (sortVal === "popularity") {
-        filtered.sort((a, b) => b.popularity - a.popularity);
-      }
-
-      renderProducts(filtered);
-    }
-
-    // Event listeners
-    searchBar.addEventListener("input", filterAndSort);
-    sortOptions.addEventListener("change", filterAndSort);
-
-    // Initial render
-    renderProducts(products);
-  </script>
-</body>
-</html>
+    const sortOptions = document
