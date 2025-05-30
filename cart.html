@@ -59,34 +59,35 @@
       background-color: white;
       box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
       transition: background-color 0.3s ease;
+      margin-left: 1rem;
     }
     #sort-options:hover {
       background-color: #e0e7ff;
     }
 
-    /* Cart button & badge */
-    #cart-button {
-      background: none;
+    /* Cart Icon */
+    #cart-icon {
+      position: relative;
+      background: transparent;
       border: none;
       color: white;
+      font-size: 1.5rem;
       cursor: pointer;
-      position: relative;
-      font-size: 1.4rem;
       user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
     }
     #cart-count {
-      position: absolute;
-      top: -8px;
-      right: -12px;
-      background: #e3342f;
-      color: white;
-      font-weight: 700;
+      background: #ea580c;
+      color: #fff;
       border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 0.8rem;
-      min-width: 20px;
-      text-align: center;
-      line-height: 1.2;
+      padding: 0 7px;
+      font-size: 0.9rem;
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      font-weight: 700;
       pointer-events: none;
     }
 
@@ -121,7 +122,7 @@
       display: flex;
       flex-direction: column;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      cursor: default;
     }
     .product-card:hover {
       transform: translateY(-8px);
@@ -181,74 +182,78 @@
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
 
-    /* Cart Modal Styles */
+    /* Cart Modal */
     #cart-modal {
       display: none;
       position: fixed;
       top: 60px;
       right: 20px;
       width: 320px;
-      max-height: 70vh;
+      max-height: 80vh;
+      background: #fff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
       overflow-y: auto;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-      padding: 1rem 1.5rem 2rem;
-      z-index: 9999;
+      z-index: 1000;
+      padding: 1rem;
     }
-    #cart-modal h2 {
+    #cart-modal h3 {
       margin-top: 0;
       margin-bottom: 1rem;
-      font-size: 1.5rem;
-      color: #333;
       text-align: center;
     }
-    #cart-items > div {
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    #cart-modal button#close-cart-btn {
+      float: right;
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #444;
     }
-    #cart-items p {
-      margin: 0;
-      font-size: 1rem;
+    #cart-items {
+      margin-bottom: 1rem;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.4rem;
+    }
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 0.8rem;
     }
     .cart-item-details {
       flex-grow: 1;
     }
-    .remove-btn {
-      background: none;
+    .cart-item-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .cart-item-qty-price {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.2rem;
+    }
+    .cart-remove-btn {
+      background: #ea580c;
       border: none;
-      color: #e3342f;
+      color: white;
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
       font-weight: 700;
       cursor: pointer;
-      font-size: 0.9rem;
-      padding: 0 6px;
+      margin-left: 0.5rem;
       user-select: none;
+      transition: background-color 0.3s ease;
     }
-    #cart-total {
-      font-weight: 900;
-      font-size: 1.2rem;
-      text-align: right;
-      margin-top: 1rem;
-      border-top: 2px solid #9d96e6;
-      padding-top: 0.8rem;
-      color: #1e293b;
-    }
-    #close-cart {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      background: none;
-      border: none;
-      font-size: 1.3rem;
-      cursor: pointer;
-      user-select: none;
-      color: #999;
-    }
-    #close-cart:hover {
-      color: #333;
+    .cart-remove-btn:hover {
+      background-color: #b3470a;
     }
 
     /* Responsive tweaks */
@@ -262,7 +267,6 @@
       #cart-modal {
         width: 90vw;
         right: 5vw;
-        top: 70px;
       }
     }
   </style>
@@ -283,7 +287,8 @@
       <option value="price-high">Price: High to Low</option>
     </select>
 
-    <button id="cart-button" aria-label="Open cart">
+    <!-- Cart Icon -->
+    <button id="cart-icon" aria-label="Open cart">
       🛒 Cart <span id="cart-count">0</span>
     </button>
   </header>
@@ -295,46 +300,92 @@
     </div>
   </main>
 
+  <!-- Cart Modal -->
   <div id="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-    <button id="close-cart" aria-label="Close cart">&times;</button>
-    <h2 id="cart-title">Your Cart</h2>
+    <button id="close-cart-btn" aria-label="Close cart">&times;</button>
+    <h3 id="cart-title">Your Cart</h3>
     <div id="cart-items">
-      <!-- Cart items injected by JS -->
+      <!-- Cart items go here -->
     </div>
-    <div id="cart-total">Total: $0.00</div>
+    <hr />
+    <p><strong>Total: $<span id="cart-total">0.00</span></strong></p>
   </div>
 
   <script>
+    // Product Data
     const products = [
-      { id: 1, name: "Cartoon Print T-Shirt", category: "T-Shirts", price: 12.99, popularity: 70, image: "images/kids_tshirt.jpg" },
-      { id: 2, name: "Denim Dungarees", category: "Bottomwear", price: 18.99, popularity: 80, image: "images/dungaree.jpg" },
-      { id: 3, name: "Kid's Sneakers", category: "Footwear", price: 25.00, popularity: 75, image: "images/kids_sneakers.jpg" },
-      { id: 4, name: "Party Dress", category: "Dresses", price: 35.00, popularity: 85, image: "images/party_dress.jpg" },
-      { id: 5, name: "Winter Hoodie", category: "Winter Wear", price: 20.00, popularity: 65, image: "images/kids_hoodie.jpg" },
-      { id: 6, name: "Traditional Set", category: "Ethnic Wear", price: 30.00, popularity: 60, image: "images/kids_ethnic.jpg" }
+      {
+        id: 1,
+        name: "Cartoon Print T-Shirt",
+        category: "T-Shirts",
+        price: 12.99,
+        popularity: 70,
+        image: "images/kids_tshirt.jpg"
+      },
+      {
+        id: 2,
+        name: "Denim Dungarees",
+        category: "Bottomwear",
+        price: 18.99,
+        popularity: 80,
+        image: "images/dungaree.jpg"
+      },
+      {
+        id: 3,
+        name: "Kid's Sneakers",
+        category: "Footwear",
+        price: 25.0,
+        popularity: 75,
+        image: "images/kids_sneakers.jpg"
+      },
+      {
+        id: 4,
+        name: "Party Dress",
+        category: "Dresses",
+        price: 35.0,
+        popularity: 85,
+        image: "images/party_dress.jpg"
+      },
+      {
+        id: 5,
+        name: "Winter Hoodie",
+        category: "Winter Wear",
+        price: 20.0,
+        popularity: 65,
+        image: "images/kids_hoodie.jpg"
+      },
+      {
+        id: 6,
+        name: "Traditional Set",
+        category: "Ethnic Wear",
+        price: 30.0,
+        popularity: 60,
+        image: "images/kids_ethnic.jpg"
+      }
     ];
 
+    // State for cart: {productId: quantity}
+    const cart = {};
+
+    // Elements
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
-    const cartButton = document.getElementById("cart-button");
+    const cartIcon = document.getElementById("cart-icon");
     const cartCount = document.getElementById("cart-count");
     const cartModal = document.getElementById("cart-modal");
-    const closeCartBtn = document.getElementById("close-cart");
+    const closeCartBtn = document.getElementById("close-cart-btn");
     const cartItemsContainer = document.getElementById("cart-items");
     const cartTotal = document.getElementById("cart-total");
 
-    // Cart: array of objects with product info + quantity
-    let cart = [];
-
-    // Render products to the page
+    // Render Products
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
         productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
         return;
       }
-      items.forEach(product => {
+      items.forEach((product) => {
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
@@ -345,14 +396,14 @@
               <p class="product-category">${product.category}</p>
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
-            <button class="btn-buy" onclick="addToCart(${product.id})">Buy Now</button>
+            <button class="btn-buy" data-id="${product.id}">Buy Now</button>
           </div>
         `;
         productGrid.appendChild(card);
       });
     }
 
-    // Filter & Sort products
+    // Filter & Sort Products
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -370,21 +421,5 @@
       renderProducts(filtered);
     }
 
-    // Add product to cart, increment quantity if already present
-    function addToCart(productId) {
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
-
-      const cartItem = cart.find(item => item.product.id === productId);
-      if (cartItem) {
-        cartItem.quantity++;
-      } else {
-        cart.push({ product, quantity: 1 });
-      }
-      updateCartCount();
-      alert(`Added "${product.name}" to cart!`);
-    }
-
-    // Update cart count badge
-    function updateCartCount() {
-      const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0
+    // Update Cart Count Badge
+    function updateCart
