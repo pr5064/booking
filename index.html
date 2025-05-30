@@ -25,7 +25,6 @@
       overflow: hidden;
     }
 
-    /* Glowing animated circles */
     .glow-circle {
       position: absolute;
       border-radius: 50%;
@@ -153,6 +152,18 @@
   <footer>
     <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
   </footer>
+
+  <!-- Cart functionality (initialize empty cart if not present) -->
+  <script>
+    if (!localStorage.getItem('cart')) {
+      localStorage.setItem('cart', JSON.stringify([]));
+    }
+
+    window.onload = () => {
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      console.log("Cart contents on index load:", cart);
+    };
+  </script>
 
 </body>
 </html>
