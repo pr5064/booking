@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Men's Fashion | PreviBook</title>
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
@@ -16,7 +15,6 @@
       color: #1a1a1a;
     }
 
-    /* Header */
     header {
       background: linear-gradient(90deg, #000102, #00040b);
       padding: 1.25rem 2rem;
@@ -30,7 +28,7 @@
       top: 0;
       z-index: 100;
     }
-    header .logo {
+    .logo {
       color: white;
       font-size: 1.9rem;
       font-weight: 900;
@@ -64,7 +62,15 @@
       background-color: #e0e7ff;
     }
 
-    /* Main Content */
+    .cart-icon {
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      background: #334155;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+    }
+
     main {
       max-width: 1200px;
       margin: 2rem auto 4rem;
@@ -79,14 +85,12 @@
       letter-spacing: 1px;
     }
 
-    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
 
-    /* Product Card */
     .product-card {
       background: white;
       border-radius: 18px;
@@ -139,13 +143,12 @@
     .btn-buy {
       background: #02060e;
       color: white;
-      padding: 0.6rem 1.5rem;
+      padding: 0.6rem 1.1rem;
       border: none;
       border-radius: 30px;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.9rem;
       cursor: pointer;
-      align-self: flex-start;
       transition: background-color 0.3s ease;
       box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
       user-select: none;
@@ -155,7 +158,6 @@
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
 
-    /* Responsive tweaks */
     @media (max-width: 600px) {
       header {
         justify-content: center;
@@ -170,90 +172,53 @@
 
   <header>
     <div class="logo">PreviBook</div>
-    <input
-      type="text"
-      id="search-bar"
-      placeholder="Search men’s products..."
-      aria-label="Search products"
-    />
-    <select id="sort-options" aria-label="Sort products">
+    <input type="text" id="search-bar" placeholder="Search men’s products..." />
+    <select id="sort-options">
       <option value="popularity">Sort by Popularity</option>
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
     </select>
+    <div class="cart-icon">🛒 Cart: <span id="cart-count">0</span></div>
   </header>
 
   <main>
     <h1>Men's Fashion Collection</h1>
-    <div class="product-grid" id="product-grid">
-      <!-- Products injected by JS -->
-    </div>
+    <div class="product-grid" id="product-grid"></div>
   </main>
 
   <script>
-    // Sample data - In real, fetch from backend or API
     const products = [
-      {
-        id: 1,
-        name: "Classic T-Shirt",
-        category: "T-Shirts",
-        price: 15.99,
-        popularity: 80,
-        image: "images/tshirt.jpg"
-      },
-      {
-        id: 2,
-        name: "Formal Shirt",
-        category: "Shirts",
-        price: 29.99,
-        popularity: 80,
-        image: "images/shirt.jpg"
-      },
-      {
-        id: 3,
-        name: "Running Shoes",
-        category: "Shoes",
-        price: 50,
-        popularity: 80,
-        image: "images/shoes.jpg"
-      },
-      {
-        id: 4,
-        name: "Winter Jacket",
-        category: "Jackets",
-        price: 79.99,
-        popularity: 85,
-        image: "images/jack.png"
-      },
-      {
-        id: 5,
-        name: "Casual Kurta",
-        category: "Kurtas",
-        price: 39.99,
-        popularity: 50,
-        image: "images/kurta.png"
-      },
-      {
-        id: 6,
-        name: "Sneakers",
-        category: "Shoes",
-        price: 65.00,
-        popularity: 75,
-        image: "images/sneakers.png"
-      }
+      { id: 1, name: "Classic T-Shirt", category: "T-Shirts", price: 15.99, popularity: 80, image: "images/tshirt.jpg" },
+      { id: 2, name: "Formal Shirt", category: "Shirts", price: 29.99, popularity: 80, image: "images/shirt.jpg" },
+      { id: 3, name: "Running Shoes", category: "Shoes", price: 50, popularity: 80, image: "images/shoes.jpg" },
+      { id: 4, name: "Winter Jacket", category: "Jackets", price: 79.99, popularity: 85, image: "images/jack.png" },
+      { id: 5, name: "Casual Kurta", category: "Kurtas", price: 39.99, popularity: 50, image: "images/kurta.png" },
+      { id: 6, name: "Sneakers", category: "Shoes", price: 65.00, popularity: 75, image: "images/sneakers.png" }
     ];
 
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
+    const cartCount = document.getElementById("cart-count");
+    let cartItems = [];
 
-    // Render products
+    function updateCartCount() {
+      cartCount.textContent = cartItems.length;
+    }
+
+    function addToCart(product) {
+      cartItems.push(product);
+      updateCartCount();
+      alert(`"${product.name}" added to cart.`);
+    }
+
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
         productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
         return;
       }
+
       items.forEach((product) => {
         const card = document.createElement("div");
         card.className = "product-card";
@@ -265,14 +230,16 @@
               <p class="product-category">${product.category}</p>
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
-            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn-buy" onclick="alert('Buy Now: ${product.name}')">Buy Now</button>
+              <button class="btn-buy" style="background:#64748b;" onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+            </div>
           </div>
         `;
         productGrid.appendChild(card);
       });
     }
 
-    // Filter & Sort Logic
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -290,12 +257,12 @@
       renderProducts(filtered);
     }
 
-    // Event listeners
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
     // Initial render
     renderProducts(products);
   </script>
+
 </body>
 </html>
