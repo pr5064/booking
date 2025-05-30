@@ -18,8 +18,8 @@
                 <li><a href="#">Home & Living</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search for products, brands and more">
-                <button id="searchButton">🔍</button>
+                <input type="text" placeholder="Search for products, brands and more">
+                <button type="submit">🔍</button>
             </div>
             <div class="icons">
                 <a href="#"><img src="images/profile.png" alt="Profile" class="icon"></a>
@@ -36,85 +36,97 @@
             <button>Shop Now</button>
         </section>
     </main>
+        <section id="categories">
+            <h2>Categories</h2>
+            <div class="category">
+                <a href="mens.html">
+                    <img src="images/men.jpg" height="200px" alt="Men's Fashion">
+                    <h3>Men's Fashion</h3>
+                </a>
+            </div>
+            
+            <div class="category">
+                <a href="womens.html">
+                <img src="images/women.webp" height="200px" alt="Women's Fashion">
+                <h3>Women's Fashion</h3>
+            </div>
+            <div class="category">
+                <a href="kids.html">
+                <img src="images/kids.jpg" height="200px" alt="Kids' Fashion">
+                <h3>Kids' Fashion</h3>
+            </div>
+            <div class="category">
+                <a href="electronics.html">
+                <img src="images/electronics.jpg" height="200px" alt="Electronics">
+                <h3>Electronics</h3>
+            </div>
+            <div class="category">
+                <a href="home.html">
+                <img src="images/home.jpg" height="200px" alt="Home & Living">
+                <h3>Home & Living</h3>
+            </div>
+            <div class="category">
+                <a href="beauty.html">
+                <img src="images/beauty.avif" height="200px" alt="Beauty">
+                <h3>Beauty</h3>
+            </div>
+            <div class="category">
+                <a href="gadgets.html">
+                <img src="images/gadgets.webp" height="200px" alt="Appliances">
+                <h3>Gadgets</h3>
+            </div>
+        </section>
 
-    <section id="categories">
-        <h2>Categories</h2>
-        <!-- Categories... (no changes needed here) -->
-    </section>
+        <section id="featured-products">
+            <h2>Featured Products</h2>
+            <div class="product">
+                <img src="images/product1.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>Description of product 1.</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product2.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>Description of product 2.</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product3.jpg" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>Description of product 3.</p>
+                <button>Add to Cart</button>
+            </div>
+        </section>
 
-    <section id="featured-products">
-        <h2>Featured Products</h2>
-        <div class="product" data-name="product 1">
-            <img src="images/product1.jpg" alt="Product 1">
-            <h3>Product 1</h3>
-            <p>Description of product 1.</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product" data-name="product 2">
-            <img src="images/product2.jpg" alt="Product 2">
-            <h3>Product 2</h3>
-            <p>Description of product 2.</p>
-            <button>Add to Cart</button>
-        </div>
-        <div class="product" data-name="product 3">
-            <img src="images/product3.jpg" alt="Product 3">
-            <h3>Product 3</h3>
-            <p>Description of product 3.</p>
-            <button>Add to Cart</button>
-        </div>
-    </section>
-
-    <footer>
-        <!-- Footer... (no changes needed here) -->
-    </footer>
-
-    <!-- JavaScript to make search work -->
-    <script>
-        const searchInput = document.getElementById("searchInput");
-        const searchButton = document.getElementById("searchButton");
-        const products = document.querySelectorAll(".product");
-
-        function filterProducts() {
-            const searchTerm = searchInput.value.toLowerCase();
-            products.forEach(product => {
-                const productName = product.querySelector("h3").innerText.toLowerCase();
-                if (productName.includes(searchTerm)) {
-                    product.style.display = "block";
-                } else {
-                    product.style.display = "none";
-                }
-            });
-        }
-
-        searchButton.addEventListener("click", filterProducts);
-        searchInput.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                filterProducts();
-            }
-        });
-
-        // Add to cart feature
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const addToCartButtons = document.querySelectorAll('.product button');
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const product = button.parentElement;
-                const title = product.querySelector('h3').innerText;
-                const image = product.querySelector('img').src;
-                const description = product.querySelector('p').innerText;
-
-                const item = { title, image, description, quantity: 1 };
-                const existingItem = cart.find(p => p.title === item.title);
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push(item);
-                }
-
-                localStorage.setItem('cart', JSON.stringify(cart));
-                alert(`${item.title} added to cart!`);
-            });
-        });
-    </script>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Featured</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><img src="images/linkdien.png" alt="LinkedIn"></a>
+                        <a href="#"><img src="images/x.jpeg" alt="Twitter"></a>
+                        <a href="#"><img src="images/ig.jpeg" alt="Instagram"></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@previbook.com</p>
+                    <p>Phone: 123-456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Previ Book. All rights reserved.</p>
+            </div>
+        </footer>
 </body>
 </html>
