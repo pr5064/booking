@@ -1,35 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kids' Fashion</title>
-    <link rel="stylesheet" href="css/categories.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Men's Fashion | PreviBook</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fb;
+      color: #1a1a1a;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #000102, #00040b);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 15px rgb(37 99 235 / 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header .logo {
+      color: white;
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    #search-bar {
+      flex-grow: 1;
+      max-width: 320px;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+      outline-offset: 2px;
+    }
+    #search-bar:focus {
+      box-shadow: 0 0 8px 2px #010304;
+    }
+    #sort-options {
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: white;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease;
+    }
+    #sort-options:hover {
+      background-color: #e0e7ff;
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-weight: 900;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #9d96e6;
+      letter-spacing: 1px;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Product Card */
+    .product-card {
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgb(0 0 0 / 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgb(37 99 235 / 0.25);
+    }
+    .product-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: scale 0.3s ease;
+    }
+    .product-card:hover .product-image {
+      scale: 1.05;
+    }
+    .product-details {
+      padding: 1rem 1.25rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+      color: #1e293b;
+    }
+    .product-category {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .product-price {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #010510;
+      margin-bottom: 1rem;
+    }
+    .btn-buy {
+      background: #02060e;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
+      user-select: none;
+    }
+    .btn-buy:hover {
+      background-color: #000103;
+      box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+      }
+      #search-bar {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Shop by Category - Kids' Fashion</h1>
-    </header>
-    <section class="category-container">
-        <div class="category" data-discount="40-80% OFF">
-            <img src="images/kids-dress.jpg" alt="Kids' Dresses">
-            <h2>Kids' Dresses</h2>
-            <p>40-80% OFF</p>
-            <button>Shop Now</button>
-        </div>
-        <div class="category" data-discount="40-80% OFF">
-            <img src="images/kids-shoes.jpg" alt="Kids' Shoes">
-            <h2>Kids' Shoes</h2>
-            <p>40-80% OFF</p>
-            <button>Shop Now</button>
-        </div>
-        <div class="category" data-discount="50-80% OFF">
-            <img src="images/kids-accessories.jpg" alt="Kids' Accessories">
-            <h2>Kids' Accessories</h2>
-            <p>50-80% OFF</p>
-            <button>Shop Now</button>
-        </div>
-    </section>
+
+  <header>
+    <div class="logo">PreviBook</div>
+    <input
+      type="text"
+      id="search-bar"
+      placeholder="Search men’s products..."
+      aria-label="Search products"
+    />
+    <select id="sort-options" aria-label="Sort products">
+      <option value="popularity">Sort by Popularity</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+    </select>
+  </header>
+
+  <main>
+    <h1>Men's Fashion Collection</h1>
+    <div class="product-grid" id="product-grid">
+      <!-- Products injected by JS -->
+    </div>
+  </main>
+
+  <script>
+    // Sample data - In real, fetch from backend or API
+   const products = [
+  {
+    id: 1,
+    name: "Cartoon Print T-Shirt",
+    category: "T-Shirts",
+    price: 12.99,
+    popularity: 70,
+    image: "images/kids_tshirt.jpg"
+  },
+  {
+    id: 2,
+    name: "Denim Dungarees",
+    category: "Bottomwear",
+    price: 18.99,
+    popularity: 80,
+    image: "images/dungaree.jpg"
+  },
+  {
+    id: 3,
+    name: "Kid's Sneakers",
+    category: "Footwear",
+    price: 25.00,
+    popularity: 75,
+    image: "images/kids_sneakers.jpg"
+  },
+  {
+    id: 4,
+    name: "Party Dress",
+    category: "Dresses",
+    price: 35.00,
+    popularity: 85,
+    image: "images/party_dress.jpg"
+  },
+  {
+    id: 5,
+    name: "Winter Hoodie",
+    category: "Winter Wear",
+    price: 20.00,
+    popularity: 65,
+    image: "images/kids_hoodie.jpg"
+  },
+  {
+    id: 6,
+    name: "Traditional Set",
+    category: "Ethnic Wear",
+    price: 30.00,
+    popularity: 60,
+    image: "images/kids_ethnic.jpg"
+  }
+];
+
+
+    const productGrid = document.getElementById("product-grid");
+    const searchBar = document.getElementById("search-bar");
+    const sortOptions = document.getElementById("sort-options");
+
+    // Render products
+    function renderProducts(items) {
+      productGrid.innerHTML = "";
+      if (items.length === 0) {
+        productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
+        return;
+      }
+      items.forEach((product) => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="product-image" />
+          <div class="product-details">
+            <div>
+              <h3 class="product-name">${product.name}</h3>
+              <p class="product-category">${product.category}</p>
+              <p class="product-price">$${product.price.toFixed(2)}</p>
+            </div>
+            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+
+    // Filter & Sort Logic
+    function filterAndSort() {
+      let filtered = products.filter(p =>
+        p.name.toLowerCase().includes(searchBar.value.toLowerCase())
+      );
+
+      const sortVal = sortOptions.value;
+      if (sortVal === "price-low") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortVal === "price-high") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortVal === "popularity") {
+        filtered.sort((a, b) => b.popularity - a.popularity);
+      }
+
+      renderProducts(filtered);
+    }
+
+    // Event listeners
+    searchBar.addEventListener("input", filterAndSort);
+    sortOptions.addEventListener("change", filterAndSort);
+
+    // Initial render
+    renderProducts(products);
+  </script>
 </body>
 </html>
