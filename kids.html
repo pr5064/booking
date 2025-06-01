@@ -145,7 +145,6 @@
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
-      align-self: flex-start;
       transition: background-color 0.3s ease;
       box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
       user-select: none;
@@ -153,6 +152,23 @@
     .btn-buy:hover {
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
+    }
+
+    .btn-prebook {
+      background: transparent;
+      color: #02060e;
+      border: 2px solid #02060e;
+      padding: 0.5rem 1.3rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .btn-prebook:hover {
+      background: #02060e;
+      color: white;
     }
 
     /* Responsive tweaks */
@@ -184,71 +200,68 @@
   </header>
 
   <main>
-    <h1>kid's Fashion Collection</h1>
+    <h1>Kid's Fashion Collection</h1>
     <div class="product-grid" id="product-grid">
       <!-- Products injected by JS -->
     </div>
   </main>
 
   <script>
-    // Sample data - In real, fetch from backend or API
-   const products = [
-  {
-    id: 1,
-    name: " Printed -Shirt",
-    category: "T-Shirts",
-    price: 12.99,
-    popularity: 70,
-    image: "images/tshirt.png"
-  },
-  {
-    id: 2,
-    name: "Denim Dungarees",
-    category: "Bottomwear",
-    price: 18.99,
-    popularity: 80,
-    image: "images/dungaree.png"
-  },
-  {
-    id: 3,
-    name: "Sneakers",
-    category: "Footwear",
-    price: 25.00,
-    popularity: 75,
-    image: "images/kidssneakers.png"
-  },
-  {
-    id: 4,
-    name: "Party Dress",
-    category: "Dresses",
-    price: 35.00,
-    popularity: 85,
-    image: "images/partydress.png"
-  },
-  {
-    id: 5,
-    name: "Winter Hoodie",
-    category: "Winter Wear",
-    price: 20.00,
-    popularity: 65,
-    image: "images/kidshoodie.png"
-  },
-  {
-    id: 6,
-    name: "Traditional Set",
-    category: "Ethnic Wear",
-    price: 30.00,
-    popularity: 60,
-    image: "images/kidsethnic.png"
-  }
-];
-
+    const products = [
+      {
+        id: 1,
+        name: "Printed T-Shirt",
+        category: "T-Shirts",
+        price: 12.99,
+        popularity: 70,
+        image: "images/tshirt.png"
+      },
+      {
+        id: 2,
+        name: "Denim Dungarees",
+        category: "Bottomwear",
+        price: 18.99,
+        popularity: 80,
+        image: "images/dungaree.png"
+      },
+      {
+        id: 3,
+        name: "Sneakers",
+        category: "Footwear",
+        price: 25.00,
+        popularity: 75,
+        image: "images/kidssneakers.png"
+      },
+      {
+        id: 4,
+        name: "Party Dress",
+        category: "Dresses",
+        price: 35.00,
+        popularity: 85,
+        image: "images/partydress.png"
+      },
+      {
+        id: 5,
+        name: "Winter Hoodie",
+        category: "Winter Wear",
+        price: 20.00,
+        popularity: 65,
+        image: "images/kidshoodie.png"
+      },
+      {
+        id: 6,
+        name: "Traditional Set",
+        category: "Ethnic Wear",
+        price: 30.00,
+        popularity: 60,
+        image: "images/kidsethnic.png"
+      }
+    ];
 
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Render products
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -266,14 +279,16 @@
               <p class="product-category">${product.category}</p>
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
-            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+              <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Add to Cart</button>
+              <button class="btn-prebook" onclick="alert('Prebooked ${product.name}!')">Prebook</button>
+            </div>
           </div>
         `;
         productGrid.appendChild(card);
       });
     }
 
-    // Filter & Sort Logic
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -291,11 +306,9 @@
       renderProducts(filtered);
     }
 
-    // Event listeners
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
     renderProducts(products);
   </script>
 </body>
