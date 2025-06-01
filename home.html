@@ -190,7 +190,6 @@
       { id: 4, name: "LED Table Lamp", category: "Lighting", price: 28.00, popularity: 80, image: "images/djlaa.png" },
       { id: 5, name: "Wooden Chair", category: "Furniture", price: 90.00, popularity: 75, image: "images/chair.png" },
       { id: 6, name: "Cotton Curtain Set", category: "Home Textile", price: 50.00, popularity: 72, image: "images/curtains.png" },
-     
     ];
 
     let cartCount = 0;
@@ -212,7 +211,8 @@
               <div class="product-category">${product.category}</div>
               <div class="product-price">₹${product.price.toFixed(2)}</div>
             </div>
-            <button class="btn-buy" onclick="addToCart()">Buy</button>
+            <button class="btn-buy" onclick="addToCart()">Add to Cart</button>
+            <button class="btn-buy" style="margin-top: 0.5rem; background: #4f46e5;" onclick="alert('Pre Booked!')">Pre Book</button>
           </div>
         `;
         productGrid.appendChild(card);
