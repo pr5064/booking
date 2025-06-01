@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gadjets| PreviBook</title>
+  <title>Gadgets | PreviBook</title>
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
@@ -30,13 +29,25 @@
       top: 0;
       z-index: 100;
     }
-    header .logo {
+    .logo {
       color: white;
       font-size: 1.9rem;
       font-weight: 900;
       letter-spacing: 2px;
       user-select: none;
+      text-decoration: none;
     }
+    .nav-link {
+      color: #ffffffcc;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 1rem;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
     #search-bar {
       flex-grow: 1;
       max-width: 320px;
@@ -64,12 +75,12 @@
       background-color: #e0e7ff;
     }
 
-    /* Main Content */
     main {
       max-width: 1200px;
       margin: 2rem auto 4rem;
       padding: 0 1rem;
     }
+
     h1 {
       font-weight: 900;
       text-align: center;
@@ -79,14 +90,12 @@
       letter-spacing: 1px;
     }
 
-    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
 
-    /* Product Card */
     .product-card {
       background: white;
       border-radius: 18px;
@@ -155,10 +164,10 @@
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
 
-    /* Responsive tweaks */
     @media (max-width: 600px) {
       header {
-        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
       }
       #search-bar {
         max-width: 100%;
@@ -169,14 +178,10 @@
 <body>
 
   <header>
-    <div class="logo">PreviBook</div>
-    <input
-      type="text"
-      id="search-bar"
-      placeholder="Search gadjet’s products..."
-      aria-label="Search products"
-    />
-    <select id="sort-options" aria-label="Sort products">
+    <a href="index.html" class="logo">PreviBook</a>
+    <a href="index.html" class="nav-link">Home</a>
+    <input type="text" id="search-bar" placeholder="Search gadgets..." />
+    <select id="sort-options">
       <option value="popularity">Sort by Popularity</option>
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
@@ -184,71 +189,66 @@
   </header>
 
   <main>
-    <h1>Gagets's Collection</h1>
-    <div class="product-grid" id="product-grid">
-      <!-- Products injected by JS -->
-    </div>
+    <h1>Gadgets Collection</h1>
+    <div class="product-grid" id="product-grid"></div>
   </main>
 
   <script>
-    // Sample data - In real, fetch from backend or API
-   const products = [
-  {
-    id: 1,
-    name: "Portable Charger",
-    category: "Power",
-    price: 25.00,
-    popularity: 88,
-    image: "images/powerbank.png"
-  },
-  {
-    id: 2,
-    name: "Smart Plug",
-    category: "Smart Home",
-    price: 15.00,
-    popularity: 75,
-    image: "images/smartplug.png"
-  },
-  {
-    id: 3,
-    name: "Fitness Band",
-    category: "Wearables",
-    price: 40.00,
-    popularity: 90,
-    image: "images/fitnessband.png"
-  },
-  {
-    id: 4,
-    name: "VR Headset",
-    category: "Entertainment",
-    price: 120.00,
-    popularity: 85,
-    image: "images/vr.png"
-  },
-  {
-    id: 5,
-    name: "Phone Tripod",
-    category: "Accessories",
-    price: 18.99,
-    popularity: 65,
-    image: "images/tripods.png"
-  },
-  {
-    id: 6,
-    name: "Mini Bluetooth Tracker",
-    category: "Smart Devices",
-    price: 12.00,
-    popularity: 70,
-    image: "images/tracker.png"
-  }
-];
-
+    const products = [
+      {
+        id: 1,
+        name: "Portable Charger",
+        category: "Power",
+        price: 25.00,
+        popularity: 88,
+        image: "images/powerbank.png"
+      },
+      {
+        id: 2,
+        name: "Smart Plug",
+        category: "Smart Home",
+        price: 15.00,
+        popularity: 75,
+        image: "images/smartplug.png"
+      },
+      {
+        id: 3,
+        name: "Fitness Band",
+        category: "Wearables",
+        price: 40.00,
+        popularity: 90,
+        image: "images/fitnessband.png"
+      },
+      {
+        id: 4,
+        name: "VR Headset",
+        category: "Entertainment",
+        price: 120.00,
+        popularity: 85,
+        image: "images/vr.png"
+      },
+      {
+        id: 5,
+        name: "Phone Tripod",
+        category: "Accessories",
+        price: 18.99,
+        popularity: 65,
+        image: "images/tripods.png"
+      },
+      {
+        id: 6,
+        name: "Mini Bluetooth Tracker",
+        category: "Smart Devices",
+        price: 12.00,
+        popularity: 70,
+        image: "images/tracker.png"
+      }
+    ];
 
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Render products
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -273,7 +273,6 @@
       });
     }
 
-    // Filter & Sort Logic
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -291,11 +290,9 @@
       renderProducts(filtered);
     }
 
-    // Event listeners
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
     renderProducts(products);
   </script>
 </body>
