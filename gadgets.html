@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gadgets | PreviBook</title>
+  <title>Gadjets | PreviBook</title>
   <style>
+    /* Reset and base */
     * {
       box-sizing: border-box;
     }
@@ -29,25 +30,13 @@
       top: 0;
       z-index: 100;
     }
-    .logo {
+    header .logo {
       color: white;
       font-size: 1.9rem;
       font-weight: 900;
       letter-spacing: 2px;
       user-select: none;
-      text-decoration: none;
     }
-    .nav-link {
-      color: #ffffffcc;
-      text-decoration: none;
-      font-weight: 600;
-      margin-left: 1rem;
-      transition: color 0.2s ease;
-    }
-    .nav-link:hover {
-      color: #ffffff;
-    }
-
     #search-bar {
       flex-grow: 1;
       max-width: 320px;
@@ -75,12 +64,12 @@
       background-color: #e0e7ff;
     }
 
+    /* Main Content */
     main {
       max-width: 1200px;
       margin: 2rem auto 4rem;
       padding: 0 1rem;
     }
-
     h1 {
       font-weight: 900;
       text-align: center;
@@ -90,12 +79,14 @@
       letter-spacing: 1px;
     }
 
+    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
 
+    /* Product Card */
     .product-card {
       background: white;
       border-radius: 18px;
@@ -145,7 +136,7 @@
       color: #010510;
       margin-bottom: 1rem;
     }
-    .btn-buy {
+    .btn-buy, .btn-prebook {
       background: #02060e;
       color: white;
       padding: 0.6rem 1.5rem;
@@ -154,23 +145,46 @@
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
-      align-self: flex-start;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       user-select: none;
+      margin-right: 1rem;
+      box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
     }
     .btn-buy:hover {
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
+    .btn-prebook {
+      background: #3b82f6; /* blue */
+      box-shadow: 0 4px 12px rgb(59 130 246 / 0.5);
+    }
+    .btn-prebook:hover {
+      background-color: #2563eb;
+      box-shadow: 0 6px 18px rgb(37 99 235 / 0.7);
+    }
 
+    .btn-group {
+      display: flex;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    /* Responsive tweaks */
     @media (max-width: 600px) {
       header {
-        flex-direction: column;
-        align-items: stretch;
+        justify-content: center;
       }
       #search-bar {
         max-width: 100%;
+      }
+      .btn-group {
+        flex-direction: column;
+      }
+      .btn-buy, .btn-prebook {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
@@ -178,10 +192,14 @@
 <body>
 
   <header>
-    <a href="index.html" class="logo">PreviBook</a>
-    <a href="index.html" class="nav-link">Home</a>
-    <input type="text" id="search-bar" placeholder="Search gadgets..." />
-    <select id="sort-options">
+    <div class="logo">PreviBook</div>
+    <input
+      type="text"
+      id="search-bar"
+      placeholder="Search gadget’s products..."
+      aria-label="Search products"
+    />
+    <select id="sort-options" aria-label="Sort products">
       <option value="popularity">Sort by Popularity</option>
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
@@ -189,11 +207,14 @@
   </header>
 
   <main>
-    <h1>Gadgets Collection</h1>
-    <div class="product-grid" id="product-grid"></div>
+    <h1>Gadgets' Collection</h1>
+    <div class="product-grid" id="product-grid">
+      <!-- Products injected by JS -->
+    </div>
   </main>
 
   <script>
+    // Sample data - In real, fetch from backend or API
     const products = [
       {
         id: 1,
@@ -249,6 +270,7 @@
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
+    // Render products
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -266,13 +288,17 @@
               <p class="product-category">${product.category}</p>
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
-            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+            <div class="btn-group">
+              <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+              <button class="btn-prebook" onclick="alert('Pre-booked ${product.name}!')">Pre-Book</button>
+            </div>
           </div>
         `;
         productGrid.appendChild(card);
       });
     }
 
+    // Filter & Sort Logic
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -290,9 +316,11 @@
       renderProducts(filtered);
     }
 
+    // Event listeners
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
+    // Initial render
     renderProducts(products);
   </script>
 </body>
