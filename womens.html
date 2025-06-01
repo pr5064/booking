@@ -136,21 +136,26 @@
       color: #010510;
       margin-bottom: 1rem;
     }
-    .btn-buy {
+    .btn-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-buy,
+    .btn-prebook {
       background: #02060e;
       color: white;
-      padding: 0.6rem 1.5rem;
+      padding: 0.5rem 1rem;
       border: none;
       border-radius: 30px;
-      font-weight: 700;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
-      align-self: flex-start;
       transition: background-color 0.3s ease;
       box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
-      user-select: none;
     }
-    .btn-buy:hover {
+    .btn-buy:hover,
+    .btn-prebook:hover {
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
@@ -191,63 +196,61 @@
   </main>
 
   <script>
-    // Sample data - In real, fetch from backend or API
-   const products = [
-  {
-    id: 1,
-    name: "Floral Summer Dress",
-    category: "Dresses",
-    price: 45.99,
-    popularity: 85,
-    image: "images/floral.png"
-  },
-  {
-    id: 2,
-    name: "Denim Jacket",
-    category: "Jackets",
-    price: 59.99,
-    popularity: 75,
-    image: "images/denim.png"
-  },
-  {
-    id: 3,
-    name: "High Heels",
-    category: "Footwear",
-    price: 70.00,
-    popularity: 90,
-    image: "images/high.png"
-  },
-  {
-    id: 4,
-    name: "Handbag",
-    category: "Accessories",
-    price: 35.00,
-    popularity: 65,
-    image: "images/handbag.png"
-  },
-  {
-    id: 5,
-    name: "Traditional Saree",
-    category: "Ethnic Wear",
-    price: 89.99,
-    popularity: 80,
-    image: "images/saree.png"
-  },
-  {
-    id: 6,
-    name: "Casual Kurti",
-    category: "Tops",
-    price: 25.00,
-    popularity: 60,
-    image: "images/kurthi.png"
-  }
+    const products = [
+      {
+        id: 1,
+        name: "Floral Summer Dress",
+        category: "Dresses",
+        price: 45.99,
+        popularity: 85,
+        image: "images/floral.png"
+      },
+      {
+        id: 2,
+        name: "Denim Jacket",
+        category: "Jackets",
+        price: 59.99,
+        popularity: 75,
+        image: "images/denim.png"
+      },
+      {
+        id: 3,
+        name: "High Heels",
+        category: "Footwear",
+        price: 70.00,
+        popularity: 90,
+        image: "images/high.png"
+      },
+      {
+        id: 4,
+        name: "Handbag",
+        category: "Accessories",
+        price: 35.00,
+        popularity: 65,
+        image: "images/handbag.png"
+      },
+      {
+        id: 5,
+        name: "Traditional Saree",
+        category: "Ethnic Wear",
+        price: 89.99,
+        popularity: 80,
+        image: "images/saree.png"
+      },
+      {
+        id: 6,
+        name: "Casual Kurti",
+        category: "Tops",
+        price: 25.00,
+        popularity: 60,
+        image: "images/kurthi.png"
+      }
     ];
 
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Render products
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -265,14 +268,16 @@
               <p class="product-category">${product.category}</p>
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
-            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+            <div class="btn-container">
+              <button class="btn-buy" onclick="addToCart('${product.name}')">Add to Cart</button>
+              <button class="btn-prebook" onclick="prebook('${product.name}')">Prebook</button>
+            </div>
           </div>
         `;
         productGrid.appendChild(card);
       });
     }
 
-    // Filter & Sort Logic
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -290,11 +295,17 @@
       renderProducts(filtered);
     }
 
-    // Event listeners
+    function addToCart(productName) {
+      alert(`Added "${productName}" to cart!`);
+    }
+
+    function prebook(productName) {
+      alert(`Prebooked "${productName}" successfully!`);
+    }
+
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
     renderProducts(products);
   </script>
 </body>
