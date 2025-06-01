@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home&living | PreviBook</title>
+  <title>Home & Living | PreviBook</title>
   <style>
     /* Reset and base */
     * {
@@ -62,6 +62,16 @@
     }
     #sort-options:hover {
       background-color: #e0e7ff;
+    }
+    .cart-icon {
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      background: #334155;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      user-select: none;
+      cursor: default;
     }
 
     /* Main Content */
@@ -193,6 +203,7 @@
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
     </select>
+    <div class="cart-icon">🛒 Cart: <span id="cart-count">0</span></div>
   </header>
 
   <main>
@@ -254,96 +265,24 @@
         popularity: 72,
         image: "images/curtains.png"
       },
-
-      // Gadgets (with PreBook option)
+      // Gadgets
       {
         id: 7,
-        name: "Smartphone X100",
+        name: "Smart Watch",
         category: "Gadgets",
-        price: 699.00,
+        price: 199.99,
         popularity: 95,
-        image: "images/smartphone.png"
+        image: "images/smartwatch.png"
       },
       {
         id: 8,
-        name: "Wireless Headphones",
+        name: "Wireless Earbuds",
         category: "Gadgets",
-        price: 149.99,
-        popularity: 88,
-        image: "images/headphones.png"
-      },
-      {
-        id: 9,
-        name: "Smartwatch Pro",
-        category: "Gadgets",
-        price: 199.00,
-        popularity: 85,
-        image: "images/smartwatch.png"
+        price: 89.99,
+        popularity: 90,
+        image: "images/earbuds.png"
       }
     ];
 
     const productGrid = document.getElementById("product-grid");
-    const searchBar = document.getElementById("search-bar");
-    const sortOptions = document.getElementById("sort-options");
-
-    // Render products with conditional buttons
-    function renderProducts(items) {
-      productGrid.innerHTML = "";
-      if (items.length === 0) {
-        productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
-        return;
-      }
-      items.forEach((product) => {
-        const card = document.createElement("div");
-        card.className = "product-card";
-
-        // Decide button based on category
-        let buttonHTML = "";
-        if(product.category.toLowerCase() === "gadgets") {
-          buttonHTML = `<button class="btn-prebook" onclick="alert('PreBooked ${product.name}!')">PreBook</button>`;
-        } else {
-          buttonHTML = `<button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>`;
-        }
-
-        card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="product-image" />
-          <div class="product-details">
-            <div>
-              <h3 class="product-name">${product.name}</h3>
-              <p class="product-category">${product.category}</p>
-              <p class="product-price">$${product.price.toFixed(2)}</p>
-            </div>
-            ${buttonHTML}
-          </div>
-        `;
-        productGrid.appendChild(card);
-      });
-    }
-
-    // Filter & Sort Logic
-    function filterAndSort() {
-      let filtered = products.filter(p =>
-        p.name.toLowerCase().includes(searchBar.value.toLowerCase())
-      );
-
-      const sortVal = sortOptions.value;
-      if (sortVal === "price-low") {
-        filtered.sort((a, b) => a.price - b.price);
-      } else if (sortVal === "price-high") {
-        filtered.sort((a, b) => b.price - a.price);
-      } else if (sortVal === "popularity") {
-        filtered.sort((a, b) => b.popularity - a.popularity);
-      }
-
-      renderProducts(filtered);
-    }
-
-    // Event listeners
-    searchBar.addEventListener("input", filterAndSort);
-    sortOptions.addEventListener("change", filterAndSort);
-
-    // Initial render
-    renderProducts(products);
-  </script>
-</body>
-</html>
+    const searchBar = document.getElementById
