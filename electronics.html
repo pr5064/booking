@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Electronics | PreviBook</title>
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
@@ -15,8 +14,6 @@
       background: #f8f9fb;
       color: #1a1a1a;
     }
-
-    /* Header */
     header {
       background: linear-gradient(90deg, #000102, #00040b);
       padding: 1.25rem 2rem;
@@ -63,8 +60,6 @@
     #sort-options:hover {
       background-color: #e0e7ff;
     }
-
-    /* Main Content */
     main {
       max-width: 1200px;
       margin: 2rem auto 4rem;
@@ -78,15 +73,11 @@
       color: #9d96e6;
       letter-spacing: 1px;
     }
-
-    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
-
-    /* Product Card */
     .product-card {
       background: white;
       border-radius: 18px;
@@ -154,8 +145,24 @@
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
-
-    /* Responsive tweaks */
+    .btn-prebook {
+      background: #5b21b6;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgba(91, 33, 182, 0.4);
+      margin-top: 0.5rem;
+    }
+    .btn-prebook:hover {
+      background-color: #4c1d95;
+      box-shadow: 0 6px 18px rgba(76, 29, 149, 0.6);
+    }
     @media (max-width: 600px) {
       header {
         justify-content: center;
@@ -170,12 +177,7 @@
 
   <header>
     <div class="logo">PreviBook</div>
-    <input
-      type="text"
-      id="search-bar"
-      placeholder="Search Electronic’s device..."
-      aria-label="Search products"
-    />
+    <input type="text" id="search-bar" placeholder="Search Electronic’s device..." aria-label="Search products" />
     <select id="sort-options" aria-label="Sort products">
       <option value="popularity">Sort by Popularity</option>
       <option value="price-low">Price: Low to High</option>
@@ -184,70 +186,66 @@
   </header>
 
   <main>
-    <h1>Electronic device's </h1>
-    <div class="product-grid" id="product-grid">
-      <!-- Products injected by JS -->
-    </div>
+    <h1>Electronic device's</h1>
+    <div class="product-grid" id="product-grid"></div>
   </main>
 
   <script>
-    // Sample data - In real, fetch from backend or API
-   const products = [
-  {
-    id: 1,
-    name: "Smartphone X100",
-    category: "Mobiles",
-    price: 699.00,
-    popularity: 95,
-    image: "images/smartphone.png"
-  },
-  {
-    id: 2,
-    name: "Wireless Earbuds",
-    category: "Audio",
-    price: 49.99,
-    popularity: 88,
-    image: "images/earbuds.png"
-  },
-  {
-    id: 3,
-    name: "Smart LED TV",
-    category: "Television",
-    price: 399.99,
-    popularity: 92,
-    image: "images/tv.png"
-  },
-  {
-    id: 4,
-    name: "Gaming Laptop",
-    category: "Computers",
-    price: 999.00,
-    popularity: 85,
-    image: "images/laptop.png"
-  },
-  {
-    id: 5,
-    name: "Bluetooth Speaker",
-    category: "Audio",
-    price: 75.00,
-    popularity: 78,
-    image: "images/speaker.png"
-  },
-  {
-    id: 6,
-    name: "Fridge",
-    category: "usable",
-    price: 120.00,
-    popularity: 80,
-    image: "images/fridge.png"
-  }
-];
+    const products = [
+      {
+        id: 1,
+        name: "Smartphone X100",
+        category: "Mobiles",
+        price: 699.00,
+        popularity: 95,
+        image: "images/smartphone.png"
+      },
+      {
+        id: 2,
+        name: "Wireless Earbuds",
+        category: "Audio",
+        price: 49.99,
+        popularity: 88,
+        image: "images/earbuds.png"
+      },
+      {
+        id: 3,
+        name: "Smart LED TV",
+        category: "Television",
+        price: 399.99,
+        popularity: 92,
+        image: "images/tv.png"
+      },
+      {
+        id: 4,
+        name: "Gaming Laptop",
+        category: "Computers",
+        price: 999.00,
+        popularity: 85,
+        image: "images/laptop.png"
+      },
+      {
+        id: 5,
+        name: "Bluetooth Speaker",
+        category: "Audio",
+        price: 75.00,
+        popularity: 78,
+        image: "images/speaker.png"
+      },
+      {
+        id: 6,
+        name: "Fridge",
+        category: "Usable",
+        price: 120.00,
+        popularity: 80,
+        image: "images/fridge.png"
+      }
+    ];
 
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Render products
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -266,13 +264,13 @@
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
             <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+            <button class="btn-prebook" onclick="alert('You have pre-booked ${product.name}!')">Pre Book Now</button>
           </div>
         `;
         productGrid.appendChild(card);
       });
     }
 
-    // Filter & Sort Logic
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -290,11 +288,9 @@
       renderProducts(filtered);
     }
 
-    // Event listeners
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
     renderProducts(products);
   </script>
 </body>
