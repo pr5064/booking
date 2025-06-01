@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>beauty Collection | PreviBook</title>
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
@@ -16,7 +15,6 @@
       color: #1a1a1a;
     }
 
-    /* Header */
     header {
       background: linear-gradient(90deg, #000102, #00040b);
       padding: 1.25rem 2rem;
@@ -30,7 +28,7 @@
       top: 0;
       z-index: 100;
     }
-    header .logo {
+    .logo {
       color: white;
       font-size: 1.9rem;
       font-weight: 900;
@@ -45,7 +43,6 @@
       border: none;
       font-size: 1rem;
       transition: box-shadow 0.3s ease;
-      outline-offset: 2px;
     }
     #search-bar:focus {
       box-shadow: 0 0 8px 2px #010304;
@@ -58,13 +55,11 @@
       cursor: pointer;
       background-color: white;
       box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
-      transition: background-color 0.3s ease;
     }
     #sort-options:hover {
       background-color: #e0e7ff;
     }
 
-    /* Main Content */
     main {
       max-width: 1200px;
       margin: 2rem auto 4rem;
@@ -79,14 +74,12 @@
       letter-spacing: 1px;
     }
 
-    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
 
-    /* Product Card */
     .product-card {
       background: white;
       border-radius: 18px;
@@ -105,10 +98,6 @@
       width: 100%;
       height: 240px;
       object-fit: cover;
-      transition: scale 0.3s ease;
-    }
-    .product-card:hover .product-image {
-      scale: 1.05;
     }
     .product-details {
       padding: 1rem 1.25rem 1.5rem;
@@ -136,26 +125,39 @@
       color: #010510;
       margin-bottom: 1rem;
     }
+    .btn-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-buy,
+    .btn-prebook {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
     .btn-buy {
       background: #02060e;
       color: white;
-      padding: 0.6rem 1.5rem;
-      border: none;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      align-self: flex-start;
-      transition: background-color 0.3s ease;
       box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
-      user-select: none;
     }
     .btn-buy:hover {
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
+    .btn-prebook {
+      background: #e0e7ff;
+      color: #000;
+    }
+    .btn-prebook:hover {
+      background: #c7d2fe;
+    }
 
-    /* Responsive tweaks */
     @media (max-width: 600px) {
       header {
         justify-content: center;
@@ -173,7 +175,7 @@
     <input
       type="text"
       id="search-bar"
-      placeholder="Search beuty products..."
+      placeholder="Search beauty products..."
       aria-label="Search products"
     />
     <select id="sort-options" aria-label="Sort products">
@@ -184,77 +186,75 @@
   </header>
 
   <main>
-    <h1>beauty Collection</h1>
+    <h1>Beauty Collection</h1>
     <div class="product-grid" id="product-grid">
-      <!-- Products injected by JS -->
+      <!-- Products will be injected here -->
     </div>
   </main>
 
   <script>
-    // Sample data - In real, fetch from backend or API
-   const products = [
-  {
-    id: 1,
-    name: "Matte Lipstick Set",
-    category: "Makeup",
-    price: 29.99,
-    popularity: 85,
-    image: "images/lipstick.png"
-  },
-  {
-    id: 2,
-    name: "Herbal Face Wash",
-    category: "Skincare",
-    price: 10.99,
-    popularity: 78,
-    image: "images/facewash.png"
-  },
-  {
-    id: 3,
-    name: "Perfume - Rose Bliss",
-    category: "Fragrance",
-    price: 35.00,
-    popularity: 80,
-    image: "images/perfume.png"
-  },
-  {
-    id: 4,
-    name: "Hair Dryer",
-    category: "Haircare Tools",
-    price: 25.00,
-    popularity: 70,
-    image: "images/hairdryer.png"
-  },
-  {
-    id: 5,
-    name: "Aloe Vera Gel",
-    category: "Skincare",
-    price: 15.00,
-    popularity: 65,
-    image: "images/aloe.png"
-  },
-  {
-    id: 6,
-    name: "Nail Paint Set",
-    category: "Cosmetics",
-    price: 12.00,
-    popularity: 60,
-    image: "images/nailpaint.png"
-  }
-];
-
+    const products = [
+      {
+        id: 1,
+        name: "Matte Lipstick Set",
+        category: "Makeup",
+        price: 29.99,
+        popularity: 85,
+        image: "images/lipstick.png"
+      },
+      {
+        id: 2,
+        name: "Herbal Face Wash",
+        category: "Skincare",
+        price: 10.99,
+        popularity: 78,
+        image: "images/facewash.png"
+      },
+      {
+        id: 3,
+        name: "Perfume - Rose Bliss",
+        category: "Fragrance",
+        price: 35.00,
+        popularity: 80,
+        image: "images/perfume.png"
+      },
+      {
+        id: 4,
+        name: "Hair Dryer",
+        category: "Haircare Tools",
+        price: 25.00,
+        popularity: 70,
+        image: "images/hairdryer.png"
+      },
+      {
+        id: 5,
+        name: "Aloe Vera Gel",
+        category: "Skincare",
+        price: 15.00,
+        popularity: 65,
+        image: "images/aloe.png"
+      },
+      {
+        id: 6,
+        name: "Nail Paint Set",
+        category: "Cosmetics",
+        price: 12.00,
+        popularity: 60,
+        image: "images/nailpaint.png"
+      }
+    ];
 
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Render products
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
         productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
         return;
       }
+
       items.forEach((product) => {
         const card = document.createElement("div");
         card.className = "product-card";
@@ -266,14 +266,16 @@
               <p class="product-category">${product.category}</p>
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
-            <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+            <div class="btn-group">
+              <button class="btn-buy" onclick="alert('Added ${product.name} to cart!')">Buy Now</button>
+              <button class="btn-prebook" onclick="alert('You have pre-booked ${product.name}')">Pre Book</button>
+            </div>
           </div>
         `;
         productGrid.appendChild(card);
       });
     }
 
-    // Filter & Sort Logic
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
@@ -284,18 +286,16 @@
         filtered.sort((a, b) => a.price - b.price);
       } else if (sortVal === "price-high") {
         filtered.sort((a, b) => b.price - a.price);
-      } else if (sortVal === "popularity") {
+      } else {
         filtered.sort((a, b) => b.popularity - a.popularity);
       }
 
       renderProducts(filtered);
     }
 
-    // Event listeners
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
     renderProducts(products);
   </script>
 </body>
