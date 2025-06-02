@@ -5,8 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Men's Fashion | PreviBook</title>
   <style>
-    /* [Your styles here, unchanged for brevity] */
-    /* ... */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fb;
+      color: #1a1a1a;
+    }
+    header {
+      background: linear-gradient(90deg, #000102, #00040b);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 15px rgb(37 99 235 / 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      color: white;
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    #search-bar {
+      flex-grow: 1;
+      max-width: 320px;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+      outline-offset: 2px;
+    }
+    #search-bar:focus { box-shadow: 0 0 8px 2px #010304; }
+    #sort-options {
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: white;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease;
+    }
+    #sort-options:hover { background-color: #e0e7ff; }
+
     .cart-icon {
       color: white;
       font-weight: bold;
@@ -18,9 +66,97 @@
       transition: background 0.2s;
     }
     .cart-icon:hover { background: #475569; }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-weight: 900;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #9d96e6;
+      letter-spacing: 1px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgb(0 0 0 / 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgb(37 99 235 / 0.25);
+    }
+    .product-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: scale 0.3s ease;
+    }
+    .product-card:hover .product-image { scale: 1.05; }
+    .product-details {
+      padding: 1rem 1.25rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+      color: #1e293b;
+    }
+    .product-category {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .product-price {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #010510;
+      margin-bottom: 1rem;
+    }
+    .btn-buy {
+      background: #02060e;
+      color: white;
+      padding: 0.6rem 1.1rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
+      user-select: none;
+    }
+    .btn-buy:hover {
+      background-color: #000103;
+      box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
+    }
+    @media (max-width: 600px) {
+      header { justify-content: center; }
+      #search-bar { max-width: 100%; }
+    }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">PreviBook</div>
     <input type="text" id="search-bar" placeholder="Search men’s products..." />
@@ -31,10 +167,12 @@
     </select>
     <a href="cart.html" class="cart-icon">🛒 Cart: <span id="cart-count">0</span></a>
   </header>
+
   <main>
     <h1>Men's Fashion Collection</h1>
     <div class="product-grid" id="product-grid"></div>
   </main>
+
   <script>
     const products = [
       { id: 1, name: "Classic T-Shirt", category: "T-Shirts", price: 15.99, popularity: 80, image: "images/tshirt.jpg" },
@@ -50,12 +188,14 @@
     const sortOptions = document.getElementById("sort-options");
     const cartCount = document.getElementById("cart-count");
 
+    // Update cart count based on localStorage
     function updateCartCount() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       let total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
       cartCount.textContent = total;
     }
 
+    // Add to cart and save in localStorage
     function addToCart(product) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       const existing = cart.find(item => item.id === product.id);
@@ -69,6 +209,7 @@
       alert(`"${product.name}" added to cart.`);
     }
 
+    // Render product cards
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -96,7 +237,7 @@
       });
     }
 
-    // Helper to avoid JSON string issues in onclick
+    // Helper to avoid issues with JSON in onclick
     window.addToCartFunc = function(productId) {
       const product = products.find(p => p.id === productId);
       if (product) addToCart(product);
