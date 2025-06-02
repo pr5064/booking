@@ -2,138 +2,247 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mens - PreviBook</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Men's Collection | PreviBook</title>
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f2f5;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fb;
+      color: #1a1a1a;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-
-    .header {
+    header {
+      background: linear-gradient(90deg, #000102, #00040b);
+      padding: 1.25rem 2rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 15px rgb(37 99 235 / 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      color: white;
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    #search-bar {
+      flex-grow: 1;
+      max-width: 320px;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+    }
+    #search-bar:focus {
+      box-shadow: 0 0 8px 2px #010304;
+      outline: none;
+    }
+    #sort-options {
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: white;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+    #sort-options:hover {
+      background-color: #e0e7ff;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-weight: 900;
+      text-align: center;
+      font-size: 2.5rem;
       margin-bottom: 2rem;
-    }
-
-    .header h1 {
-      font-size: 2rem;
-      color: #333;
-    }
-
-    .header a {
-      text-decoration: none;
-      color: #007bff;
-      font-weight: bold;
+      color: #9d96e6;
+      letter-spacing: 1px;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
     }
 
     .product-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      padding: 1rem;
-      text-align: center;
-      transition: transform 0.2s;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgb(0 0 0 / 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
-
     .product-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgb(37 99 235 / 0.25);
     }
-
-    .product-card img {
+    .product-image {
       width: 100%;
-      height: 200px;
+      height: 240px;
       object-fit: cover;
-      border-radius: 8px;
+      transition: scale 0.3s ease;
+    }
+    .product-card:hover .product-image {
+      scale: 1.05;
+    }
+    .product-details {
+      padding: 1rem 1.25rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+      color: #1e293b;
+    }
+    .product-category {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .product-price {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #010510;
       margin-bottom: 1rem;
     }
-
-    .product-card h3 {
-      font-size: 1.1rem;
-      color: #333;
-    }
-
-    .product-card p {
-      font-size: 1rem;
-      color: #555;
-      margin: 0.5rem 0;
-    }
-
-    .product-card button {
-      background-color: #007bff;
-      color: white;
+    .btn-buy {
+      padding: 0.6rem 1.5rem;
       border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: background-color 0.3s;
+      background: #02060e;
+      color: white;
+      box-shadow: 0 4px 12px rgba(62, 63, 65, 0.4);
+      transition: background-color 0.3s ease;
+    }
+    .btn-buy:hover {
+      background-color: #000103;
+      box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
 
-    .product-card button:hover {
-      background-color: #0056b3;
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+      }
+      #search-bar {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Men's Products</h1>
-      <a href="cart.html">🛒 View Cart</a>
-    </div>
+  <header>
+    <div class="logo">PreviBook</div>
+    <input type="text" id="search-bar" placeholder="Search products..." aria-label="Search products" />
+    <select id="sort-options" aria-label="Sort products">
+      <option value="popularity">Sort by Popularity</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+    </select>
+  </header>
 
-    <div class="product-grid">
-      <!-- Product 1 -->
-      <div class="product-card">
-        <img src="images/shirt1.jpg" alt="Classic Shirt" />
-        <h3>Classic Shirt</h3>
-        <p>₹799</p>
-        <button onclick="addToCart('Classic Shirt', 799, 'images/shirt1.jpg')">Add to Cart</button>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="product-card">
-        <img src="images/jacket1.jpg" alt="Denim Jacket" />
-        <h3>Denim Jacket</h3>
-        <p>₹1299</p>
-        <button onclick="addToCart('Denim Jacket', 1299, 'images/jacket1.jpg')">Add to Cart</button>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="product-card">
-        <img src="images/shoes1.jpg" alt="Running Shoes" />
-        <h3>Running Shoes</h3>
-        <p>₹999</p>
-        <button onclick="addToCart('Running Shoes', 999, 'images/shoes1.jpg')">Add to Cart</button>
-      </div>
-
-      <!-- Add more products here -->
-    </div>
-  </div>
+  <main>
+    <h1>Men's Fashion</h1>
+    <div class="product-grid" id="product-grid"></div>
+  </main>
 
   <script>
-    function addToCart(name, price, image) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ name, price, image });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${name} has been added to your cart!`);
+    const products = [
+      { id: 1, name: "Men's Leather Jacket", category: "Outerwear", price: 120.00, popularity: 85, image: "images/mens-jacket.png" },
+      { id: 2, name: "Slim Fit Jeans", category: "Bottomwear", price: 55.00, popularity: 72, image: "images/mens-jeans.png" },
+      { id: 3, name: "Graphic T-Shirt", category: "Topwear", price: 25.00, popularity: 90, image: "images/mens-tshirt.png" },
+      { id: 4, name: "Formal Shirt", category: "Shirts", price: 45.00, popularity: 70, image: "images/mens-shirt.png" },
+      { id: 5, name: "Sports Shoes", category: "Footwear", price: 60.00, popularity: 88, image: "images/mens-shoes.png" },
+      { id: 6, name: "Analog Watch", category: "Accessories", price: 80.00, popularity: 77, image: "images/mens-watch.png" },
+    ];
+
+    const productGrid = document.getElementById("product-grid");
+    const searchBar = document.getElementById("search-bar");
+    const sortOptions = document.getElementById("sort-options");
+
+    function displayProducts(productList) {
+      productGrid.innerHTML = "";
+      productList.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="product-image">
+          <div class="product-details">
+            <div>
+              <div class="product-name">${product.name}</div>
+              <div class="product-category">${product.category}</div>
+              <div class="product-price">₹${product.price.toFixed(2)}</div>
+            </div>
+            <button class="btn-buy" onclick="addToCart(${product.id})">Buy Now</button>
+            <button class="btn-buy" style="margin-top: 0.5rem; background: #4f46e5;" onclick="alert('Pre Booked!')">Pre Book</button>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
     }
+
+    function sortProducts(products, type) {
+      const sorted = [...products];
+      if (type === "price-low") sorted.sort((a, b) => a.price - b.price);
+      else if (type === "price-high") sorted.sort((a, b) => b.price - a.price);
+      else if (type === "popularity") sorted.sort((a, b) => b.popularity - a.popularity);
+      return sorted;
+    }
+
+    function filterAndRender() {
+      const query = searchBar.value.toLowerCase();
+      const sortType = sortOptions.value;
+      const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query)
+      );
+      displayProducts(sortProducts(filtered, sortType));
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Item added to cart!");
+    }
+
+    searchBar.addEventListener("input", filterAndRender);
+    sortOptions.addEventListener("change", filterAndRender);
+
+    // Initial render
+    displayProducts(sortProducts(products, "popularity"));
   </script>
 </body>
 </html>
