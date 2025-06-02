@@ -251,6 +251,43 @@
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
+    // Get cart from localStorage or create empty
+    function getCart() {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    }
+
+    // Save cart to localStorage
+    function saveCart(cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    // Add product to cart by id
+    function addToCart(productId) {
+      const cart = getCart();
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      // Check if product already in cart
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          image: product.image
+        });
+      }
+      saveCart(cart);
+      alert(`Added "${product.name}" to cart!`);
+    }
+
+    function prebook(productName) {
+      alert(`Prebooked "${productName}" successfully!`);
+    }
+
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -269,7 +306,7 @@
               <p class="product-price">$${product.price.toFixed(2)}</p>
             </div>
             <div class="btn-container">
-              <button class="btn-buy" onclick="addToCart('${product.name}')">Add to Cart</button>
+              <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
               <button class="btn-prebook" onclick="prebook('${product.name}')">Prebook</button>
             </div>
           </div>
@@ -295,17 +332,10 @@
       renderProducts(filtered);
     }
 
-    function addToCart(productName) {
-      alert(`Added "${productName}" to cart!`);
-    }
-
-    function prebook(productName) {
-      alert(`Prebooked "${productName}" successfully!`);
-    }
-
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
+    // Initial render
     renderProducts(products);
   </script>
 </body>
