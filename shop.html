@@ -1,8 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
     <title>Previ Book</title>
     <link rel="stylesheet" href="css/shop.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Font Awesome for cart icon -->
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <style>
+        /* Cart badge styling */
+        .cart-icon-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: red;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,7 +47,11 @@
             <div class="icons">
                 <a href="#"><img src="images/profile.png" alt="Profile" class="icon"></a>
                 <a href="#"><img src="images/wishlist.jpg" alt="Wishlist" class="icon"></a>
-                <a href="#"><img src="images/shop.png" alt="Bag" class="icon"></a>
+                <!-- Cart icon with dynamic badge and link -->
+                <a href="cart.html" title="View Cart" class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-cart fa-2x"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </a>
             </div>
         </nav>
     </header>
@@ -36,97 +63,120 @@
             <button>Shop Now</button>
         </section>
     </main>
-        <section id="categories">
-            <h2>Categories</h2>
-            <div class="category">
-                <a href="mens.html">
-                    <img src="images/men.jpg" height="200px" alt="Men's Fashion">
-                    <h3>Men's Fashion</h3>
-                </a>
-            </div>
-            
-            <div class="category">
-                <a href="womens.html">
+    <section id="categories">
+        <h2>Categories</h2>
+        <div class="category">
+            <a href="mens.html">
+                <img src="images/men.jpg" height="200px" alt="Men's Fashion">
+                <h3>Men's Fashion</h3>
+            </a>
+        </div>
+        <div class="category">
+            <a href="womens.html">
                 <img src="images/women.webp" height="200px" alt="Women's Fashion">
                 <h3>Women's Fashion</h3>
-            </div>
-            <div class="category">
-                <a href="kids.html">
+            </a>
+        </div>
+        <div class="category">
+            <a href="kids.html">
                 <img src="images/kids.jpg" height="200px" alt="Kids' Fashion">
                 <h3>Kids' Fashion</h3>
-            </div>
-            <div class="category">
-                <a href="electronics.html">
+            </a>
+        </div>
+        <div class="category">
+            <a href="electronics.html">
                 <img src="images/electronics.jpg" height="200px" alt="Electronics">
                 <h3>Electronics</h3>
-            </div>
-            <div class="category">
-                <a href="home.html">
+            </a>
+        </div>
+        <div class="category">
+            <a href="home.html">
                 <img src="images/home.jpg" height="200px" alt="Home & Living">
                 <h3>Home & Living</h3>
-            </div>
-            <div class="category">
-                <a href="beauty.html">
+            </a>
+        </div>
+        <div class="category">
+            <a href="beauty.html">
                 <img src="images/beauty.avif" height="200px" alt="Beauty">
                 <h3>Beauty</h3>
-            </div>
-            <div class="category">
-                <a href="gadgets.html">
+            </a>
+        </div>
+        <div class="category">
+            <a href="gadgets.html">
                 <img src="images/gadgets.webp" height="200px" alt="Appliances">
                 <h3>Gadgets</h3>
-            </div>
-        </section>
+            </a>
+        </div>
+    </section>
 
-        <section id="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product">
-                <img src="images/product1.jpg" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>Description of product 1.</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="images/product2.jpg" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>Description of product 2.</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="images/product3.jpg" alt="Product 3">
-                <h3>Product 3</h3>
-                <p>Description of product 3.</p>
-                <button>Add to Cart</button>
-            </div>
-        </section>
+    <section id="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product">
+            <img src="images/product1.jpg" alt="Product 1">
+            <h3>Product 1</h3>
+            <p>Description of product 1.</p>
+            <button onclick="addToCart('Product 1', 499, 'images/product1.jpg')">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/product2.jpg" alt="Product 2">
+            <h3>Product 2</h3>
+            <p>Description of product 2.</p>
+            <button onclick="addToCart('Product 2', 799, 'images/product2.jpg')">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/product3.jpg" alt="Product 3">
+            <h3>Product 3</h3>
+            <p>Description of product 3.</p>
+            <button onclick="addToCart('Product 3', 299, 'images/product3.jpg')">Add to Cart</button>
+        </div>
+    </section>
 
-        <footer>
-            <div class="footer-container">
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Categories</a></li>
-                        <li><a href="#">Featured</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="#"><img src="images/linkdien.png" alt="LinkedIn"></a>
-                        <a href="#"><img src="images/x.jpeg" alt="Twitter"></a>
-                        <a href="#"><img src="images/ig.jpeg" alt="Instagram"></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>Email: info@previbook.com</p>
-                    <p>Phone: 123-456-7890</p>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Featured</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="images/linkdien.png" alt="LinkedIn"></a>
+                    <a href="#"><img src="images/x.jpeg" alt="Twitter"></a>
+                    <a href="#"><img src="images/ig.jpeg" alt="Instagram"></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Previ Book. All rights reserved.</p>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@previbook.com</p>
+                <p>Phone: 123-456-7890</p>
             </div>
-        </footer>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Previ Book. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Add to cart and update badge
+        function addToCart(name, price, image) {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({ name, price, image });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartBadge();
+            alert(name + " added to cart!");
+        }
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-badge").textContent = cart.length;
+        }
+
+        // Update badge on page load
+        window.onload = updateCartBadge;
+    </script>
 </body>
 </html>
