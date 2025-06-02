@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Home & Living | PreviBook</title>
   <style>
-    /* Reset and base */
-    * { box-sizing: border-box; }
+    /* Base and reset */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +21,7 @@
       padding: 1.25rem 2rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       flex-wrap: wrap;
       gap: 1rem;
       box-shadow: 0 4px 15px rgb(37 99 235 / 0.3);
@@ -27,7 +29,7 @@
       top: 0;
       z-index: 100;
     }
-    header .logo {
+    .logo {
       color: white;
       font-size: 1.9rem;
       font-weight: 900;
@@ -58,15 +60,6 @@
     }
     #sort-options:hover {
       background-color: #e0e7ff;
-    }
-    .cart-icon {
-      color: white;
-      font-weight: 700;
-      font-size: 1.1rem;
-      background: #334155;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      user-select: none;
     }
 
     main {
@@ -174,7 +167,6 @@
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
     </select>
-    <div class="cart-icon">🛒 Cart: <span id="cart-count">0</span></div>
   </header>
 
   <main>
@@ -184,34 +176,89 @@
 
   <script>
     const products = [
-      { id: 1, name: "Wooden Wall Clock", category: "Decor", price: 40.00, popularity: 78, image: "images/wallclock.png" },
-      { id: 2, name: "Floral Bedsheet", category: "Bedding", price: 35.99, popularity: 70, image: "images/bedsheet.png" },
-      { id: 3, name: "Aroma Diffuser", category: "Essentials", price: 20.00, popularity: 65, image: "images/diffuser.png" },
-      { id: 4, name: "LED Table Lamp", category: "Lighting", price: 28.00, popularity: 80, image: "images/djlaa.png" },
-      { id: 5, name: "Wooden Chair", category: "Furniture", price: 90.00, popularity: 75, image: "images/chair.png" },
-      { id: 6, name: "Cotton Curtain Set", category: "Home Textile", price: 50.00, popularity: 72, image: "images/curtains.png" },
+      {
+        id: 101,
+        name: "Wooden Wall Clock",
+        category: "Decor",
+        price: 40.0,
+        popularity: 78,
+        image: "images/wallclock.png",
+      },
+      {
+        id: 102,
+        name: "Floral Bedsheet",
+        category: "Bedding",
+        price: 35.99,
+        popularity: 70,
+        image: "images/bedsheet.png",
+      },
+      {
+        id: 103,
+        name: "Aroma Diffuser",
+        category: "Essentials",
+        price: 20.0,
+        popularity: 65,
+        image: "images/diffuser.png",
+      },
+      {
+        id: 104,
+        name: "LED Table Lamp",
+        category: "Lighting",
+        price: 28.0,
+        popularity: 80,
+        image: "images/djlaa.png",
+      },
+      {
+        id: 105,
+        name: "Wooden Chair",
+        category: "Furniture",
+        price: 90.0,
+        popularity: 75,
+        image: "images/chair.png",
+      },
+      {
+        id: 106,
+        name: "Cotton Curtain Set",
+        category: "Home Textile",
+        price: 50.0,
+        popularity: 72,
+        image: "images/curtains.png",
+      },
     ];
 
-    let cartCount = 0;
+    // Cart stored in localStorage as array of product IDs
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     const productGrid = document.getElementById("product-grid");
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
-    const cartCountEl = document.getElementById("cart-count");
 
-    function displayProducts(productList) {
+    function saveCart() {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    // Add product to cart and save in localStorage
+    function addToCart(id) {
+      cart.push(id);
+      saveCart();
+      alert("Added to Cart!");
+    }
+
+    // Render products on page
+    function displayProducts(productsToShow) {
       productGrid.innerHTML = "";
-      productList.forEach(product => {
+      productsToShow.forEach((product) => {
         const card = document.createElement("div");
         card.className = "product-card";
         card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="product-image">
+          <img src="${product.image}" alt="${product.name}" class="product-image" />
           <div class="product-details">
             <div>
               <div class="product-name">${product.name}</div>
               <div class="product-category">${product.category}</div>
               <div class="product-price">₹${product.price.toFixed(2)}</div>
             </div>
-            <button class="btn-buy" onclick="addToCart()">Add to Cart</button>
+            <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
             <button class="btn-buy" style="margin-top: 0.5rem; background: #4f46e5;" onclick="alert('Pre Booked!')">Pre Book</button>
           </div>
         `;
@@ -219,33 +266,48 @@
       });
     }
 
-    function addToCart() {
-      cartCount++;
-      cartCountEl.textContent = cartCount;
-    }
-
-    function sortProducts(products, type) {
-      const sorted = [...products];
-      if (type === "price-low") sorted.sort((a, b) => a.price - b.price);
-      else if (type === "price-high") sorted.sort((a, b) => b.price - a.price);
-      else if (type === "popularity") sorted.sort((a, b) => b.popularity - a.popularity);
+    // Sort products function
+    function sortProducts(products, sortType) {
+      let sorted = [...products];
+      if (sortType === "price-low") {
+        sorted.sort((a, b) => a.price - b.price);
+      } else if (sortType === "price-high") {
+        sorted.sort((a, b) => b.price - a.price);
+      } else if (sortType === "popularity") {
+        sorted.sort((a, b) => b.popularity - a.popularity);
+      }
       return sorted;
     }
 
-    function filterAndRender() {
-      const query = searchBar.value.toLowerCase();
-      const sortType = sortOptions.value;
-      const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query)
-      );
-      displayProducts(sortProducts(filtered, sortType));
+    // Filter products based on search input
+    function filterProducts(query) {
+      return products.filter((p) => {
+        const lowerQuery = query.toLowerCase();
+        return (
+          p.name.toLowerCase().includes(lowerQuery) ||
+          p.category.toLowerCase().includes(lowerQuery)
+        );
+      });
     }
 
-    searchBar.addEventListener("input", filterAndRender);
-    sortOptions.addEventListener("change", filterAndRender);
+    // Handle search and sort and display products
+    function handleFilterSort() {
+      const searchQuery = searchBar.value;
+      const sortType = sortOptions.value;
+      const filtered = filterProducts(searchQuery);
+      const sorted = sortProducts(filtered, sortType);
+      displayProducts(sorted);
+    }
+
+    // Event listeners
+    searchBar.addEventListener("input", handleFilterSort);
+    sortOptions.addEventListener("change", handleFilterSort);
+
+    // Expose addToCart to window
+    window.addToCart = addToCart;
 
     // Initial render
-    displayProducts(sortProducts(products, "popularity"));
+    handleFilterSort();
   </script>
 </body>
 </html>
