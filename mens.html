@@ -5,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Men's Fashion | PreviBook</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f8f9fb;
       color: #1a1a1a;
     }
-
     header {
       background: linear-gradient(90deg, #000102, #00040b);
       padding: 1.25rem 2rem;
@@ -45,9 +42,7 @@
       transition: box-shadow 0.3s ease;
       outline-offset: 2px;
     }
-    #search-bar:focus {
-      box-shadow: 0 0 8px 2px #010304;
-    }
+    #search-bar:focus { box-shadow: 0 0 8px 2px #010304; }
     #sort-options {
       padding: 0.5rem 1rem;
       border-radius: 30px;
@@ -58,9 +53,7 @@
       box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
       transition: background-color 0.3s ease;
     }
-    #sort-options:hover {
-      background-color: #e0e7ff;
-    }
+    #sort-options:hover { background-color: #e0e7ff; }
 
     .cart-icon {
       color: white;
@@ -69,7 +62,10 @@
       background: #334155;
       padding: 0.4rem 1rem;
       border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.2s;
     }
+    .cart-icon:hover { background: #475569; }
 
     main {
       max-width: 1200px;
@@ -84,13 +80,11 @@
       color: #9d96e6;
       letter-spacing: 1px;
     }
-
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
-
     .product-card {
       background: white;
       border-radius: 18px;
@@ -111,9 +105,7 @@
       object-fit: cover;
       transition: scale 0.3s ease;
     }
-    .product-card:hover .product-image {
-      scale: 1.05;
-    }
+    .product-card:hover .product-image { scale: 1.05; }
     .product-details {
       padding: 1rem 1.25rem 1.5rem;
       flex-grow: 1;
@@ -157,14 +149,9 @@
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
-
     @media (max-width: 600px) {
-      header {
-        justify-content: center;
-      }
-      #search-bar {
-        max-width: 100%;
-      }
+      header { justify-content: center; }
+      #search-bar { max-width: 100%; }
     }
   </style>
 </head>
@@ -178,7 +165,7 @@
       <option value="price-low">Price: Low to High</option>
       <option value="price-high">Price: High to Low</option>
     </select>
-    <div class="cart-icon">🛒 Cart: <span id="cart-count">0</span></div>
+    <a href="cart.html" class="cart-icon">🛒 Cart: <span id="cart-count">0</span></a>
   </header>
 
   <main>
@@ -200,25 +187,35 @@
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
     const cartCount = document.getElementById("cart-count");
-    let cartItems = [];
 
+    // Update cart count based on localStorage
     function updateCartCount() {
-      cartCount.textContent = cartItems.length;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      cartCount.textContent = total;
     }
 
+    // Add to cart and save in localStorage
     function addToCart(product) {
-      cartItems.push(product);
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(item => item.id === product.id);
+      if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
       updateCartCount();
       alert(`"${product.name}" added to cart.`);
     }
 
+    // Render product cards
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
         productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
         return;
       }
-
       items.forEach((product) => {
         const card = document.createElement("div");
         card.className = "product-card";
@@ -228,11 +225,11 @@
             <div>
               <h3 class="product-name">${product.name}</h3>
               <p class="product-category">${product.category}</p>
-              <p class="product-price">$${product.price.toFixed(2)}</p>
+              <p class="product-price">₹${product.price.toFixed(2)}</p>
             </div>
             <div style="display: flex; gap: 0.5rem;">
               <button class="btn-buy" onclick="alert('Prebooked: ${product.name}')">Prebook Now</button>
-              <button class="btn-buy" style="background:#64748b;" onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+              <button class="btn-buy" style="background:#64748b;" onclick='window.addToCartFunc(${product.id})'>Add to Cart</button>
             </div>
           </div>
         `;
@@ -240,11 +237,16 @@
       });
     }
 
+    // Helper to avoid issues with JSON in onclick
+    window.addToCartFunc = function(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) addToCart(product);
+    };
+
     function filterAndSort() {
       let filtered = products.filter(p =>
         p.name.toLowerCase().includes(searchBar.value.toLowerCase())
       );
-
       const sortVal = sortOptions.value;
       if (sortVal === "price-low") {
         filtered.sort((a, b) => a.price - b.price);
@@ -253,16 +255,15 @@
       } else if (sortVal === "popularity") {
         filtered.sort((a, b) => b.popularity - a.popularity);
       }
-
       renderProducts(filtered);
     }
 
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
+    // Initial render and cart count
     renderProducts(products);
+    updateCartCount();
   </script>
-
 </body>
 </html>
