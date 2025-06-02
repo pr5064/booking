@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+    .progress-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      counter-reset: step;
+    }
+    .progress-step {
+      width: 25%;
+      text-align: center;
+      position: relative;
+      font-size: 14px;
+      color: #bbb;
+    }
+    .progress-step::before {
+      counter-increment: step;
+      content: counter(step);
+      width: 30px;
+      height: 30px;
+      border: 2px solid #bbb;
+      display: block;
+      margin: 0 auto 10px auto;
+      border-radius: 50%;
+      line-height: 26px;
+      background-color: white;
+      color: #bbb;
+      font-weight: bold;
+      transition: 0.3s ease all;
+    }
+    .progress-step.active {
+      color: #4a90e2;
+    }
+    .progress-step.active::before {
+      border-color: #4a90e2;
+      background-color: #4a90e2;
+      color: white;
+    }
+    .progress-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      right: -50%;
+      width: 100%;
+      height: 2px;
+      background-color: #bbb;
+      z-index: -1;
+      transition: 0.3s ease all;
+    }
+    .progress-step.active:not(:last-child)::after {
+      background-color: #4a90e2;
+    }
+    form {
+      width: 100%;
+    }
+    .form-step {
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .form-step.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px 12px 12px 12px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      background: none;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus {
+      border-color: #4a90e2;
+    }
+    label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 0 5px;
+      background: white;
+      color: #999;
+      font-size: 16px;
+      pointer-events: none;
+      transition: 0.3s ease all;
+    }
+    input:focus + label,
+    input:not(:placeholder-shown) + label,
+    select:focus + label,
+    select:not([value=""]) + label {
+      top: -10px;
+      font-size: 12px;
+      color: #4a90e2;
+    }
+    .error-message {
+      color: #e74c3c;
+      font-size: 13px;
+      margin-top: 4px;
+      display: none;
+    }
+    .input-group.error input,
+    .input-group.error select {
+      border-color: #e74c3c;
+    }
+    .input-group.error .error-message {
+      display: block;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    button {
+      background-color: #4a90e2;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:disabled {
+      background-color: #a0c1f7;
+      cursor: not-allowed;
+    }
+    button:hover:not(:disabled) {
+      background-color: #357ABD;
+    }
+    #review-info {
+      font-size: 16px;
+      line-height: 1.5;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      white-space: pre-line;
+    }
+    /* Responsive */
+    @media (max-width: 500px) {
+      .button-group {
+        flex-direction: column;
+        gap: 10px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Checkout</h2>
+    <div class="progress-bar">
+      <div class="progress-step active" data-title="Contact"></div>
+      <div class="progress-step" data-title="Shipping"></div>
+      <div class="progress-step" data-title="Payment"></div>
+      <div class="progress-step" data-title="Review"></div>
+    </div>
+
+    <form id="checkout-form" novalidate>
+      <!-- Step 1: Contact Info -->
+      <div class="form-step active">
+        <div class="input-group" id="group-fullname">
+          <input type="text" id="fullname" placeholder=" " required />
+          <label for="fullname">Full Name</label>
+          <div class="error-message" id="fullname-error">Please enter your full name (min 3 characters)</div>
+        </div>
+        <div class="input-group" id="group-email">
+          <input type="email" id="email" placeholder=" " required />
+          <label for="email">Email Address</label>
+          <div class="error-message" id="email-error">Please enter a valid email</div>
+        </div>
+        <div class="input-group" id="group-phone">
+          <input type="tel" id="phone" placeholder=" " required pattern="^\d{10,15}$" />
+          <label for="phone">Phone Number</label>
+          <div class="error-message" id="phone-error">Please enter a valid phone number (10-15 digits)</div>
+        </div>
+      </div>
+
+      <!-- Step 2: Shipping Address -->
+      <div class="form-step">
+        <div class="input-group" id="group-address">
+          <input type="text" id="address" placeholder=" " required />
+          <label for="address">Street Address</label>
+          <div class="error-message" id="address-error">Please enter your street address</div>
+        </div>
+        <div class="input-group" id="group-city">
+          <input type="text" id="city" placeholder=" " required />
+          <label for="city">City</label>
+          <div class="error-message" id="city-error">Please enter your city</div>
+        </div>
+        <div class="input-group" id="group-state">
+          <input type="text" id="state" placeholder=" " required />
+          <label for="state">State / Province</label>
+          <div class="error-message" id="state-error">Please enter your state or province</div>
+        </div>
+        <div class="input-group" id="group-zip">
+          <input type="text" id="zip" placeholder=" " required pattern="^\d{4,10}$" />
+          <label for="zip">Zip / Postal Code</label>
+          <div class="error-message" id="zip-error">Please enter a valid zip/postal code</div>
+        </div>
+        <div class="input-group" id="group-country">
+          <select id="country" required>
+            <option value="" disabled selected hidden></option>
+            <option value="USA">United States</option>
+            <option value="CAN">Canada</option>
+            <option value="GBR">United Kingdom</option>
+            <option value="IND">India</option>
+            <option value="AUS">Australia</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="country">Country</label>
+          <div class="error-message" id="country-error">Please select your country</div>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment Info -->
+      <div class="form-step">
+        <div class="input-group" id="group-cardname">
+          <input type="text" id="cardname" placeholder=" " required />
+          <label for="cardname">Name on Card</label>
+          <div class="error-message" id="cardname-error">Please enter the name on your card</div>
+        </div>
+        <div class="input-group" id="group-cardnumber">
+          <input type="text" id="cardnumber" placeholder=" " required pattern="^\d{13,19}$" maxlength="19" />
+          <label for="cardnumber">Card Number</label>
+          <div class="error-message" id="cardnumber-error">Please enter a valid card number (13-19 digits)</div>
+        </div>
+        <div class="input-group" id="group-expiry">
+          <input type="month" id="expiry" placeholder=" " required />
+          <label for="expiry">Expiry Date</label>
+          <div class="error-message" id="expiry-error">Please enter a valid expiry date</div>
+        </div>
+        <div class="input-group" id="group-cvv">
+          <input type="password" id="cvv" placeholder=" " required pattern="^\d{3,4}$" maxlength="4" />
+          <label for="cvv">CVV</label>
+          <div class="error-message" id="cvv-error">Please enter a valid 3 or 4 digit CVV</div>
+        </div>
+      </div>
+
+      <!-- Step 4: Review -->
+      <div class="form-step">
+        <h3>Review Your Information</h3>
+        <pre id="review-info" aria-live="polite"></pre>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="prev-btn" disabled>Previous</button>
+        <button type="button" id="next-btn">Next</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    (function () {
+      const form = document.getElementById('checkout-form');
+      const steps = [...document.querySelectorAll('.form-step')];
+      const progressSteps = [...document.querySelectorAll('.progress-step')];
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const reviewInfo = document.getElementById('review-info');
+
+      let currentStep = 0;
+
+      // Show current step and update progress
+      function updateFormSteps() {
+        steps.forEach((step, idx) => {
+          step.classList.toggle('active', idx === currentStep);
+          progressSteps[idx].classList.toggle('active', idx <= currentStep);
+        });
+        prevBtn.disabled = currentStep === 0;
+        nextBtn.textContent = currentStep === steps.length - 1 ? 'Confirm' : 'Next';
+      }
+
+      // Validation functions for each input
+      function validateInput(input) {
+        const group = input.parentElement;
+        let valid = true;
+
+        if (!input.checkValidity()) {
+          valid = false;
+        } else if (input.id === 'expiry') {
+          // Additional expiry date validation: must be future month
+          const now = new Date();
+          const [year, month] = input.value.split('-').map(Number);
+          if (!year || !month || new Date(year, month - 1) < new Date(now.getFullYear(), now.getMonth())) {
+            valid = false;
+          }
+        }
+
+        if (!valid) {
+          group.classList.add('error');
+        } else {
+          group.classList.remove('error');
+        }
+        return valid;
+      }
+
+      // Validate all inputs on current step
+      function validateCurrentStep() {
+        const inputs = [...steps[currentStep].querySelectorAll('input, select')];
+        return inputs.every(input => validateInput(input));
+      }
+
+      // Gather all form data to review
+      function getFormData() {
+        return {
+          fullname: document.getElementById('fullname').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          city: document.getElementById('city').value.trim(),
+          state: document.getElementById('state').value.trim(),
+          zip: document.getElementById('zip').value.trim(),
+          country: document.getElementById('country').value,
+          cardname: document.getElementById('cardname').value.trim(),
+          cardnumber: document.getElementById('cardnumber').value.trim().replace(/(.{4})/g, '$1 ').trim(),
+          expiry: document.getElementById('expiry').value,
+          cvv: document.getElementById('cvv').value.trim()
+        };
+      }
+
+      // Show review data
+      function populateReview() {
+        const data = getFormData();
+        const expiryFormatted = data.expiry ? new Date(data.expiry + '-01').toLocaleDateString(undefined, { year: 'numeric', month: 'long' }) : '';
+        reviewInfo.textContent = `
+Contact Information:
+  Name: ${data.fullname}
+  Email: ${data.email}
+  Phone: ${data.phone}
+
+Shipping Address:
+  ${data.address}
+  ${data.city}, ${data.state} ${data.zip}
+  ${data.country}
+
+Payment Details:
+  Cardholder Name: ${data.cardname}
+  Card Number: ${data.cardnumber.replace(/\d(?=\d{4})/g, '*')}
+  Expiry Date: ${expiryFormatted}
+        `;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        // Validate current step before moving forward
+        if (!validateCurrentStep()) return;
+
+        if (currentStep === steps.length - 1) {
+          alert('Order confirmed! Thank you for your purchase.');
+          form.reset();
+          currentStep = 0;
+          updateFormSteps();
+          return;
+        }
+
+        currentStep++;
+        if (currentStep === steps.length - 1) {
+          populateReview();
+        }
+        updateFormSteps();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentStep > 0) {
+          currentStep--;
+          updateFormSteps();
+        }
+      });
+
+      // Validate inputs on blur to show immediate errors
+      document.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('blur', () => validateInput(input));
+      });
+
+      updateFormSteps();
+    })();
+  </script>
+</body>
+</html>
