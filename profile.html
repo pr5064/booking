@@ -1,425 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PreviBook Customer Profile - Premium UI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* Reset & base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #5f2c82, #49a09d);
-      color: #eee;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-    /* Container */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Premium Profile - Previ Book</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  .profile-container {
+    background: #fff;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    display: flex;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+  .profile-container:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  }
+  /* Left panel */
+  .profile-image-section {
+    flex: 1;
+    background: linear-gradient(135deg, #f4845f, #f7b267);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: white;
+    position: relative;
+  }
+  .profile-image-section label {
+    cursor: pointer;
+  }
+  #profileImagePreview {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 5px solid rgba(255,255,255,0.8);
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+  }
+  #profileImagePreview:hover {
+    transform: scale(1.05);
+  }
+  .upload-text {
+    margin-top: 18px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  /* Right panel */
+  .profile-info-section {
+    flex: 2;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .profile-info-section h1 {
+    margin: 0 0 8px 0;
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: #222;
+  }
+  .profile-info-section p.email {
+    margin: 0 0 30px 0;
+    font-size: 1.1rem;
+    color: #666;
+    letter-spacing: 0.02em;
+  }
+  .info-group {
+    margin-bottom: 24px;
+  }
+  .info-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #f4845f;
+    letter-spacing: 0.05em;
+  }
+  .info-group span {
+    display: block;
+    font-size: 1.1rem;
+    color: #444;
+  }
+  /* Form inputs */
+  .profile-form input[type="text"],
+  .profile-form input[type="email"],
+  .profile-form input[type="tel"],
+  .profile-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1.8px solid #ddd;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+    resize: vertical;
+  }
+  .profile-form input[type="text"]:focus,
+  .profile-form input[type="email"]:focus,
+  .profile-form input[type="tel"]:focus,
+  .profile-form textarea:focus {
+    border-color: #f4845f;
+    outline: none;
+  }
+  .profile-form textarea {
+    min-height: 80px;
+  }
+  /* Buttons */
+  .button-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+  }
+  button {
+    padding: 12px 36px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 6px 12px rgba(244,132,95,0.3);
+  }
+  button.save-btn {
+    background: linear-gradient(90deg, #f7b267, #f4845f);
+    color: white;
+  }
+  button.save-btn:hover {
+    background: linear-gradient(90deg, #f4845f, #f7b267);
+  }
+  button.edit-btn {
+    background: #eee;
+    color: #f4845f;
+    box-shadow: none;
+  }
+  button.edit-btn:hover {
+    background: #f7b267;
+    color: white;
+  }
+  /* Responsive */
+  @media (max-width: 768px) {
     .profile-container {
-      background: #1e1e2f;
-      width: 480px;
-      max-width: 95vw;
-      border-radius: 20px;
-      box-shadow:
-        0 0 15px #7c3aed,
-        0 0 30px #a164f5;
-      padding: 3rem 2.5rem 3rem 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Header */
-    .profile-header {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #b29fff;
-      text-shadow: 0 0 10px #b29fff88;
-      letter-spacing: 3px;
-      font-weight: 700;
-      font-size: 2.7rem;
-      text-transform: uppercase;
-    }
-    /* Avatar upload */
-    .avatar-wrapper {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 2.5rem;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid #a777ff;
-      box-shadow: 0 0 20px #ab85ffaa;
-      cursor: pointer;
-      position: relative;
-      background: #2f235c;
-      transition: box-shadow 0.3s ease;
-    }
-    .avatar-wrapper:hover {
-      box-shadow: 0 0 30px #d0b8ffcc;
-    }
-    .avatar-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      user-select: none;
-      pointer-events: none;
-    }
-    .avatar-wrapper input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-    .remove-avatar-btn {
-      position: absolute;
-      bottom: 4px;
-      right: 6px;
-      background: #ff4c4ccc;
-      border: none;
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      font-size: 20px;
-      line-height: 28px;
-      text-align: center;
-      color: #fff;
-      cursor: pointer;
-      display: none;
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-    .remove-avatar-btn:hover {
-      background: #ff2a2acc;
-    }
-    /* Form */
-    form {
-      display: flex;
       flex-direction: column;
+      max-width: 400px;
     }
-    .form-step {
-      display: none;
-      animation: fadeInUp 0.6s ease forwards;
+    .profile-image-section, .profile-info-section {
+      padding: 30px 20px;
     }
-    .form-step.active {
-      display: block;
+    .profile-info-section h1 {
+      font-size: 1.8rem;
     }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    /* Floating label styles */
-    .form-group {
-      position: relative;
-      margin-bottom: 1.7rem;
-    }
-    input, select {
-      width: 100%;
-      padding: 1rem 1.1rem 1rem 1.1rem;
-      border-radius: 15px;
-      border: none;
-      background: #3b2e6d;
-      color: #eee;
-      font-size: 1rem;
-      box-shadow: inset 0 0 10px #9a72ffcc;
-      transition: box-shadow 0.3s ease;
-      outline-offset: 2px;
-    }
-    input:focus, select:focus {
-      outline: none;
-      box-shadow: 0 0 15px #a982ff;
-    }
-    input:focus + label,
-    input:not(:placeholder-shown) + label,
-    select:focus + label,
-    select:not([value=""]) + label {
-      top: -10px;
-      font-size: 0.8rem;
-      color: #cfa1ff;
-      text-shadow: 0 0 10px #cfa1ffaa;
-    }
-    label {
-      position: absolute;
-      top: 1rem;
-      left: 1.1rem;
-      color: #b29fff88;
-      pointer-events: none;
-      user-select: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      background: #1e1e2f;
-      padding: 0 6px;
-      border-radius: 10px;
-    }
-    /* Buttons */
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 2rem;
-    }
-    button {
-      background: linear-gradient(135deg, #a366ff, #7940f7);
-      border: none;
-      border-radius: 30px;
-      padding: 1rem 2rem;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #eee;
-      cursor: pointer;
-      box-shadow: 0 6px 15px #814bfbaa;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      flex: 1;
-      margin: 0 0.5rem;
-      max-width: 140px;
-      text-transform: uppercase;
-    }
-    button:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-      box-shadow: none;
-    }
-    button:hover:not(:disabled) {
-      background: linear-gradient(135deg, #d8afff, #ae82ff);
-      box-shadow: 0 10px 25px #c68effcc;
-    }
-    /* Step indicators */
-    .stepper {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 2rem;
-      gap: 1rem;
-    }
-    .stepper .step {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #5d4ea7cc;
-      box-shadow: 0 0 10px #9b7fffaa;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-    .stepper .step.active {
-      background: #cfa1ff;
-      box-shadow: 0 0 15px #d7bfffcc;
-    }
-    .stepper .step.completed {
-      background: #a677f7;
-      box-shadow: 0 0 15px #b88effcc;
-    }
-    /* Success message */
-    .success-message {
-      text-align: center;
-      font-size: 1.6rem;
-      color: #b7ffcb;
-      font-weight: 700;
-      animation: glowPulse 1.5s ease-in-out infinite alternate;
-      padding: 2rem 1rem;
-    }
-    @keyframes glowPulse {
-      0% {
-        text-shadow: 0 0 5px #82ffb1aa, 0 0 20px #70ffa0cc;
-      }
-      100% {
-        text-shadow: 0 0 15px #59fba0ff, 0 0 30px #38f894ff;
-      }
-    }
-    /* Responsive */
-    @media (max-width: 520px) {
-      .profile-container {
-        padding: 2rem 1.5rem;
-      }
-      button {
-        max-width: 100px;
-        margin: 0 0.25rem;
-        padding: 0.8rem 1.5rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <main class="profile-container" role="main" aria-labelledby="profileTitle">
-    <h1 id="profileTitle" class="profile-header" tabindex="0">Profile</h1>
+<div class="profile-container" aria-label="User Profile">
+  <!-- Left: Profile Image & Upload -->
+  <div class="profile-image-section">
+    <label for="profileImageInput" aria-label="Upload profile image">
+      <img src="images/profile.png" alt="Profile Picture" id="profileImagePreview" />
+      <div class="upload-text">Click to change photo</div>
+    </label>
+    <input type="file" id="profileImageInput" accept="image/*" />
+  </div>
 
-    <div class="avatar-wrapper" aria-label="Upload profile picture">
-      <img src="https://i.pravatar.cc/130" alt="User avatar" id="avatarPreview" />
-      <input type="file" id="avatarInput" accept="image/*" aria-describedby="avatarHelp" />
-      <button type="button" id="removeAvatarBtn" aria-label="Remove profile picture">&times;</button>
+  <!-- Right: Profile Info / Form -->
+  <div class="profile-info-section">
+    <h1 id="profileName">Your Name</h1>
+    <p class="email" id="profileEmail">your.email@example.com</p>
+
+    <!-- Display Mode -->
+    <div id="profileDisplay">
+      <div class="info-group">
+        <label>Phone</label>
+        <span id="profilePhone">+1 234 567 8901</span>
+      </div>
+      <div class="info-group">
+        <label>Address</label>
+        <span id="profileAddress">123 Main St, City, Country</span>
+      </div>
+      <div class="button-group">
+        <button class="edit-btn" id="editProfileBtn" aria-label="Edit Profile">Edit Profile</button>
+      </div>
     </div>
 
-    <div class="stepper" aria-label="Form steps">
-      <div class="step active" data-step="0" tabindex="0" aria-current="step" aria-label="Step 1: Basic Info"></div>
-      <div class="step" data-step="1" tabindex="0" aria-label="Step 2: Contact Details"></div>
-      <div class="step" data-step="2" tabindex="0" aria-label="Step 3: Address"></div>
-    </div>
-
-    <form id="profileForm" novalidate>
-      <!-- Step 1 -->
-      <section class="form-step active" aria-live="polite" aria-label="Basic Information">
-        <div class="form-group">
-          <input type="text" id="fullName" placeholder=" " required autocomplete="name" aria-describedby="fullNameHelp" />
-          <label for="fullName">Full Name</label>
-        </div>
-        <div class="form-group">
-          <input type="date" id="dob" placeholder=" " required aria-describedby="dobHelp" />
-          <label for="dob">Date of Birth</label>
-        </div>
-        <div class="form-group">
-          <select id="gender" required aria-describedby="genderHelp">
-            <option value="" disabled selected hidden></option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
-          <label for="gender">Gender</label>
-        </div>
-      </section>
-
-      <!-- Step 2 -->
-      <section class="form-step" aria-live="polite" aria-label="Contact Information">
-        <div class="form-group">
-          <input type="email" id="email" placeholder=" " required autocomplete="email" aria-describedby="emailHelp" />
-          <label for="email">Email Address</label>
-        </div>
-        <div class="form-group">
-          <input type="tel" id="phone" placeholder=" " pattern="^\+?\d{7,15}$" required autocomplete="tel" aria-describedby="phoneHelp" />
-          <label for="phone">Phone Number</label>
-        </div>
-      </section>
-
-      <!-- Step 3 -->
-      <section class="form-step" aria-live="polite" aria-label="Address Information">
-        <div class="form-group">
-          <input type="text" id="address" placeholder=" " required autocomplete="street-address" aria-describedby="addressHelp" />
-          <label for="address">Delivery Address</label>
-        </div>
-      </section>
-
-      <div class="buttons" role="group" aria-label="Form navigation buttons">
-        <button type="button" id="prevBtn" disabled aria-disabled="true">Previous</button>
-        <button type="button" id="nextBtn">Next</button>
+    <!-- Edit Mode -->
+    <form id="profileForm" class="profile-form" style="display:none;" novalidate>
+      <input type="text" id="inputName" placeholder="Full Name" required aria-required="true" />
+      <input type="email" id="inputEmail" placeholder="Email Address" required aria-required="true" />
+      <input type="tel" id="inputPhone" placeholder="Phone Number" required aria-required="true" />
+      <textarea id="inputAddress" placeholder="Address" required aria-required="true"></textarea>
+      <div class="button-group" style="justify-content:flex-start;">
+        <button type="submit" class="save-btn" aria-label="Save Profile">Save</button>
+        <button type="button" class="edit-btn" id="cancelEditBtn" aria-label="Cancel Editing">Cancel</button>
       </div>
     </form>
+  </div>
+</div>
 
-    <div id="successMessage" class="success-message" hidden role="alert" aria-live="assertive">
-       Profile successfully created! Welcome to PreviBook! 
-    </div>
-  </main>
+<script>
+  const profileImageInput = document.getElementById('profileImageInput');
+  const profileImagePreview = document.getElementById('profileImagePreview');
+  const profileName = document.getElementById('profileName');
+  const profileEmail = document.getElementById('profileEmail');
+  const profilePhone = document.getElementById('profilePhone');
+  const profileAddress = document.getElementById('profileAddress');
 
-  <script>
-    (() => {
-      const avatarInput = document.getElementById('avatarInput');
-      const avatarPreview = document.getElementById('avatarPreview');
-      const removeAvatarBtn = document.getElementById('removeAvatarBtn');
+  const profileDisplay = document.getElementById('profileDisplay');
+  const profileForm = document.getElementById('profileForm');
+  const editProfileBtn = document.getElementById('editProfileBtn');
+  const cancelEditBtn = document.getElementById('cancelEditBtn');
 
-      const form = document.getElementById('profileForm');
-      const steps = [...document.querySelectorAll('.form-step')];
-      const stepButtons = document.querySelectorAll('.stepper .step');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const successMessage = document.getElementById('successMessage');
+  const inputName = document.getElementById('inputName');
+  const inputEmail = document.getElementById('inputEmail');
+  const inputPhone = document.getElementById('inputPhone');
+  const inputAddress = document.getElementById('inputAddress');
 
-      let currentStep = 0;
-      let avatarFile = null;
+  // Load profile from localStorage or default
+  function loadProfile() {
+    const profile = JSON.parse(localStorage.getItem('profile')) || {
+      name: 'Your Name',
+      email: 'your.email@example.com',
+      phone: '+1 234 567 8901',
+      address: '123 Main St, City, Country',
+      image: 'images/profile.png'
+    };
+    profileName.textContent = profile.name;
+    profileEmail.textContent = profile.email;
+    profilePhone.textContent = profile.phone;
+    profileAddress.textContent = profile.address;
+    profileImagePreview.src = profile.image || 'images/profile.png';
 
-      // Avatar upload preview
-      avatarInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-          avatarFile = file;
-          const reader = new FileReader();
-          reader.onload = () => {
-            avatarPreview.src = reader.result;
-            removeAvatarBtn.style.display = 'block';
-          };
-          reader.readAsDataURL(file);
-        } else {
-          alert('Please upload a valid image file.');
-          avatarInput.value = '';
-        }
-      });
+    // Fill form inputs
+    inputName.value = profile.name;
+    inputEmail.value = profile.email;
+    inputPhone.value = profile.phone;
+    inputAddress.value = profile.address;
+  }
 
-      // Remove avatar button
-      removeAvatarBtn.addEventListener('click', () => {
-        avatarFile = null;
-        avatarInput.value = '';
-        avatarPreview.src = 'https://i.pravatar.cc/130';
-        removeAvatarBtn.style.display = 'none';
-      });
+  // Toggle between display and edit mode
+  function toggleEditMode(editing) {
+    if (editing) {
+      profileDisplay.style.display = 'none';
+      profileForm.style.display = 'block';
+      inputName.focus();
+    } else {
+      profileForm.style.display = 'none';
+      profileDisplay.style.display = 'block';
+    }
+  }
 
-      // Update buttons & steps UI
-      function updateUI() {
-        steps.forEach((step, i) => step.classList.toggle('active', i === currentStep));
-        stepButtons.forEach((stepBtn, i) => {
-          stepBtn.classList.remove('active', 'completed');
-          if (i < currentStep) stepBtn.classList.add('completed');
-          else if (i === currentStep) stepBtn.classList.add('active');
-        });
-        prevBtn.disabled = currentStep === 0;
-        prevBtn.setAttribute('aria-disabled', prevBtn.disabled);
-        nextBtn.textContent = currentStep === steps.length - 1 ? 'Submit' : 'Next';
-      }
+  // Image preview on upload
+  profileImageInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        profileImagePreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
-      // Validate current step fields
-      function validateStep() {
-        const currentFields = [...steps[currentStep].querySelectorAll('input, select')];
-        return currentFields.every(field => field.checkValidity());
-      }
+  // Edit button click
+  editProfileBtn.addEventListener('click', () => {
+    toggleEditMode(true);
+  });
 
-      // Next button click
-      nextBtn.addEventListener('click', () => {
-        if (!validateStep()) {
-          // Show native HTML5 validation UI on first invalid field
-          const invalidField = steps[currentStep].querySelector('input:invalid, select:invalid');
-          if (invalidField) invalidField.reportValidity();
-          return;
-        }
-        if (currentStep < steps.length - 1) {
-          currentStep++;
-          updateUI();
-        } else {
-          // Final submit logic here
-          form.style.display = 'none';
-          document.querySelector('.avatar-wrapper').style.display = 'none';
-          document.querySelector('.stepper').style.display = 'none';
-          successMessage.hidden = false;
-        }
-      });
+  // Cancel button click
+  cancelEditBtn.addEventListener('click', () => {
+    loadProfile();
+    toggleEditMode(false);
+  });
 
-      // Previous button click
-      prevBtn.addEventListener('click', () => {
-        if (currentStep > 0) {
-          currentStep--;
-          updateUI();
-        }
-      });
+  // Save form submit
+  profileForm.addEventListener('submit', e => {
+    e.preventDefault();
+    // Validate inputs (basic)
+    if (!inputName.value.trim() || !inputEmail.value.trim() || !inputPhone.value.trim() || !inputAddress.value.trim()) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    // Save profile
+    const profile = {
+      name: inputName.value.trim(),
+      email: inputEmail.value.trim(),
+      phone: inputPhone.value.trim(),
+      address: inputAddress.value.trim(),
+      image: profileImagePreview.src
+    };
+    localStorage.setItem('profile', JSON.stringify(profile));
+    loadProfile();
+    toggleEditMode(false);
+  });
 
-      // Stepper click to jump steps (optional)
-      stepButtons.forEach((stepBtn, i) => {
-        stepBtn.addEventListener('click', () => {
-          if (i <= currentStep + 1) { // prevent jumping ahead too far
-            currentStep = i;
-            updateUI();
-          }
-        });
-      });
+  // Initial load
+  loadProfile();
+  toggleEditMode(false);
+</script>
 
-      // Initialize
-      updateUI();
-      removeAvatarBtn.style.display = 'none';
-    })();
-  </script>
 </body>
 </html>
