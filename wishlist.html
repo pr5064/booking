@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PREVIBOOK Wishlist - Premium UI</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1f2937, #111827);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 4rem;
+    }
+    
+    header {
+      font-weight: 600;
+      font-size: 2.5rem;
+      color: #60a5fa;
+      margin-bottom: 3rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      user-select: none;
+      text-shadow: 0 0 8px #3b82f6;
+    }
+    
+    main {
+      width: 100%;
+      max-width: 1200px;
+    }
+    
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+    
+    .wishlist-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgb(96 165 250 / 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+    .wishlist-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgb(96 165 250 / 0.7);
+    }
+    
+    .wishlist-image {
+      width: 100%;
+      height: 240px;
+      object-fit: contain;
+      border-bottom: 2px solid #3b82f6;
+      background-color: #111827;
+      padding: 10px;
+      transition: none; /* remove scaling on hover */
+    }
+    
+    .wishlist-details {
+      padding: 1.5rem 2rem 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .wishlist-name {
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #bfdbfe;
+      margin-bottom: 0.2rem;
+      text-shadow: 0 0 6px #60a5fa;
+    }
+    .wishlist-category {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .wishlist-price {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #3b82f6;
+      margin-bottom: 1.6rem;
+      text-shadow: 0 0 5px #3b82f6;
+    }
+    
+    /* Remove Button */
+    .btn-remove {
+      background: transparent;
+      border: none;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f87171;
+      box-shadow: 0 0 8px #f87171;
+      z-index: 10;
+    }
+    .btn-remove:hover {
+      background-color: #f87171;
+      color: white;
+      box-shadow: 0 0 12px #ef4444;
+    }
+    .btn-remove svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s ease;
+    }
+    .btn-remove:hover svg {
+      stroke: white;
+    }
+    
+    /* Empty Wishlist */
+    .empty-message {
+      text-align: center;
+      margin-top: 6rem;
+      font-size: 1.6rem;
+      color: #94a3b8;
+      user-select: none;
+    }
+    
+    .empty-icon {
+      margin: 2rem auto;
+      width: 80px;
+      height: 80px;
+      fill: #94a3b8;
+      opacity: 0.6;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    .btn-shop {
+      margin-top: 1.5rem;
+      display: inline-block;
+      padding: 0.8rem 2.2rem;
+      background: #3b82f6;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      box-shadow: 0 0 12px #3b82f6;
+      transition: background-color 0.3s ease;
+    }
+    .btn-shop:hover {
+      background: #2563eb;
+      box-shadow: 0 0 20px #2563eb;
+    }
+    
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+      }
+      .wishlist-price {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>PREVIBOOK WISHLIST</header>
+  
+  <main>
+    <div class="wishlist-grid" id="wishlist-grid">
+      <!-- Wishlist items inserted here -->
+    </div>
+
+    <div id="empty-state" style="display:none; text-align:center;">
+      <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M3 3h18v2H3V3zm0 4h18v14H3V7zm2 4v6h2v-6H5zm4 0v6h2v-6H9zm4 0v6h2v-6h-2z" />
+      </svg>
+      <p class="empty-message">Your wishlist is empty!</p>
+      <a href="shop.html" class="btn-shop">Start Shopping</a>
+    </div>
+  </main>
+
+  <script>
+    function getWishlist() {
+      return JSON.parse(localStorage.getItem('wishlist')) || [];
+    }
+    function saveWishlist(wishlist) {
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
+    function removeFromWishlist(id, event) {
+      event.stopPropagation(); // prevent card click
+      let wishlist = getWishlist();
+      wishlist = wishlist.filter(item => item.id !== id);
+      saveWishlist(wishlist);
+      renderWishlist();
+    }
+    function renderWishlist() {
+      const wishlistGrid = document.getElementById('wishlist-grid');
+      const emptyState = document.getElementById('empty-state');
+      const wishlist = getWishlist();
+
+      wishlistGrid.innerHTML = '';
+
+      if (wishlist.length === 0) {
+        emptyState.style.display = 'block';
+        wishlistGrid.style.display = 'none';
+        return;
+      } else {
+        emptyState.style.display = 'none';
+        wishlistGrid.style.display = 'grid';
+      }
+
+      wishlist.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'wishlist-card';
+        card.title = "View Product Details";
+        card.onclick = () => {
+          // Redirect to product page or detail view, assuming a URL or you can adapt this
+          window.location.href = `product.html?id=${item.id}`;
+        };
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="wishlist-image" />
+          <button class="btn-remove" title="Remove from Wishlist" onclick="removeFromWishlist(${item.id}, event)" aria-label="Remove from wishlist">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+          <div class="wishlist-details">
+            <div>
+              <h3 class="wishlist-name">${item.name}</h3>
+              <p class="wishlist-category">${item.category || ''}</p>
+              <p class="wishlist-price">$${item.price.toFixed(2)}</p>
+            </div>
+          </div>
+        `;
+        wishlistGrid.appendChild(card);
+      });
+    }
+
+    // Initial render
+    renderWishlist();
+  </script>
+</body>
+</html>
