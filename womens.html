@@ -195,148 +195,145 @@
     </div>
   </main>
 
-  <script>
-    const products = [
-      {
-        id: 1,
-        name: "Floral Summer Dress",
-        category: "Dresses",
-        price: 45.99,
-        popularity: 85,
-        image: "images/floral.png"
-      },
-      {
-        id: 2,
-        name: "Denim Jacket",
-        category: "Jackets",
-        price: 59.99,
-        popularity: 75,
-        image: "images/denim.png"
-      },
-      {
-        id: 3,
-        name: "High Heels",
-        category: "Footwear",
-        price: 70.00,
-        popularity: 90,
-        image: "images/high.png"
-      },
-      {
-        id: 4,
-        name: "Handbag",
-        category: "Accessories",
-        price: 35.00,
-        popularity: 65,
-        image: "images/handbag.png"
-      },
-      {
-        id: 5,
-        name: "Traditional Saree",
-        category: "Ethnic Wear",
-        price: 89.99,
-        popularity: 80,
-        image: "images/saree.png"
-      },
-      {
-        id: 6,
-        name: "Casual Kurti",
-        category: "Tops",
-        price: 25.00,
-        popularity: 60,
-        image: "images/kurthi.png"
-      }
-    ];
-
-    const productGrid = document.getElementById("product-grid");
-    const searchBar = document.getElementById("search-bar");
-    const sortOptions = document.getElementById("sort-options");
-
-    // Get cart from localStorage or create empty
-    function getCart() {
-      return JSON.parse(localStorage.getItem("cart")) || [];
+<!-- ...[same code up to script tag]... -->
+<script>
+  const products = [
+    {
+      id: 1,
+      name: "Floral Summer Dress",
+      category: "Dresses",
+      price: 45.99,
+      popularity: 85,
+      image: "images/floral.png"
+    },
+    {
+      id: 2,
+      name: "Denim Jacket",
+      category: "Jackets",
+      price: 59.99,
+      popularity: 75,
+      image: "images/denim.png"
+    },
+    {
+      id: 3,
+      name: "High Heels",
+      category: "Footwear",
+      price: 70.00,
+      popularity: 90,
+      image: "images/high.png"
+    },
+    {
+      id: 4,
+      name: "Handbag",
+      category: "Accessories",
+      price: 35.00,
+      popularity: 65,
+      image: "images/handbag.png"
+    },
+    {
+      id: 5,
+      name: "Traditional Saree",
+      category: "Ethnic Wear",
+      price: 89.99,
+      popularity: 80,
+      image: "images/saree.png"
+    },
+    {
+      id: 6,
+      name: "Casual Kurti",
+      category: "Tops",
+      price: 25.00,
+      popularity: 60,
+      image: "images/kurthi.png"
     }
+  ];
 
-    // Save cart to localStorage
-    function saveCart(cart) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
+  const productGrid = document.getElementById("product-grid");
+  const searchBar = document.getElementById("search-bar");
+  const sortOptions = document.getElementById("sort-options");
 
-    // Add product to cart by id
-    function addToCart(productId) {
-      const cart = getCart();
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
+  function getCart() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
 
-      // Check if product already in cart
-      const existing = cart.find(item => item.id === productId);
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          quantity: 1,
-          image: product.image
-        });
-      }
-      saveCart(cart);
-      alert(`Added "${product.name}" to cart!`);
-    }
+  function saveCart(cart) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
-    function prebook(productName) {
-      alert(`Prebooked "${productName}" successfully!`);
-    }
+  function addToCart(productId) {
+    const cart = getCart();
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
 
-    function renderProducts(items) {
-      productGrid.innerHTML = "";
-      if (items.length === 0) {
-        productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
-        return;
-      }
-      items.forEach((product) => {
-        const card = document.createElement("div");
-        card.className = "product-card";
-        card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="product-image" />
-          <div class="product-details">
-            <div>
-              <h3 class="product-name">${product.name}</h3>
-              <p class="product-category">${product.category}</p>
-              <p class="product-price">$${product.price.toFixed(2)}</p>
-            </div>
-            <div class="btn-container">
-              <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
-              <button class="btn-prebook" onclick="prebook('${product.name}')">Prebook</button>
-            </div>
-          </div>
-        `;
-        productGrid.appendChild(card);
+    const existing = cart.find(item => item.id === productId);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        image: product.image
       });
     }
+    saveCart(cart);
+    alert(`Added "${product.name}" to cart!`);
+  }
 
-    function filterAndSort() {
-      let filtered = products.filter(p =>
-        p.name.toLowerCase().includes(searchBar.value.toLowerCase())
-      );
+  // Updated Wishlist function
+  function addToWishlist(productName) {
+    alert(`Added "${productName}" to your wishlist!`);
+  }
 
-      const sortVal = sortOptions.value;
-      if (sortVal === "price-low") {
-        filtered.sort((a, b) => a.price - b.price);
-      } else if (sortVal === "price-high") {
-        filtered.sort((a, b) => b.price - a.price);
-      } else if (sortVal === "popularity") {
-        filtered.sort((a, b) => b.popularity - a.popularity);
-      }
+  function renderProducts(items) {
+    productGrid.innerHTML = "";
+    if (items.length === 0) {
+      productGrid.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-weight:600; color:#555;'>No products found.</p>";
+      return;
+    }
+    items.forEach((product) => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="product-image" />
+        <div class="product-details">
+          <div>
+            <h3 class="product-name">${product.name}</h3>
+            <p class="product-category">${product.category}</p>
+            <p class="product-price">$${product.price.toFixed(2)}</p>
+          </div>
+          <div class="btn-container">
+            <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
+            <button class="btn-prebook" onclick="addToWishlist('${product.name}')">Add to Wishlist</button>
+          </div>
+        </div>
+      `;
+      productGrid.appendChild(card);
+    });
+  }
 
-      renderProducts(filtered);
+  function filterAndSort() {
+    let filtered = products.filter(p =>
+      p.name.toLowerCase().includes(searchBar.value.toLowerCase())
+    );
+
+    const sortVal = sortOptions.value;
+    if (sortVal === "price-low") {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortVal === "price-high") {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (sortVal === "popularity") {
+      filtered.sort((a, b) => b.popularity - a.popularity);
     }
 
-    searchBar.addEventListener("input", filterAndSort);
-    sortOptions.addEventListener("change", filterAndSort);
+    renderProducts(filtered);
+  }
 
-    // Initial render
-    renderProducts(products);
-  </script>
+  searchBar.addEventListener("input", filterAndSort);
+  sortOptions.addEventListener("change", filterAndSort);
+
+  renderProducts(products);
+</script>
 </body>
 </html>

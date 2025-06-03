@@ -142,7 +142,7 @@
       flex-wrap: wrap;
     }
     .btn-buy,
-    .btn-prebook {
+    .btn-wishlist {
       background: #02060e;
       color: white;
       padding: 0.5rem 1rem;
@@ -155,7 +155,7 @@
       box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
     }
     .btn-buy:hover,
-    .btn-prebook:hover {
+    .btn-wishlist:hover {
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
@@ -178,7 +178,7 @@
     <input
       type="text"
       id="search-bar"
-      placeholder="Search beuty products..."
+      placeholder="Search beauty products..."
       aria-label="Search products"
     />
     <select id="sort-options" aria-label="Sort products">
@@ -195,7 +195,7 @@
     </div>
   </main>
 
- <script>
+  <script>
     const products = [
       {
         id: 1,
@@ -284,8 +284,37 @@
       alert(`Added "${product.name}" to cart!`);
     }
 
-    function prebook(productName) {
-      alert(`Prebooked "${productName}" successfully!`);
+    // Get wishlist from localStorage or create empty
+    function getWishlist() {
+      return JSON.parse(localStorage.getItem("wishlist")) || [];
+    }
+
+    // Save wishlist to localStorage
+    function saveWishlist(wishlist) {
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }
+
+    // Add product to wishlist by name (or id)
+    function addToWishlist(productId) {
+      const wishlist = getWishlist();
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      // Check if product already in wishlist
+      const existing = wishlist.find(item => item.id === productId);
+      if (existing) {
+        alert(`"${product.name}" is already in your wishlist.`);
+        return;
+      } else {
+        wishlist.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image
+        });
+      }
+      saveWishlist(wishlist);
+      alert(`Added "${product.name}" to wishlist!`);
     }
 
     function renderProducts(items) {
@@ -307,7 +336,7 @@
             </div>
             <div class="btn-container">
               <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
-              <button class="btn-prebook" onclick="prebook('${product.name}')">Prebook</button>
+              <button class="btn-wishlist" onclick="addToWishlist(${product.id})">Add to Wishlist</button>
             </div>
           </div>
         `;

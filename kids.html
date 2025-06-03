@@ -274,6 +274,18 @@
       alert(`Added ${product.name} to cart!`);
     }
 
+    function addToWishlist(product) {
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const exists = wishlist.find(item => item.id === product.id);
+      if (!exists) {
+        wishlist.push(product);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert(`Added ${product.name} to wishlist!`);
+      } else {
+        alert(`${product.name} is already in your wishlist!`);
+      }
+    }
+
     function renderProducts(items) {
       productGrid.innerHTML = "";
       if (items.length === 0) {
@@ -284,7 +296,6 @@
         const card = document.createElement("div");
         card.className = "product-card";
 
-        // Safely stringify the product for inline onclick
         const productStr = JSON.stringify(product).replace(/"/g, '&quot;');
 
         card.innerHTML = `
@@ -297,7 +308,7 @@
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
               <button class="btn-buy" onclick="addToCart(JSON.parse('${productStr}'))">Add to Cart</button>
-              <button class="btn-prebook" onclick="alert('Prebooked ${product.name}!')">Prebook</button>
+              <button class="btn-prebook" onclick="addToWishlist(JSON.parse('${productStr}'))">Add to Wishlist</button>
             </div>
           </div>
         `;

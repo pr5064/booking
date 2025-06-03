@@ -1,3 +1,4 @@
+<!-- Replace the full content of your current home.html with the following -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,7 +143,7 @@
       flex-wrap: wrap;
     }
     .btn-buy,
-    .btn-prebook {
+    .btn-wishlist {
       background: #02060e;
       color: white;
       padding: 0.5rem 1rem;
@@ -155,7 +156,7 @@
       box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
     }
     .btn-buy:hover,
-    .btn-prebook:hover {
+    .btn-wishlist:hover {
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
@@ -195,7 +196,7 @@
     </div>
   </main>
 
-<script>
+  <script>
     const products = [
       {
         id: 101,
@@ -251,23 +252,27 @@
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Get cart from localStorage or create empty
     function getCart() {
       return JSON.parse(localStorage.getItem("cart")) || [];
     }
 
-    // Save cart to localStorage
     function saveCart(cart) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    // Add product to cart by id
+    function getWishlist() {
+      return JSON.parse(localStorage.getItem("wishlist")) || [];
+    }
+
+    function saveWishlist(wishlist) {
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }
+
     function addToCart(productId) {
       const cart = getCart();
       const product = products.find(p => p.id === productId);
       if (!product) return;
 
-      // Check if product already in cart
       const existing = cart.find(item => item.id === productId);
       if (existing) {
         existing.quantity += 1;
@@ -284,8 +289,23 @@
       alert(`Added "${product.name}" to cart!`);
     }
 
-    function prebook(productName) {
-      alert(`Prebooked "${productName}" successfully!`);
+    function addToWishlist(productId) {
+      const wishlist = getWishlist();
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      if (!wishlist.some(item => item.id === productId)) {
+        wishlist.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image
+        });
+        saveWishlist(wishlist);
+        alert(`Added "${product.name}" to wishlist!`);
+      } else {
+        alert(`"${product.name}" is already in wishlist.`);
+      }
     }
 
     function renderProducts(items) {
@@ -307,7 +327,7 @@
             </div>
             <div class="btn-container">
               <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
-              <button class="btn-prebook" onclick="prebook('${product.name}')">Prebook</button>
+              <button class="btn-wishlist" onclick="addToWishlist(${product.id})">Add to Wishlist</button>
             </div>
           </div>
         `;
@@ -335,7 +355,6 @@
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
     renderProducts(products);
   </script>
 </body>

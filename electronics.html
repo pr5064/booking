@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Electronic Devices | PreviBook</title>
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
@@ -16,7 +15,6 @@
       color: #1a1a1a;
     }
 
-    /* Header */
     header {
       background: linear-gradient(90deg, #000102, #00040b);
       padding: 1.25rem 2rem;
@@ -64,7 +62,6 @@
       background-color: #e0e7ff;
     }
 
-    /* Main Content */
     main {
       max-width: 1200px;
       margin: 2rem auto 4rem;
@@ -79,14 +76,12 @@
       letter-spacing: 1px;
     }
 
-    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
 
-    /* Product Card */
     .product-card {
       background: white;
       border-radius: 18px;
@@ -142,7 +137,7 @@
       flex-wrap: wrap;
     }
     .btn-buy,
-    .btn-prebook {
+    .btn-wishlist {
       background: #02060e;
       color: white;
       padding: 0.5rem 1rem;
@@ -155,12 +150,11 @@
       box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
     }
     .btn-buy:hover,
-    .btn-prebook:hover {
+    .btn-wishlist:hover {
       background-color: #000103;
       box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
     }
 
-    /* Responsive tweaks */
     @media (max-width: 600px) {
       header {
         justify-content: center;
@@ -178,7 +172,7 @@
     <input
       type="text"
       id="search-bar"
-      placeholder="Search Women’s products..."
+      placeholder="Search Electronic devices..."
       aria-label="Search products"
     />
     <select id="sort-options" aria-label="Sort products">
@@ -195,7 +189,7 @@
     </div>
   </main>
 
- <script>
+  <script>
     const products = [
       {
         id: 1,
@@ -251,23 +245,19 @@
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Get cart from localStorage or create empty
     function getCart() {
       return JSON.parse(localStorage.getItem("cart")) || [];
     }
 
-    // Save cart to localStorage
     function saveCart(cart) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    // Add product to cart by id
     function addToCart(productId) {
       const cart = getCart();
       const product = products.find(p => p.id === productId);
       if (!product) return;
 
-      // Check if product already in cart
       const existing = cart.find(item => item.id === productId);
       if (existing) {
         existing.quantity += 1;
@@ -284,8 +274,8 @@
       alert(`Added "${product.name}" to cart!`);
     }
 
-    function prebook(productName) {
-      alert(`Prebooked "${productName}" successfully!`);
+    function addToWishlist(productName) {
+      alert(`"${productName}" added to your wishlist!`);
     }
 
     function renderProducts(items) {
@@ -307,7 +297,7 @@
             </div>
             <div class="btn-container">
               <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
-              <button class="btn-prebook" onclick="prebook('${product.name}')">Prebook</button>
+              <button class="btn-wishlist" onclick="addToWishlist('${product.name}')">Add to Wishlist</button>
             </div>
           </div>
         `;
@@ -335,7 +325,6 @@
     searchBar.addEventListener("input", filterAndSort);
     sortOptions.addEventListener("change", filterAndSort);
 
-    // Initial render
     renderProducts(products);
   </script>
 </body>
