@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Men's Fashion | PreviBook</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -201,16 +199,13 @@
   function getCart() {
     return JSON.parse(localStorage.getItem("cart")) || [];
   }
-
   function saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
-
   function addToCart(productId) {
     const cart = getCart();
     const product = products.find(p => p.id === productId);
     if (!product) return;
-
     const existing = cart.find(item => item.id === productId);
     if (existing) {
       existing.quantity += 1;
@@ -230,21 +225,18 @@
   function addToWishlist(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
-
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-
     if (wishlist.some(item => item.id === productId)) {
       alert(`"${product.name}" is already in your wishlist.`);
       return;
     }
-
     wishlist.push({
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image
+      image: product.image,
+      category: product.category
     });
-
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     alert(`Added "${product.name}" to wishlist!`);
   }
@@ -280,7 +272,6 @@
     let filtered = products.filter(p =>
       p.name.toLowerCase().includes(searchBar.value.toLowerCase())
     );
-
     const sortVal = sortOptions.value;
     if (sortVal === "price-low") {
       filtered.sort((a, b) => a.price - b.price);
@@ -289,7 +280,6 @@
     } else if (sortVal === "popularity") {
       filtered.sort((a, b) => b.popularity - a.popularity);
     }
-
     renderProducts(filtered);
   }
 
@@ -298,6 +288,10 @@
 
   // Initial render
   renderProducts(products);
+
+  // Expose functions for inline onclick
+  window.addToCart = addToCart;
+  window.addToWishlist = addToWishlist;
 </script>
 
 </body>
