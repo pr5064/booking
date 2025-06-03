@@ -1,169 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PreviBook - Welcome</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e3a8a, #0ea5e9);
-      color: #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .glow-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
-      animation: float 10s ease-in-out infinite alternate;
-      z-index: 0;
-    }
-
-    .glow-circle.one {
-      width: 200px;
-      height: 200px;
-      top: 10%;
-      left: 15%;
-      animation-delay: 0s;
-    }
-
-    .glow-circle.two {
-      width: 300px;
-      height: 300px;
-      bottom: 15%;
-      right: 10%;
-      animation-delay: 3s;
-    }
-
-    .glow-circle.three {
-      width: 150px;
-      height: 150px;
-      bottom: 5%;
-      left: 5%;
-      animation-delay: 5s;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-20px) scale(1.05); }
-    }
-
-    .container {
-      position: center;
-      z-index: 1;
-      background: rgba(30, 41, 59, 0.85);
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 35px rgba(59, 130, 246, 0.4);
-      max-width: 480px;
-      width: 100%;
-      border: 1px solid rgba(147, 197, 253, 0.3);
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      font-size: 2.8rem;
-      color: #3b82f6;
-      margin-bottom: 16px;
-    }
-
-    p {
-      font-size: 1.2rem;
-      color: #cbd5e1;
-      margin-bottom: 32px;
-    }
-
-    .options {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .btn {
-      padding: 14px 28px;
-      font-size: 1rem;
-      border-radius: 50px;
-      border: none;
-      background: linear-gradient(to right, #3b82f6, #2563eb);
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 24px rgba(59, 130, 246, 0.6);
-    }
-
-    footer {
-      margin-top: auto;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #cbd5e1;
-      text-align: center;
-      z-index: 1;
-    }
-
-    @media (max-width: 600px) {
-      .side-bars {
-        display: none;
-      }
-
-      .container {
-        padding: 30px 20px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>Previ Book</title>
+    <link rel="stylesheet" href="css/shop.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Font Awesome for cart icon -->
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <style>
+        .cart-icon-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: red;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .icon.profile {
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            transition: box-shadow 0.2s;
+        }
+        .icon.profile:hover {
+            box-shadow: 0 0 8px #3b82f6;
+        }
+        .icon.wishlist {
+            border-radius: 50%;
+            border: 2px solid #f87171;
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            margin-left: 8px;
+            margin-right: 8px;
+            transition: box-shadow 0.2s;
+        }
+        .icon.wishlist:hover {
+            box-shadow: 0 0 8px #f87171;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="#">
+                <img src="images/logo.jpg" alt="Previ Book Logo" class="logo">
+            </a>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Men's Fashion</a></li>
+                <li><a href="#">Women's Fashion</a></li>
+                <li><a href="#">Kids' Fashion</a></li>
+                <li><a href="#">Home & Living</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <button type="submit">🔍</button>
+            </div>
+            <div class="icons">
+                <!-- Profile icon links to profile.html -->
+                <a href="profile.html" title="Profile">
+                    <img src="images/profile.png" alt="Profile" class="icon profile">
+                </a>
+                <!-- Wishlist icon links to wishlist.html -->
+                <a href="wishlist.html" title="Wishlist">
+                    <img src="images/wishlist.jpg" alt="Wishlist" class="icon wishlist">
+                </a>
+                <!-- Cart icon with dynamic badge and link -->
+                <a href="cart.html" title="View Cart" class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-cart fa-2x"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Animated Background Circles -->
-  <div class="glow-circle one"></div>
-  <div class="glow-circle two"></div>
-  <div class="glow-circle three"></div>
+    <main>
+        <section id="hero">
+            <h1>Welcome to Previ Book!</h1>
+            <p>We offer a wide variety of products for everyone.</p>
+            <button>Shop Now</button>
+        </section>
+    </main>
+    <section id="categories">
+        <h2>Categories</h2>
+        <div class="category">
+            <a href="mens.html">
+                <img src="images/men.jpg" height="200px" alt="Men's Fashion">
+                <h3>Men's Fashion</h3>
+            </a>
+        </div>
+        <div class="category">
+            <a href="womens.html">
+                <img src="images/women.webp" height="200px" alt="Women's Fashion">
+                <h3>Women's Fashion</h3>
+            </a>
+        </div>
+        <div class="category">
+            <a href="kids.html">
+                <img src="images/kids.jpg" height="200px" alt="Kids' Fashion">
+                <h3>Kids' Fashion</h3>
+            </a>
+        </div>
+        <div class="category">
+            <a href="electronics.html">
+                <img src="images/electronics.jpg" height="200px" alt="Electronics">
+                <h3>Electronics</h3>
+            </a>
+        </div>
+        <div class="category">
+            <a href="home.html">
+                <img src="images/home.jpg" height="200px" alt="Home & Living">
+                <h3>Home & Living</h3>
+            </a>
+        </div>
+        <div class="category">
+            <a href="beauty.html">
+                <img src="images/beauty.avif" height="200px" alt="Beauty">
+                <h3>Beauty</h3>
+            </a>
+        </div>
+        <div class="category">
+            <a href="gadgets.html">
+                <img src="images/gadgets.webp" height="200px" alt="Appliances">
+                <h3>Gadgets</h3>
+            </a>
+        </div>
+    </section>
 
-  <!-- Main Container -->
-  <div class="container">
-    <h1>Welcome to PreviBook!</h1>
-    <p>Are you here to shop or display your product?</p>
-    <div class="options">
-      <button class="btn" onclick="window.location.href='display.html'">Display Your Product</button>
-      <button class="btn" onclick="window.location.href='shop.html'">Shop Now</button>
-    </div>
-  </div>
+    <section id="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product">
+            <img src="images/product1.jpg" alt="Product 1">
+            <h3>Product 1</h3>
+            <p>Description of product 1.</p>
+            <button onclick="addToCart('Product 1', 499, 'images/product1.jpg')">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/product2.jpg" alt="Product 2">
+            <h3>Product 2</h3>
+            <p>Description of product 2.</p>
+            <button onclick="addToCart('Product 2', 799, 'images/product2.jpg')">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/product3.jpg" alt="Product 3">
+            <h3>Product 3</h3>
+            <p>Description of product 3.</p>
+            <button onclick="addToCart('Product 3', 299, 'images/product3.jpg')">Add to Cart</button>
+        </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 PREVIBOOK. All rights reserved.</p>
-  </footer>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Featured</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="images/linkdien.png" alt="LinkedIn"></a>
+                    <a href="#"><img src="images/x.jpeg" alt="Twitter"></a>
+                    <a href="#"><img src="images/ig.jpeg" alt="Instagram"></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@previbook.com</p>
+                <p>Phone: 123-456-7890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Previ Book. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Add to cart and update badge
+        function addToCart(name, price, image) {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({ name, price, image });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartBadge();
+            alert(name + " added to cart!");
+        }
 
-  <!-- Cart functionality (initialize empty cart if not present) -->
-  <script>
-    if (!localStorage.getItem('cart')) {
-      localStorage.setItem('cart', JSON.stringify([]));
-    }
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-badge").textContent = cart.length;
+        }
 
-    window.onload = () => {
-      const cart = JSON.parse(localStorage.getItem('cart'));
-      console.log("Cart contents on index load:", cart);
-    };
-  </script>
-
+        // Update badge on page load
+        window.onload = updateCartBadge;
+    </script>
 </body>
 </html>
