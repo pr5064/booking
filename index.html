@@ -5,9 +5,9 @@
     <title>Previ Book</title>
     <link rel="stylesheet" href="css/shop.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- Font Awesome for cart icon -->
     <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <style>
+        /* ... (your CSS remains unchanged) ... */
         .cart-icon-wrapper {
             position: relative;
             display: inline-block;
@@ -73,7 +73,7 @@
         .search-bar button:hover {
             background: #2563eb;
         }
-        .product {
+        .category {
             display: inline-block;
             vertical-align: top;
             margin: 1rem;
@@ -85,38 +85,25 @@
             text-align: center;
             transition: box-shadow 0.2s;
         }
-        .product img {
+        .category img {
             width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 8px;
         }
-        .product h3 {
+        .category h3 {
             margin: 0.7rem 0 0.3rem 0;
         }
-        .product p {
+        .category p {
             font-size: 0.95rem;
             color: #555;
             margin-bottom: 0.6rem;
         }
-        .product button {
-            background: #3b82f6;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .product button:hover {
-            background: #2563eb;
-        }
         @media (max-width: 900px) {
-            .product { width: 45%; }
+            .category { width: 45%; }
         }
         @media (max-width: 600px) {
-            .product { width: 95%; }
+            .category { width: 95%; }
         }
     </style>
 </head>
@@ -134,19 +121,16 @@
                 <li><a href="#">Home & Living</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search for products, brands and more">
-                <button type="button" onclick="searchProducts()">🔍</button>
+                <input type="text" id="search-input" placeholder="Search for categories">
+                <button type="button" onclick="searchCategories()">🔍</button>
             </div>
             <div class="icons">
-                <!-- Profile icon links to profile.html -->
                 <a href="profile.html" title="Profile">
                     <img src="images/profile.png" alt="Profile" class="icon profile">
                 </a>
-                <!-- Wishlist icon links to wishlist.html -->
                 <a href="wishlist.html" title="Wishlist">
                     <img src="images/wishlist.jpg" alt="Wishlist" class="icon wishlist">
                 </a>
-                <!-- Cart icon with dynamic badge and link -->
                 <a href="cart.html" title="View Cart" class="cart-icon-wrapper">
                     <i class="fas fa-shopping-cart fa-2x"></i>
                     <span class="cart-badge" id="cart-badge">0</span>
@@ -206,13 +190,10 @@
                 <h3>Gadgets</h3>
             </a>
         </div>
-
-        </div>
         <div id="no-results" style="display:none; text-align:center; color:#f87171; font-size:1.2rem; margin-top:2rem;">
-            No products found.
+            No categories found.
         </div>
     </section>
-
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -257,26 +238,25 @@
             document.getElementById("cart-badge").textContent = cart.length;
         }
 
-        // Search function for featured products
-        function searchProducts() {
+        // Search function for categories
+        function searchCategories() {
             const input = document.getElementById('search-input').value.toLowerCase();
-            const products = document.querySelectorAll('#products-list .product');
+            const categories = document.querySelectorAll('#categories .category');
             let found = false;
-            products.forEach(product => {
-                const name = product.querySelector('h3').textContent.toLowerCase();
-                const desc = product.querySelector('p').textContent.toLowerCase();
-                if (name.includes(input) || desc.includes(input)) {
-                    product.style.display = 'inline-block';
+            categories.forEach(category => {
+                const name = category.querySelector('h3').textContent.toLowerCase();
+                if (name.includes(input)) {
+                    category.style.display = 'inline-block';
                     found = true;
                 } else {
-                    product.style.display = 'none';
+                    category.style.display = 'none';
                 }
             });
             document.getElementById('no-results').style.display = (!found && input.length > 0) ? 'block' : 'none';
         }
 
         // Enable live search as user types
-        document.getElementById('search-input').addEventListener('keyup', searchProducts);
+        document.getElementById('search-input').addEventListener('keyup', searchCategories);
 
         // Update badge on page load
         window.onload = updateCartBadge;
