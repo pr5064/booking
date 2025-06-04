@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Women's Fashion | PreviBook</title>
+  <title>Beauty Collection | PreviBook</title>
   <style>
     /* Reset and base */
     * {
@@ -251,23 +251,19 @@
     const searchBar = document.getElementById("search-bar");
     const sortOptions = document.getElementById("sort-options");
 
-    // Get cart from localStorage or create empty
     function getCart() {
       return JSON.parse(localStorage.getItem("cart")) || [];
     }
 
-    // Save cart to localStorage
     function saveCart(cart) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    // Add product to cart by id
     function addToCart(productId) {
       const cart = getCart();
       const product = products.find(p => p.id === productId);
       if (!product) return;
 
-      // Check if product already in cart
       const existing = cart.find(item => item.id === productId);
       if (existing) {
         existing.quantity += 1;
@@ -284,17 +280,14 @@
       alert(`Added "${product.name}" to cart!`);
     }
 
-    // Get wishlist from localStorage or create empty
     function getWishlist() {
       return JSON.parse(localStorage.getItem("wishlist")) || [];
     }
 
-    // Save wishlist to localStorage
     function saveWishlist(wishlist) {
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
     }
 
-    // Add product to wishlist by name (or id)
     function addToWishlist(productId) {
       const wishlist = getWishlist();
       const product = products.find(p => p.id === productId);
@@ -310,7 +303,8 @@
           id: product.id,
           name: product.name,
           price: product.price,
-          image: product.image
+          image: product.image,
+          category: product.category
         });
       }
       saveWishlist(wishlist);
@@ -366,6 +360,10 @@
 
     // Initial render
     renderProducts(products);
+
+    // Expose functions for inline onclick
+    window.addToCart = addToCart;
+    window.addToWishlist = addToWishlist;
   </script>
 </body>
 </html>

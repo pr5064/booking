@@ -1,4 +1,3 @@
-<!-- Replace the full content of your current home.html with the following -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -293,13 +292,14 @@
       const wishlist = getWishlist();
       const product = products.find(p => p.id === productId);
       if (!product) return;
-
+      // Prevent duplicate
       if (!wishlist.some(item => item.id === productId)) {
         wishlist.push({
           id: product.id,
           name: product.name,
           price: product.price,
-          image: product.image
+          image: product.image,
+          category: product.category
         });
         saveWishlist(wishlist);
         alert(`Added "${product.name}" to wishlist!`);

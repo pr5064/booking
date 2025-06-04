@@ -251,7 +251,7 @@
   const searchBar = document.getElementById("search-bar");
   const sortOptions = document.getElementById("sort-options");
 
-  // Cart functions (you already have these, kept for context)
+  // Cart functions (for context)
   function getCart() {
     return JSON.parse(localStorage.getItem("cart")) || [];
   }
@@ -279,7 +279,7 @@
     alert(`Added "${product.name}" to cart!`);
   }
 
-  // Wishlist functions
+  // Wishlist functions (updated)
   function getWishlist() {
     return JSON.parse(localStorage.getItem("wishlist")) || [];
   }
@@ -291,17 +291,18 @@
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
+    // Prevent duplicate
     const exists = wishlist.find(item => item.id === productId);
     if (exists) {
       alert(`"${product.name}" is already in your wishlist.`);
       return;
     }
-
     wishlist.push({
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image
+      image: product.image,
+      category: product.category
     });
     saveWishlist(wishlist);
     alert(`Added "${product.name}" to wishlist!`);
@@ -358,6 +359,10 @@
 
   // Initial render
   renderProducts(products);
+
+  // Expose functions for inline onclick
+  window.addToCart = addToCart;
+  window.addToWishlist = addToWishlist;
 </script>
 
 </body>

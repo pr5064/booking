@@ -278,7 +278,14 @@
       let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
       const exists = wishlist.find(item => item.id === product.id);
       if (!exists) {
-        wishlist.push(product);
+        // Only store relevant fields for the wishlist
+        wishlist.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          category: product.category
+        });
         localStorage.setItem("wishlist", JSON.stringify(wishlist));
         alert(`Added ${product.name} to wishlist!`);
       } else {
@@ -296,6 +303,7 @@
         const card = document.createElement("div");
         card.className = "product-card";
 
+        // Safely encode product for inline JSON
         const productStr = JSON.stringify(product).replace(/"/g, '&quot;');
 
         card.innerHTML = `
@@ -337,6 +345,10 @@
     sortOptions.addEventListener("change", filterAndSort);
 
     renderProducts(products);
+
+    // Expose functions for inline onclick
+    window.addToCart = addToCart;
+    window.addToWishlist = addToWishlist;
   </script>
 </body>
 </html>

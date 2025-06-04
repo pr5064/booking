@@ -274,9 +274,35 @@
       alert(`Added "${product.name}" to cart!`);
     }
 
-    function addToWishlist(productName) {
-      alert(`"${productName}" added to your wishlist!`);
+    // --- Wishlist Logic (updated) ---
+    function getWishlist() {
+      return JSON.parse(localStorage.getItem("wishlist")) || [];
     }
+
+    function saveWishlist(wishlist) {
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }
+
+    function addToWishlist(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      let wishlist = getWishlist();
+      if (wishlist.some(item => item.id === productId)) {
+        alert(`"${product.name}" is already in your wishlist!`);
+        return;
+      }
+      // Store only the relevant fields for wishlist.html compatibility
+      wishlist.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        category: product.category
+      });
+      saveWishlist(wishlist);
+      alert(`Added "${product.name}" to wishlist!`);
+    }
+    // --- End Wishlist Logic ---
 
     function renderProducts(items) {
       productGrid.innerHTML = "";
@@ -297,7 +323,7 @@
             </div>
             <div class="btn-container">
               <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
-              <button class="btn-wishlist" onclick="addToWishlist('${product.name}')">Add to Wishlist</button>
+              <button class="btn-wishlist" onclick="addToWishlist(${product.id})">Add to Wishlist</button>
             </div>
           </div>
         `;
@@ -326,6 +352,10 @@
     sortOptions.addEventListener("change", filterAndSort);
 
     renderProducts(products);
+
+    // Expose wishlist/cart functions for inline onclick
+    window.addToCart = addToCart;
+    window.addToWishlist = addToWishlist;
   </script>
 </body>
 </html>
