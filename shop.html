@@ -25,6 +25,73 @@
             font-weight: bold;
             z-index: 2;
         }
+        /* Search bar styling */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .search-bar input[type="text"] {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-radius: 20px 0 0 20px;
+            outline: none;
+            font-size: 1rem;
+        }
+        .search-bar button {
+            padding: 6px 16px;
+            border: none;
+            background: #3b82f6;
+            color: #fff;
+            border-radius: 0 20px 20px 0;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-bar button:hover {
+            background: #2563eb;
+        }
+        /* No results message */
+        #no-results {
+            display: none;
+            text-align: center;
+            color: #f87171;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+        /* Simple product/category styling for demo */
+        .category, .product {
+            display: inline-block;
+            vertical-align: top;
+            margin: 1rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 1rem;
+            width: 220px;
+            text-align: center;
+            transition: box-shadow 0.2s;
+        }
+        .category img, .product img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .category h3, .product h3 {
+            margin: 0.7rem 0 0.3rem 0;
+        }
+        .category p, .product p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 0.6rem;
+        }
+        @media (max-width: 900px) {
+            .category, .product { width: 45%; }
+        }
+        @media (max-width: 600px) {
+            .category, .product { width: 95%; }
+        }
     </style>
 </head>
 <body>
@@ -41,14 +108,12 @@
                 <li><a href="#">Home & Living</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Search for products, brands and more">
-                <button type="submit">🔍</button>
+                <input type="text" id="search-input" placeholder="Search for products, brands and more">
+                <button type="button" id="search-btn">🔍</button>
             </div>
             <div class="icons">
-                <!-- Updated: Profile icon links to profile.html -->
                 <a href="profile.html"><img src="images/profile.png" alt="Profile" class="icon"></a>
                 <a href="#"><img src="images/wishlist.jpg" alt="Wishlist" class="icon"></a>
-                <!-- Cart icon with dynamic badge and link -->
                 <a href="cart.html" title="View Cart" class="cart-icon-wrapper">
                     <i class="fas fa-shopping-cart fa-2x"></i>
                     <span class="cart-badge" id="cart-badge">0</span>
@@ -131,7 +196,7 @@
             <button onclick="addToCart('Product 3', 299, 'images/product3.jpg')">Add to Cart</button>
         </div>
     </section>
-
+    <div id="no-results">No results found.</div>
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -175,6 +240,44 @@
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
             document.getElementById("cart-badge").textContent = cart.length;
         }
+
+        // Search function for categories and products
+        function searchItems() {
+            const input = document.getElementById('search-input').value.trim().toLowerCase();
+            const categories = document.querySelectorAll('#categories .category');
+            const products = document.querySelectorAll('#featured-products .product');
+            let found = false;
+
+            // Filter categories
+            categories.forEach(category => {
+                const name = category.querySelector('h3').textContent.toLowerCase();
+                if (name.includes(input)) {
+                    category.style.display = 'inline-block';
+                    found = true;
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+
+            // Filter products
+            products.forEach(product => {
+                const name = product.querySelector('h3').textContent.toLowerCase();
+                const desc = product.querySelector('p').textContent.toLowerCase();
+                if (name.includes(input) || desc.includes(input)) {
+                    product.style.display = 'inline-block';
+                    found = true;
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // Show/hide "no results"
+            document.getElementById('no-results').style.display = (!found && input.length > 0) ? 'block' : 'none';
+        }
+
+        // Enable live search as user types and on button click
+        document.getElementById('search-input').addEventListener('keyup', searchItems);
+        document.getElementById('search-btn').addEventListener('click', searchItems);
 
         // Update badge on page load
         window.onload = updateCartBadge;
