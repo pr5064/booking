@@ -5,27 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Women's Fashion | PreviBook</title>
   <style>
-    /* Reset and base */
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f8f9fb;
       color: #1a1a1a;
     }
-
-    /* Header */
     header {
-      background: linear-gradient(90deg, #000102, #00040b);
+      background: linear-gradient(90deg, #f43f5e, #be185d);
       padding: 1.25rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
-      box-shadow: 0 4px 15px rgb(37 99 235 / 0.3);
+      box-shadow: 0 4px 15px rgb(236 72 153 / 0.15);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -48,7 +43,7 @@
       outline-offset: 2px;
     }
     #search-bar:focus {
-      box-shadow: 0 0 8px 2px #010304;
+      box-shadow: 0 0 8px 2px #be185d;
     }
     #sort-options {
       padding: 0.5rem 1rem;
@@ -61,10 +56,8 @@
       transition: background-color 0.3s ease;
     }
     #sort-options:hover {
-      background-color: #e0e7ff;
+      background-color: #fbcfe8;
     }
-
-    /* Main Content */
     main {
       max-width: 1200px;
       margin: 2rem auto 4rem;
@@ -75,18 +68,14 @@
       text-align: center;
       font-size: 2.5rem;
       margin-bottom: 2rem;
-      color: #9d96e6;
+      color: #f472b6;
       letter-spacing: 1px;
     }
-
-    /* Product Grid */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
-
-    /* Product Card */
     .product-card {
       background: white;
       border-radius: 18px;
@@ -99,7 +88,7 @@
     }
     .product-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 30px rgb(37 99 235 / 0.25);
+      box-shadow: 0 20px 30px rgb(236 72 153 / 0.18);
     }
     .product-image {
       width: 100%;
@@ -121,11 +110,11 @@
       font-weight: 700;
       font-size: 1.2rem;
       margin-bottom: 0.3rem;
-      color: #1e293b;
+      color: #be185d;
     }
     .product-category {
       font-size: 0.9rem;
-      color: #64748b;
+      color: #f472b6;
       margin-bottom: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -133,7 +122,7 @@
     .product-price {
       font-weight: 900;
       font-size: 1.3rem;
-      color: #010510;
+      color: #be185d;
       margin-bottom: 1rem;
     }
     .btn-container {
@@ -142,8 +131,8 @@
       flex-wrap: wrap;
     }
     .btn-buy,
-    .btn-prebook {
-      background: #02060e;
+    .btn-wishlist {
+      background: #be185d;
       color: white;
       padding: 0.5rem 1rem;
       border: none;
@@ -152,15 +141,13 @@
       font-size: 0.95rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      box-shadow: 0 4px 12px rgb(37 99 235 / 0.4);
+      box-shadow: 0 4px 12px rgb(236 72 153 / 0.25);
     }
     .btn-buy:hover,
-    .btn-prebook:hover {
-      background-color: #000103;
-      box-shadow: 0 6px 18px rgb(30 64 175 / 0.6);
+    .btn-wishlist:hover {
+      background-color: #f43f5e;
+      box-shadow: 0 6px 18px rgb(236 72 153 / 0.35);
     }
-
-    /* Responsive tweaks */
     @media (max-width: 600px) {
       header {
         justify-content: center;
@@ -178,7 +165,7 @@
     <input
       type="text"
       id="search-bar"
-      placeholder="Search Women’s products..."
+      placeholder="Search Women's products..."
       aria-label="Search products"
     />
     <select id="sort-options" aria-label="Sort products">
@@ -195,59 +182,57 @@
     </div>
   </main>
 
-<!-- ...[same code up to script tag]... -->
 <script>
-  const products = [
-    {
-      id: 1,
-      name: "Floral Summer Dress",
-      category: "Dresses",
-      price: 45.99,
-      popularity: 85,
-      image: "images/floral.png"
-    },
-    {
-      id: 2,
-      name: "Denim Jacket",
-      category: "Jackets",
-      price: 59.99,
-      popularity: 75,
-      image: "images/denim.png"
-    },
-    {
-      id: 3,
-      name: "High Heels",
-      category: "Footwear",
-      price: 70.00,
-      popularity: 90,
-      image: "images/high.png"
-    },
-    {
-      id: 4,
-      name: "Handbag",
-      category: "Accessories",
-      price: 35.00,
-      popularity: 65,
-      image: "images/handbag.png"
-    },
-    {
-      id: 5,
-      name: "Traditional Saree",
-      category: "Ethnic Wear",
-      price: 89.99,
-      popularity: 80,
-      image: "images/saree.png"
-    },
-    {
-      id: 6,
-      name: "Casual Kurti",
-      category: "Tops",
-      price: 25.00,
-      popularity: 60,
-      image: "images/kurthi.png"
-    }
-  ];
-
+    const products = [
+      {
+        id: 1,
+        name: "Floral Summer Dress",
+        category: "Dresses",
+        price: 45.99,
+        popularity: 85,
+        image: "images/floral.png"
+      },
+      {
+        id: 2,
+        name: "Denim Jacket",
+        category: "Jackets",
+        price: 59.99,
+        popularity: 75,
+        image: "images/denim.png"
+      },
+      {
+        id: 3,
+        name: "High Heels",
+        category: "Footwear",
+        price: 70.00,
+        popularity: 90,
+        image: "images/high.png"
+      },
+      {
+        id: 4,
+        name: "Handbag",
+        category: "Accessories",
+        price: 35.00,
+        popularity: 65,
+        image: "images/handbag.png"
+      },
+      {
+        id: 5,
+        name: "Traditional Saree",
+        category: "Ethnic Wear",
+        price: 89.99,
+        popularity: 80,
+        image: "images/saree.png"
+      },
+      {
+        id: 6,
+        name: "Casual Kurti",
+        category: "Tops",
+        price: 25.00,
+        popularity: 60,
+        image: "images/kurthi.png"
+      }
+    ];
   const productGrid = document.getElementById("product-grid");
   const searchBar = document.getElementById("search-bar");
   const sortOptions = document.getElementById("sort-options");
@@ -255,16 +240,13 @@
   function getCart() {
     return JSON.parse(localStorage.getItem("cart")) || [];
   }
-
   function saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
-
   function addToCart(productId) {
     const cart = getCart();
     const product = products.find(p => p.id === productId);
     if (!product) return;
-
     const existing = cart.find(item => item.id === productId);
     if (existing) {
       existing.quantity += 1;
@@ -281,9 +263,23 @@
     alert(`Added "${product.name}" to cart!`);
   }
 
-  // Updated Wishlist function
-  function addToWishlist(productName) {
-    alert(`Added "${productName}" to your wishlist!`);
+  function addToWishlist(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    if (wishlist.some(item => item.id === productId)) {
+      alert(`"${product.name}" is already in your wishlist.`);
+      return;
+    }
+    wishlist.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      category: product.category
+    });
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    alert(`Added "${product.name}" to wishlist!`);
   }
 
   function renderProducts(items) {
@@ -305,7 +301,7 @@
           </div>
           <div class="btn-container">
             <button class="btn-buy" onclick="addToCart(${product.id})">Add to Cart</button>
-            <button class="btn-prebook" onclick="addToWishlist('${product.name}')">Add to Wishlist</button>
+            <button class="btn-wishlist" onclick="addToWishlist(${product.id})">Add to Wishlist</button>
           </div>
         </div>
       `;
@@ -317,7 +313,6 @@
     let filtered = products.filter(p =>
       p.name.toLowerCase().includes(searchBar.value.toLowerCase())
     );
-
     const sortVal = sortOptions.value;
     if (sortVal === "price-low") {
       filtered.sort((a, b) => a.price - b.price);
@@ -326,14 +321,19 @@
     } else if (sortVal === "popularity") {
       filtered.sort((a, b) => b.popularity - a.popularity);
     }
-
     renderProducts(filtered);
   }
 
   searchBar.addEventListener("input", filterAndSort);
   sortOptions.addEventListener("change", filterAndSort);
 
+  // Initial render
   renderProducts(products);
+
+  // Expose functions for inline onclick
+  window.addToCart = addToCart;
+  window.addToWishlist = addToWishlist;
 </script>
+
 </body>
 </html>
