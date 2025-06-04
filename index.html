@@ -25,6 +25,25 @@
             font-weight: bold;
             z-index: 2;
         }
+        /* Wishlist badge styling */
+        .wishlist-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+        .wishlist-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f87171;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
         /* Search bar styling */
         .search-bar {
             display: flex;
@@ -59,7 +78,7 @@
             font-size: 1.2rem;
             margin-top: 2rem;
         }
-        /* Simple product/category styling for demo */
+        /* Simple product/category styling */
         .category, .product {
             display: inline-block;
             vertical-align: top;
@@ -71,6 +90,7 @@
             width: 220px;
             text-align: center;
             transition: box-shadow 0.2s;
+            position: relative;
         }
         .category img, .product img {
             width: 100%;
@@ -85,6 +105,53 @@
             font-size: 0.95rem;
             color: #555;
             margin-bottom: 0.6rem;
+        }
+        /* Wishlist heart button */
+        .wishlist-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #ccc;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wishlist-btn:hover {
+            color: #f87171;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .wishlist-btn.active {
+            color: #f87171;
+            background: white;
+        }
+        /* Product action buttons */
+        .product-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .btn-add-cart {
+            flex: 1;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .btn-add-cart:hover {
+            background: #2563eb;
         }
         @media (max-width: 900px) {
             .category, .product { width: 45%; }
@@ -113,7 +180,14 @@
             </div>
             <div class="icons">
                 <a href="profile.html"><img src="images/profile.png" alt="Profile" class="icon"></a>
-                <a href="#"><img src="images/wishlist.jpg" alt="Wishlist" class="icon"></a>
+                
+                <!-- Wishlist icon with badge -->
+                <a href="wishlist.html" title="View Wishlist" class="wishlist-icon-wrapper">
+                    <img src="images/wishlist.jpg" alt="Wishlist" class="icon">
+                    <span class="wishlist-badge" id="wishlist-badge">0</span>
+                </a>
+                
+                <!-- Cart icon with badge -->
                 <a href="cart.html" title="View Cart" class="cart-icon-wrapper">
                     <i class="fas fa-shopping-cart fa-2x"></i>
                     <span class="cart-badge" id="cart-badge">0</span>
@@ -129,6 +203,7 @@
             <button>Shop Now</button>
         </section>
     </main>
+    
     <section id="categories">
         <h2>Categories</h2>
         <div class="category">
@@ -173,30 +248,19 @@
                 <h3>Gadgets</h3>
             </a>
         </div>
-    </section>
-
-    <section id="featured-products">
-        <h2>Featured Products</h2>
         <div class="product">
-            <img src="images/product1.jpg" alt="Product 1">
-            <h3>Product 1</h3>
-            <p>Description of product 1.</p>
-            <button onclick="addToCart('Product 1', 499, 'images/product1.jpg')">Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="images/product2.jpg" alt="Product 2">
-            <h3>Product 2</h3>
-            <p>Description of product 2.</p>
-            <button onclick="addToCart('Product 2', 799, 'images/product2.jpg')">Add to Cart</button>
-        </div>
-        <div class="product">
+            <button class="wishlist-btn" onclick="toggleWishlist(3, 'Product 3', 299, 'images/product3.jpg', 'Home & Living', this)">♡</button>
             <img src="images/product3.jpg" alt="Product 3">
             <h3>Product 3</h3>
             <p>Description of product 3.</p>
-            <button onclick="addToCart('Product 3', 299, 'images/product3.jpg')">Add to Cart</button>
+            <div class="product-actions">
+                <button class="btn-add-cart" onclick="addToCart('Product 3', 299, 'images/product3.jpg')">Add to Cart</button>
+            </div>
         </div>
     </section>
+    
     <div id="no-results">No results found.</div>
+    
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -226,8 +290,48 @@
             <p>&copy; 2024 Previ Book. All rights reserved.</p>
         </div>
     </footer>
+    
     <script>
-        // Add to cart and update badge
+        // Get wishlist from localStorage
+        function getWishlist() {
+            return JSON.parse(localStorage.getItem('wishlist')) || [];
+        }
+
+        // Save wishlist to localStorage
+        function saveWishlist(wishlist) {
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+
+        // Toggle wishlist item (add/remove with duplicate prevention)
+        function toggleWishlist(id, name, price, image, category, buttonElement) {
+            const wishlist = getWishlist();
+            const existingIndex = wishlist.findIndex(item => item.id === id);
+            
+            if (existingIndex !== -1) {
+                // Remove from wishlist
+                wishlist.splice(existingIndex, 1);
+                buttonElement.innerHTML = '♡';
+                buttonElement.classList.remove('active');
+                alert(name + " removed from wishlist!");
+            } else {
+                // Add to wishlist (prevents duplicates automatically)
+                wishlist.push({ id, name, price, image, category });
+                buttonElement.innerHTML = '♥';
+                buttonElement.classList.add('active');
+                alert(name + " added to wishlist!");
+            }
+            
+            saveWishlist(wishlist);
+            updateWishlistBadge();
+        }
+
+        // Update wishlist badge count
+        function updateWishlistBadge() {
+            const wishlist = getWishlist();
+            document.getElementById("wishlist-badge").textContent = wishlist.length;
+        }
+
+        // Add to cart function
         function addToCart(name, price, image) {
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
             cart.push({ name, price, image });
@@ -236,6 +340,7 @@
             alert(name + " added to cart!");
         }
 
+        // Update cart badge
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
             document.getElementById("cart-badge").textContent = cart.length;
@@ -275,12 +380,35 @@
             document.getElementById('no-results').style.display = (!found && input.length > 0) ? 'block' : 'none';
         }
 
-        // Enable live search as user types and on button click
+        // Initialize wishlist heart states based on current wishlist
+        function initializeWishlistStates() {
+            const wishlist = getWishlist();
+            const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+            
+            wishlistButtons.forEach(button => {
+                const productId = parseInt(button.getAttribute('onclick').match(/\d+/)[0]);
+                const isInWishlist = wishlist.some(item => item.id === productId);
+                
+                if (isInWishlist) {
+                    button.innerHTML = '♥';
+                    button.classList.add('active');
+                } else {
+                    button.innerHTML = '♡';
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        // Enable live search and button click
         document.getElementById('search-input').addEventListener('keyup', searchItems);
         document.getElementById('search-btn').addEventListener('click', searchItems);
 
-        // Update badge on page load
-        window.onload = updateCartBadge;
+        // Initialize on page load
+        window.onload = function() {
+            updateCartBadge();
+            updateWishlistBadge();
+            initializeWishlistStates();
+        };
     </script>
 </body>
 </html>
