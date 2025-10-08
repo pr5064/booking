@@ -131,7 +131,7 @@
     <div class="cart-items" id="cart-items">
       <!-- Items will appear here -->
     </div>
-    <div class="cart-total" id="cart-total">Total: ₹0</div>
+    <div class="cart-total" id="cart-total">Total: $0</div>
     <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
   </div>
 
@@ -146,7 +146,7 @@
 
       if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty 😕</div>';
-        cartTotalDisplay.textContent = "Total: ₹0";
+        cartTotalDisplay.textContent = "Total: $0";
         return;
       }
 
@@ -161,7 +161,7 @@
               <img src="${item.image}" alt="${item.name}" />
               <div>
                 <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">₹${item.price}</div>
+                <div class="cart-item-price">$${item.price}</div>
               </div>
             </div>
             <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
@@ -171,7 +171,7 @@
         cartItemsContainer.innerHTML += itemHTML;
       });
 
-      cartTotalDisplay.textContent = `Total: ₹${total}`;
+      cartTotalDisplay.textContent = `Total: $${total}`;
     }
 
     function removeFromCart(index) {
